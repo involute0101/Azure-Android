@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StartActivity">
+        android:layout_width="match_parent"
+        android:layout_height="600dp">
+        <ImageView
+            android:id="@+id/img_login"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/icon_login"/>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:text="登录"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:elevation="8dp"
+            android:layout_below="@id/img_login"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_login"/>
+        <TextView
+            android:id="@+id/tv_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隐私+条款  "
+            android:textSize="30px"
+            android:drawableRight="@drawable/icon_forward_48"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:layout_below="@id/btn_login"
+            android:layout_centerHorizontal="true"/>
+</RelativeLayout>

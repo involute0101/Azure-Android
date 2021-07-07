@@ -1,4 +1,4 @@
-package com.example.azureapp.ui.home;
+package com.example.myapplication.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

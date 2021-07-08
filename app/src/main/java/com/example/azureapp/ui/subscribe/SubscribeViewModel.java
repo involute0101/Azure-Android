@@ -1,4 +1,4 @@
-package com.example.azureapp.ui;
+package com.example.azureapp.ui.subscribe;
 
 import androidx.lifecycle.ViewModel;
 

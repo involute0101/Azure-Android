@@ -1,16 +1,16 @@
-package com.example.azureapp.ui.dashboard;
+package com.example.azureapp.ui.resource;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class ResourceViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public ResourceViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is resource fragment");
     }
 
     public LiveData<String> getText() {

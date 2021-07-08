@@ -14,7 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.azureapp.R;
 import com.example.azureapp.databinding.FragmentNotificationsBinding;
-
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/7.
+ * Email 1403235458@qq.com
+ */
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;

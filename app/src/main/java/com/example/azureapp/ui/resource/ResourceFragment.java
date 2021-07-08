@@ -13,7 +13,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.azureapp.databinding.FragmentResourceBinding;
-
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/7.
+ * Email 1403235458@qq.com
+ */
 public class ResourceFragment extends Fragment {
 
     private ResourceViewModel resourceViewModel;

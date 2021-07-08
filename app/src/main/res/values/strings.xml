@@ -13,4 +13,6 @@
     <string name="invalid_password">你的密码不正确。如果你不记得记得密码，请立即进行重置</string>
     <string name="forget_password">忘记密码?</string>
     <string name="login_failed">"Login failed"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -3,6 +3,7 @@
     <style name="Theme.AzureAPP" parent="Theme.MaterialComponents.DayNight.Bridge">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#3a7bd5</item>
+
         <item name="colorPrimaryDark">#3a7bd5</item>
         <item name="colorAccent">@android:color/holo_blue_light</item>
         <item name="colorPrimaryVariant">@android:color/holo_blue_light</item>

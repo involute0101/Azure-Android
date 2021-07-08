@@ -9,5 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#03A9F4</color>
     <color name="brown_input">#787272</color>
+    <color name="brown_deeper">#5E5A5A</color>
     <color name="red">#CC0000</color>
+    <color name="green">#000000</color>
 </resources>

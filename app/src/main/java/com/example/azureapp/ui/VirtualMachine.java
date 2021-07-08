@@ -7,4 +7,8 @@ package com.example.azureapp.ui;
  */
 public class VirtualMachine {
     public String name;
+
+    public VirtualMachine(String name) {
+        this.name = name;
+    }
 }

@@ -13,9 +13,9 @@
         android:layout_marginTop="100dp"
         android:layout_gravity="center_horizontal"/>
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
         android:src="@drawable/icon_microsoft"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="280dp"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>

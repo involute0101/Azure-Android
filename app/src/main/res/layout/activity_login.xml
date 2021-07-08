@@ -1,13 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
-    <WebView
-        android:id="@+id/wv_login"
+    <ImageView
+        android:id="@+id/img_login_ms"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/icon_microsoft"/>
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登录"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@+id/img_login_ms"
+        />
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_login"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_user_tip"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:layout_gravity="center_horizontal"
+            />
+        <EditText
+            android:id="@+id/et_user"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:hint="电子邮件、电话或Skype"
+            android:textColorHint="@color/brown_input"
+            android:textSize="15dp"
+            android:theme="@style/MyEditText"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:id="@+id/tv_psw_tip"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:layout_gravity="center_horizontal"
+            />
+        <EditText
+            android:id="@+id/et_psw"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:hint="密码"
+            android:textColorHint="@color/brown_input"
+            android:textSize="15dp"
+            android:layout_gravity="center_horizontal"
+            android:theme="@style/MyEditText"
+            />
+        <TextView
+            android:id="@+id/tv_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forget_password"
+            android:layout_marginLeft="40dp"
+            android:textColor="#006BFF"/>
+        <Button
+            android:id="@+id/btn_login_2"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="登录"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btn_login"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="240dp"/>
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -1,6 +1,4 @@
-package com.example.azure_v1;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.azureapp;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class StartActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StartActivity.this,LoginActivity.class);
+                Intent intent = new Intent(StartActivity.this, com.example.azureapp.LoginActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,9 +1,9 @@
-package com.example.azure_v1;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.azureapp;
 
 import android.os.Bundle;
 import android.webkit.WebView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

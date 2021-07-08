@@ -13,7 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.azureapp.R;
-
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/7.
+ * Email 1403235458@qq.com
+ */
 public class SubscribeFragment extends Fragment {
 
     private SubscribeViewModel mViewModel;

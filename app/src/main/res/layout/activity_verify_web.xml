@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <WebView
+        android:id="@+id/wv_verify"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+    <com.example.azureapp.GradientColorTextView
+        android:id="@+id/tv_verify_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BDGT-HUIM-Y78G-7G9H"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:paddingVertical="5dp"
+        android:background="@color/azure_deep"/>
+</LinearLayout>

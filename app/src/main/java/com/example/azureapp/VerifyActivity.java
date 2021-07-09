@@ -12,7 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
+/**
+ * @author 刘非凡
+ * @projectName AzureAPP
+ * @date 2021-07-08 19:54
+ **/
 public class VerifyActivity extends AppCompatActivity {
 
     private TextView codeTv;

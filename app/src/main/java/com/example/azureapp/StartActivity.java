@@ -9,6 +9,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * @author 刘非凡
+ * @projectName AzureAPP
+ * @date 2021-07-08 17:12
+ **/
 public class StartActivity extends AppCompatActivity {
 
     private Button loginBtn;
@@ -23,7 +28,7 @@ public class StartActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StartActivity.this, com.example.azureapp.VerifyActivity.class);
+                Intent intent = new Intent(StartActivity.this, com.example.azureapp.VerifyWebActivity.class);
                 startActivity(intent);
             }
         });

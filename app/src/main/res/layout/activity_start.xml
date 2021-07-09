@@ -29,9 +29,9 @@
             android:textSize="20sp" />
         <TextView
             android:id="@+id/tv_forward"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="20dp"
-            android:text="隐私+条款  "
+            android:text="隐私+条款"
             android:textSize="30px"
             android:drawableRight="@drawable/icon_forward_16"
             android:textAlignment="center"

@@ -7,12 +7,17 @@ import android.os.Message;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * @author 刘非凡
+ * @projectName AzureAPP
+ * @date 2021-07-08 19:29
+ **/
 public class WelcomeActivity extends AppCompatActivity {
 
     private Handler handler = new Handler(){
         public void handleMessage(Message msg){
             super.handleMessage(msg);
-            Intent intent = new Intent(WelcomeActivity.this, com.example.azureapp.StartActivity.class);    //收到消息后跳转
+            Intent intent = new Intent(WelcomeActivity.this, com.example.azureapp.StartActivity.class);
             startActivity(intent);
             WelcomeActivity.this.finish();
         }

@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+/**
+ * @author 刘非凡
+ * @projectName AzureAPP
+ * @date 2021-07-08 16:47
+ **/
 public class LoginWebActivity extends AppCompatActivity {
 
     @Override

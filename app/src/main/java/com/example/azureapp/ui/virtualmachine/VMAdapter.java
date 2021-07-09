@@ -1,5 +1,6 @@
 package com.example.azureapp.ui.virtualmachine;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +36,23 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
     public VMViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View itemView = layoutInflater.inflate(R.layout.cell_vm,parent,false);
-        return new VMViewHolder(itemView);
+        final VMViewHolder holder = new VMViewHolder(itemView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent intent = new Intent(this, );
+                intent.putExtra("VM", vms.get(position));
+                holder.itemView.getContext().startActivity(intent);*/
+            }
+        });
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull VMViewHolder holder, int position) {
         VirtualMachine vm = vms.get(position);
-        holder.vmNameTextView.setText(vm.name);
+        holder.itemView.setTag(R.id.vm_for_view_holder,vm);
+        holder.vmNameTextView.setText(vm.vmName);
     }
 
     @Override

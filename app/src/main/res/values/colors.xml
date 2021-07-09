@@ -12,4 +12,6 @@
     <color name="brown_deeper">#5E5A5A</color>
     <color name="red">#CC0000</color>
     <color name="green">#000000</color>
+    <color name="azure_deep">#3a7bd5</color>
+    <color name="azure_shadow">#0099FF</color>
 </resources>

@@ -12,6 +12,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * @author 刘非凡
+ * @projectName AzureAPP
+ * @date 2021-07-08 09:21
+ **/
 public class LoginActivity extends AppCompatActivity {
 
     private EditText userEt;

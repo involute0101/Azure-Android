@@ -21,7 +21,7 @@ public class PayHttpUtils {
     public String post(String url, String json) throws IOException {//post请求，返回String类型
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
-                .addHeader("Content-Type","application/json")//添加头部.addHeader("Authorization",sn + " " + sign)
+                .addHeader("Content-Type","application/json")//添加头部
                 .url(url)
                 .post(body)
                 .build();

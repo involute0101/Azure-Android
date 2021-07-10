@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +18,55 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.VirtualMachine;
 import com.example.azureapp.util.PayHttpUtils;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.HttpVersion;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.params.ConnManagerParams;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * fileDesc
  * Created by wzk on 2021/7/9.
@@ -140,38 +180,17 @@ public class VMAddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 VirtualMachine virtualMachine = new VirtualMachine(subscribe_id,vent_name,vm_name,username,password,vm_size,resource_group);
-                //创建虚拟机，调用API
-                //addPostVM(virtualMachine);
-                /*VMFragment vmFragment = (VMFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.VMFragment);
-                vmFragment.addVM(virtualMachine);
+
+                addPostVM(virtualMachine);
                 NavController navController = Navigation.findNavController(v);
-                navController.navigateUp();*/
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("subscription_id","ec269b4d-93af-43c5-9fd6-9a5185235344");
-                    jsonObject.put("VNET_NAME",virtualMachine.vnetName);
-                    jsonObject.put("VM_NAME",virtualMachine.vmName);
-                    jsonObject.put("USERNAME",virtualMachine.username);
-                    jsonObject.put("PASSWORD",virtualMachine.password);
-                    jsonObject.put("VM_SIZE",virtualMachine.vmSize);
-                    jsonObject.put("RESOURCE_GROUP_NAME",virtualMachine.resGroupName);
-                    String url = new String("http://20.92.144.124:8080/Azure/createVm");
-                    Toast.makeText(getContext(), "准备发送", Toast.LENGTH_SHORT).show();
-
-                    PayHttpUtils httpUtils = new PayHttpUtils();
-                    String result = httpUtils.post(url,jsonObject.toString());//json解析字符串网络请求
-                    Toast.makeText(getContext(), "创建", Toast.LENGTH_SHORT).show();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
+                navController.navigateUp();
             }
         });
     }
+
     public void addPostVM(VirtualMachine virtualMachine){
         JSONObject jsonObject = new JSONObject();
+        String url = new String("http://20.92.144.124:8080/Azure/createVm");
         try {
             jsonObject.put("subscription_id","ec269b4d-93af-43c5-9fd6-9a5185235344");
             jsonObject.put("VNET_NAME",virtualMachine.vnetName);
@@ -180,32 +199,34 @@ public class VMAddFragment extends Fragment {
             jsonObject.put("PASSWORD",virtualMachine.password);
             jsonObject.put("VM_SIZE",virtualMachine.vmSize);
             jsonObject.put("RESOURCE_GROUP_NAME",virtualMachine.resGroupName);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    HttpClient client = HttpClients.createDefault();
+                    HttpPost httpPost = new HttpPost(url);
+                    httpPost.setHeader("Content-Type", "application/json;charset=UTF-8");
+
+                    try {
+                        StringEntity stringEntity = new StringEntity(jsonObject.toString());
+                        stringEntity.setContentType("CONTENT_TYPE_TEXT_JSON");
+                        httpPost.setEntity(stringEntity);
+                        CloseableHttpResponse response = (CloseableHttpResponse) client.execute(httpPost);
+                        HttpEntity httpEntity = response.getEntity();
+                        String s = EntityUtils.toString(httpEntity, "UTF-8");
+                        System.out.println(s);
+                        Toast.makeText(getContext(),"创建成功，过程需要2~3min，请稍等",Toast.LENGTH_SHORT).show();
 
 
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
 
-            String url = new String("http://20.92.144.124:8080/Azure/createVm");
-
-/*
-            URL url = new URL("http://20.92.144.124:8080/Azure/createVm");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5000);
-            // 设置允许输出
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            DataOutputStream os = new DataOutputStream( conn.getOutputStream());
-            String content = String.valueOf(jsonObject);
-            os.writeBytes(content);
-            os.flush();
-            os.close();
-            if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
-                Toast.makeText(getContext(), "创建成功", Toast.LENGTH_SHORT).show();
-                conn.disconnect();
-            }*/
-            PayHttpUtils httpUtils = new PayHttpUtils();
-            String result = httpUtils.post(url,jsonObject.toString());//json解析字符串网络请求
-            Toast.makeText(getContext(), "创建", Toast.LENGTH_SHORT).show();
+                    } catch (ClientProtocolException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
 
         } catch (Exception e) {
             e.printStackTrace();

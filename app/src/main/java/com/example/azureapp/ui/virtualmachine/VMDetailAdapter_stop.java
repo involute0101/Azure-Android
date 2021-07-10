@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.azureapp.R;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.azureapp.R;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,12 +19,12 @@ import org.jetbrains.annotations.NotNull;
  * @projectName AzureAPP
  * @date 2021-07-09 10:33
  **/
-public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class VMDetailAdapter_stop extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @NotNull
     private Context mContext;
 
-    public VMDetailAdapter(Context context){
+    public VMDetailAdapter_stop(Context context){
         this.mContext = context;
     }
     @Override
@@ -51,22 +53,22 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if(position == 0){
             ((LinearViewHolder_Head)holder).tvVmName.setText("back");
-            ((LinearViewHolder_Head)holder).tvVmState.setText("正在运行");
-            ((LinearViewHolder_Head)holder).imgState.setImageResource(R.drawable.icon_running_48);
+            ((LinearViewHolder_Head)holder).tvVmState.setText("未运行");
+            ((LinearViewHolder_Head)holder).imgState.setImageResource(R.drawable.icon_stop_64);
         }
-//        if(position == 1){
-//            ((LinearViewHolder_Blog)holder).tvBlogCount.setText("10条信息");
-//        }
-//        if(position == 2){
-//            ((LinearViewHolder_Source)holder).tvSourceState.setText("Source");
-//            ((LinearViewHolder_Source)holder).imgSourceState.setImageResource(R.drawable.icon_stop_64);
-//        }
-//        if(position == 3){
-//            ((LinearViewHolder_Condition)holder).tvPowerState.setText("Power");
-//            ((LinearViewHolder_Condition)holder).imgPowerState.setImageResource(R.drawable.icon_stop_64);
-//            ((LinearViewHolder_Condition)holder).tvPreplanState.setText("Preplan");
-//            ((LinearViewHolder_Condition)holder).imgPreplanState.setImageResource(R.drawable.icon_stop_64);
-//        }
+        if(position == 1){
+            ((LinearViewHolder_Blog)holder).tvBlogCount.setText("2条信息");
+        }
+        if(position == 2){
+            ((LinearViewHolder_Source)holder).tvSourceState.setText("未知");
+            ((LinearViewHolder_Source)holder).imgSourceState.setImageResource(R.drawable.icon_unkown_64);
+        }
+        if(position == 3){
+            ((LinearViewHolder_Condition)holder).tvPowerState.setText("关闭");
+            ((LinearViewHolder_Condition)holder).imgPowerState.setImageResource(R.drawable.icon_stop_64);
+            ((LinearViewHolder_Condition)holder).tvPreplanState.setText("失败");
+            ((LinearViewHolder_Condition)holder).imgPreplanState.setImageResource(R.drawable.icon_stop_64);
+        }
     }
 
     @Override

@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         userTip = "请输入有效的电子邮件地址、电话号码或Skype用户名。";
-        pswTip = "你的密码不正确。如果你不记得记得密码，请立即进行重置。";
+        pswTip = "你的密码不正确。如果你不记得你的密码，请立即进行重置。";
         userEt = findViewById(R.id.et_user);
         pswEt = findViewById(R.id.et_psw);
         userTipTv = findViewById(R.id.tv_user_tip);
@@ -62,9 +62,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logIn(){
-        Boolean userValid = false, pswValid = false;
+        Boolean userValid = true, pswValid = true;
         String userName = userEt.getText().toString();
         String psw = pswEt.getText().toString();
+        if(!userName.equals("1935245590@qq.com")){
+            userValid = false;
+        }
+        if(!psw.equals("Hello123456789//")){
+            pswValid = false;
+        }
         /**
          * 验证用户名和密码是否正确
          */
@@ -77,6 +83,10 @@ public class LoginActivity extends AppCompatActivity {
             //提示密码错误
             pswTipTv.setText(pswTip);
             pswTipTv.setTextSize(15);
+        }
+        if(userValid && pswValid){
+            Intent intent = new Intent(LoginActivity.this, com.example.azureapp.MainActivity.class);
+            startActivity(intent);
         }
         /**
          * 验证登录是否成功

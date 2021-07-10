@@ -57,6 +57,7 @@
             android:hint="密码"
             android:textColorHint="@color/brown_input"
             android:textSize="15dp"
+            android:inputType="textPassword"
             android:layout_gravity="center_horizontal"
             android:theme="@style/MyEditText"
             />

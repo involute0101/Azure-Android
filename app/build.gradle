@@ -48,6 +48,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.lecho:hellocharts-android:v1.5.8'
+    //implementation 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
 }
 
 repositories {

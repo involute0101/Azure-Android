@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
+
     List<VirtualMachine> vms = new ArrayList<>();
 
     //传入后端得到的虚拟机列表
@@ -36,15 +38,9 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
     public VMViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View itemView = layoutInflater.inflate(R.layout.cell_vm,parent,false);
+
         final VMViewHolder holder = new VMViewHolder(itemView);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Intent intent = new Intent(this, );
-                intent.putExtra("VM", vms.get(position));
-                holder.itemView.getContext().startActivity(intent);*/
-            }
-        });
+
         return holder;
     }
 
@@ -53,6 +49,16 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
         VirtualMachine vm = vms.get(position);
         holder.itemView.setTag(R.id.vm_for_view_holder,vm);
         holder.vmNameTextView.setText(vm.vmName);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(),VirtualMachineDetailActivity.class );
+                intent.putExtra("VM", vm);
+                holder.itemView.getContext().startActivity(intent);
+                Toast.makeText(holder.itemView.getContext(), "跳转", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

@@ -20,6 +20,7 @@
         android:roundIcon="@drawable/icon_azure"
         android:supportsRtl="true"
         android:theme="@style/Theme.AzureAPP">
+
         <activity android:name=".ui.database.DataBaseActivity"
             android:parentActivityName=".MainActivity"></activity>
 
@@ -28,14 +29,17 @@
             android:required="false" />
 
         <activity android:name=".VerifyWebActivity" />
-        <activity android:name=".ui.virtualmachine.VirtualMachineDetailActivity" />
+        <activity android:name=".ui.virtualmachine.VirtualMachineDetailActivity">
+
+        </activity>
+
         <activity
             android:name=".ui.virtualmachine.VirtualMachineActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".LoginWebActivity" />
         <activity android:name=".VerifyActivity" />
-        <activity
-            android:name=".MainActivity"
+      
+        <activity android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,9 +47,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+      
         <activity android:name=".WelcomeActivity" />
+        </activity>
+
         <activity android:name=".StartActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity">
+        </activity>
     </application>
 
 </manifest>

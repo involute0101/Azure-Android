@@ -28,7 +28,7 @@ public class StartActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StartActivity.this, com.example.azureapp.VerifyWebActivity.class);
+                Intent intent = new Intent(StartActivity.this, com.example.azureapp.LoginActivity.class);
                 startActivity(intent);
             }
         });

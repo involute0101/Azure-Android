@@ -15,8 +15,7 @@
         android:layout_height="match_parent">
 
         <TextView
-
-            android:id="@+id/concrete_VM_Name"
+            android:id="@+id/tv_vm_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -36,10 +35,12 @@
             android:orientation="horizontal"
             android:layout_marginTop="3dp">
             <ImageView
+                android:id="@+id/img_vm_state"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/icon_running_48" />
             <TextView
+                android:id="@+id/tv_vm_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="正在运行"

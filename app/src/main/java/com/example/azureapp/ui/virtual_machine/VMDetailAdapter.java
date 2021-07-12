@@ -13,6 +13,8 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -161,6 +163,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             mPieChart = itemView.findViewById(R.id.pie_chart);
             showPieChart(mPieChart, getPieChartData());
             mLineChart = itemView.findViewById(R.id.line_chart);
+            setChartStyle(mLineChart);
             showLineChart(mLineChart, getLineChartData());
         }
 
@@ -179,17 +182,42 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return mPie;
         }
 
+        private void setChartStyle(LineChart lineChart){
+           XAxis xAxis = lineChart.getXAxis();
+           xAxis.setDrawGridLines(false);
+           xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+           xAxis.setTextColor(Color.parseColor("#787272"));
+           xAxis.setTextSize(8);
+           lineChart.getAxisRight().setEnabled(false);
+           YAxis yAxis = lineChart.getAxisLeft();
+           yAxis.setDrawAxisLine(false);
+           yAxis.setAxisMaximum(20f);
+           yAxis.setGranularity(0.5f);
+           yAxis.setTextColor(Color.parseColor("#787272"));
+           yAxis.setTextSize(8);
+           lineChart.getDescription().setEnabled(false);
+            //lineChart.setBackgroundColor(Color.parseColor("#3a7bd5"));
+        }
         private List<Entry> getLineChartData() {
             List<Entry> lineEntry = new ArrayList<>();
             lineEntry.add(new Entry(1, 2));
-            lineEntry.add(new Entry(2, 3));
-            lineEntry.add(new Entry(3, 5));
+            lineEntry.add(new Entry(1.5f, 6f));
+            lineEntry.add(new Entry(2, 4));
+            lineEntry.add(new Entry(2.5f, 10));
+            lineEntry.add(new Entry(3, 6));
+            lineEntry.add(new Entry(3.5f, 3));
             lineEntry.add(new Entry(4, 2));
             return lineEntry;
         }
 
         private void showLineChart(LineChart lineChart, List<Entry> lineList) {
             LineDataSet dataset = new LineDataSet(lineList, "line1");
+            dataset.setDrawCircleHole(false);
+            dataset.setDrawCircles(false);
+            dataset.setLineWidth(0);
+            dataset.setDrawValues(false);//不显示数据
+            dataset.setDrawFilled(true);//填充色
+            dataset.setFillDrawable(mContext.getResources().getDrawable(R.drawable.chart_fill_sky));
             LineData data = new LineData(dataset);
             lineChart.setData(data);
         }

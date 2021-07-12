@@ -6,7 +6,11 @@ import androidx.navigation.NavController;
 import android.os.Bundle;
 
 import com.example.azureapp.R;
-
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/8.
+ * Email 1403235458@qq.com
+ */
 public class VirtualMachineActivity extends AppCompatActivity {
     private NavController navController;
     @Override

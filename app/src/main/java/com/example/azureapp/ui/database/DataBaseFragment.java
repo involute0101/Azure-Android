@@ -34,6 +34,11 @@ import java.util.List;
  * Use the {@link DataBaseFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/12.
+ * Email 1403235458@qq.com
+ */
 public class DataBaseFragment extends Fragment {
     RecyclerView recyclerView;
     DataBaseAdapter dbAdapter;

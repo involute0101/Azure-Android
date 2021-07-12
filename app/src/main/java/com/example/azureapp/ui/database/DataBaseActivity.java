@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.azureapp.R;
-
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/12.
+ * Email 1403235458@qq.com
+ */
 public class DataBaseActivity extends AppCompatActivity {
 
     @Override

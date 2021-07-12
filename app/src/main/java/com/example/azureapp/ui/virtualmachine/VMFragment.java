@@ -36,6 +36,11 @@ import java.util.List;
  * Use the {@link VMFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/8.
+ * Email 1403235458@qq.com
+ */
 public class VMFragment extends Fragment {
 
     RecyclerView recyclerView;

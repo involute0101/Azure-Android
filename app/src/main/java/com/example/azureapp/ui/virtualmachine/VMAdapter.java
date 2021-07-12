@@ -40,7 +40,6 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
         View itemView = layoutInflater.inflate(R.layout.cell_vm,parent,false);
 
         final VMViewHolder holder = new VMViewHolder(itemView);
-
         return holder;
     }
 

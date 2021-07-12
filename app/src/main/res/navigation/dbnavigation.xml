@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dbnavigation"
+    app:startDestination="@id/DataBaseFragment">
+
+    <fragment
+        android:id="@+id/DataBaseFragment"
+        android:name="com.example.azureapp.ui.database.DataBaseFragment"
+        android:label="fragment_data_base"
+        tools:layout="@layout/fragment_data_base">
+        <action
+            android:id="@+id/action_DBFragment_to_DBAddFragment"
+            app:destination="@id/DataBaseAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/DataBaseAddFragment"
+        android:name="com.example.azureapp.ui.database.DataBaseAddFragment"
+        android:label="fragment_data_base_add"
+        tools:layout="@layout/fragment_data_base_add" />
+</navigation>

@@ -1,4 +1,4 @@
-package com.example.azureapp.ui.virtualmachine;
+package com.example.azureapp.ui.database;
 
 import android.os.Bundle;
 
@@ -16,9 +16,8 @@ import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSONArray;
 import com.example.azureapp.R;
-import com.example.azureapp.ui.VirtualMachine;
+import com.example.azureapp.ui.DataBase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -32,16 +31,14 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link VMFragment#newInstance} factory method to
+ * Use the {@link DataBaseFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class VMFragment extends Fragment {
-
+public class DataBaseFragment extends Fragment {
     RecyclerView recyclerView;
-    VMAdapter vmAdapter;
-    private List<VirtualMachine> vms;
-    FloatingActionButton addVMButton;
-
+    DataBaseAdapter dbAdapter;
+    private List<DataBase> dbs;
+    FloatingActionButton addDBButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,7 +49,7 @@ public class VMFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public VMFragment() {
+    public DataBaseFragment() {
         // Required empty public constructor
     }
 
@@ -62,11 +59,11 @@ public class VMFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment VMFragment.
+     * @return A new instance of fragment DataBaseFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static VMFragment newInstance(String param1, String param2) {
-        VMFragment fragment = new VMFragment();
+    public static DataBaseFragment newInstance(String param1, String param2) {
+        DataBaseFragment fragment = new DataBaseFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,9 +78,8 @@ public class VMFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        vmAdapter = new VMAdapter();
-        Log.d("vm", "VirtualMachine");
+        dbAdapter = new DataBaseAdapter();
+        Log.d("db", "DataBase");
 
     }
 
@@ -91,15 +87,18 @@ public class VMFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_v_m, container, false);
+        return inflater.inflate(R.layout.fragment_data_base, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recyclerView = requireActivity().findViewById(R.id.vm_recycle_view);
+        recyclerView = requireActivity().findViewById(R.id.db_recycle_view);
+        dbAdapter.dbs.add(new DataBase("test"));
+        Log.d("db", "DataBase");
+        //dbAdapter.dbs.add(new DataBase("test"));
 
-        Thread thread = new Thread(new Runnable() {
+/*        Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;
             @Override
             public void run() {
@@ -114,7 +113,7 @@ public class VMFragment extends Fragment {
                         jsonArray = (JSONArray) JSONArray.parse(result);
                         for(int i=0;i<jsonArray.size();i++)
                         {
-                            vmAdapter.vms.add(new VirtualMachine(jsonArray.getJSONObject(i).getString("name")));
+                            dbAdapter.dbs.add(new DataBase(jsonArray.getJSONObject(i).getString("name")));
                         }
                         //System.out.println("結果："+result);
                         //vmAdapter.notifyDataSetChanged();
@@ -133,31 +132,17 @@ public class VMFragment extends Fragment {
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        recyclerView.setAdapter(vmAdapter);
-        addVMButton = requireActivity().findViewById(R.id.addVMButton);
-        addVMButton.setOnClickListener(new View.OnClickListener() {
+        recyclerView.setAdapter(dbAdapter);
+        addDBButton = requireActivity().findViewById(R.id.addDBButton);
+        addDBButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_VMFragment_to_VMAddFragment);
+                navController.navigate(R.id.action_DBFragment_to_DBAddFragment);
             }
         });
-    }
-
-/*    public void addVM(VirtualMachine vm ){
-        vmAdapter.vms.add(vm);
-        Log.d("vms", "1");
-
-
-    }*/
-
-    public void getVMS(){
-        //调用API
-        // vmAdapter.vms.
-        // vmAdapter.notifyDataSetChanged();
-
     }
 }

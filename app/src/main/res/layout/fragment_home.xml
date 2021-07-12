@@ -9,31 +9,36 @@
 
     <ImageButton
         android:id="@+id/dbButton"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginEnd="81dp"
         android:layout_marginRight="81dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="center"
+        android:scaleX="1"
         android:src="@drawable/db"
-        android:tint="#00FFFFFF"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/vmButton" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/vmButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="79dp"
         android:layout_marginLeft="79dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginRight="91dp"
         android:background="#00FFFFFF"
         android:src="@drawable/vm"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toStartOf="@+id/dbButton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/dbButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.2"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

@@ -16,10 +16,20 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="MyEditText" parent="Theme.AppCompat.Light">
         <!--Text color-->
         <item name="android:textColor">#000</item>
         <!--Selected underLine color-->
         <item name="colorControlActivated">#3a7bd5</item>
     </style>
+
+    <style name="Theme.AzureAPP.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.AzureAPP.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.AzureAPP.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

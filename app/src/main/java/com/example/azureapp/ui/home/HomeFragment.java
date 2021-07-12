@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azureapp.R;
 import com.example.azureapp.databinding.FragmentHomeBinding;
+import com.example.azureapp.ui.database.DataBaseActivity;
 import com.example.azureapp.ui.virtualmachine.VMAdapter;
 import com.example.azureapp.ui.virtualmachine.VirtualMachineActivity;
 
@@ -30,7 +31,6 @@ public class HomeFragment extends Fragment {
 
     ImageButton vmButton,dbButton;
     RecyclerView recyclerView;
-    VMAdapter vmAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +54,8 @@ public class HomeFragment extends Fragment {
         dbButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), DataBaseActivity.class);
+                startActivity(intent);
             }
         });
         return root;

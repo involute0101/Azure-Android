@@ -48,8 +48,6 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
     private TextView mTvDelete;
     private boolean isStart;
 
-    private TextView mTvVmName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +60,7 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         mTvStart = findViewById(R.id.tv_vm_detail_start);
         mTvDelete = findViewById(R.id.tv_vm_detail_delete);
         isStart = true;
-        start();
+        stop();
     }
 
     public void click_Event(View view){
@@ -105,18 +103,9 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
                 }
                 break;
         }
-
-
-        //concreteVMNameText = findViewById(R.id.concrete_VM_Name);
-        //Intent intent = getIntent();
-        //vm = (VirtualMachine)intent.getExtras().get("VM");
-        //Log.d("conVM", vm.vmName);
-        //concreteVMNameText.setText(vm.vmName);
-
-
     }
 
-//    public void start(){
+//    public void getVmInfo(){
 //        RestTemplate restTemplate = new RestTemplate();
 //        JSONObject response = restTemplate.getForObject("http://20.92.144.124:8080/Azure/allVM", JSONObject.class);
 //        System.out.println(response);
@@ -166,6 +155,7 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         String url = "http://20.92.144.124:8080/Azure/stopVm";
         vmOperation(url);
     }
+
     public class MyDecoration extends RecyclerView.ItemDecoration {
         @Override
         public void getItemOffsets(@NonNull @NotNull Rect outRect, @NonNull @NotNull View view, @NonNull @NotNull RecyclerView parent, @NonNull @NotNull RecyclerView.State state) {

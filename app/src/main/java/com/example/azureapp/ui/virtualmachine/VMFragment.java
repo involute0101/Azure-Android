@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.VirtualMachine;
+import com.example.azureapp.ui.VirtualMachineDescription;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -85,6 +87,7 @@ public class VMFragment extends Fragment {
         vmAdapter = new VMAdapter();
         Log.d("vm", "VirtualMachine");
 
+
     }
 
     @Override
@@ -97,6 +100,15 @@ public class VMFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        addVMButton = requireActivity().findViewById(R.id.addVMButton);
+
+        addVMButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_VMFragment_to_VMAddFragment);
+            }
+        });
         recyclerView = requireActivity().findViewById(R.id.vm_recycle_view);
 
         Thread thread = new Thread(new Runnable() {
@@ -114,7 +126,12 @@ public class VMFragment extends Fragment {
                         jsonArray = (JSONArray) JSONArray.parse(result);
                         for(int i=0;i<jsonArray.size();i++)
                         {
-                            vmAdapter.vms.add(new VirtualMachine(jsonArray.getJSONObject(i).getString("name")));
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            VirtualMachine virtualMachine = new VirtualMachine(object.getString("name"));
+                            virtualMachine.resGroupName = object.get("resourceGroup").toString();
+                            Log.d("vm", virtualMachine.vmName);
+                            //获取到数据库的描述信息
+                            vmAdapter.vms.add(virtualMachine);
                         }
                         //System.out.println("結果："+result);
                         //vmAdapter.notifyDataSetChanged();
@@ -137,14 +154,6 @@ public class VMFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(vmAdapter);
-        addVMButton = requireActivity().findViewById(R.id.addVMButton);
-        addVMButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_VMFragment_to_VMAddFragment);
-            }
-        });
     }
 
 /*    public void addVM(VirtualMachine vm ){

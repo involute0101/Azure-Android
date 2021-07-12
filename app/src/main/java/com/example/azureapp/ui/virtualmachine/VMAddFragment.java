@@ -95,13 +95,13 @@ public class VMAddFragment extends Fragment {
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity activity= requireActivity();
-        add_submit_button = activity.findViewById(R.id.add_concretevm_button);
-        vent_name_text = activity.findViewById(R.id.editTextTextVNetName);
-        vm_name_text = activity.findViewById(R.id.editTextTextVirtualMachineName);
-        username_text = activity.findViewById(R.id.editTextTextVirtualMachineUsername);
-        password_text = activity.findViewById(R.id.editTextTextVirtualMachinePassword);
-        vm_size_text = activity.findViewById(R.id.editTextTextVirtualMachineSize);
-        resource_group_text = activity.findViewById(R.id.editTextTextSourceGroup);
+        add_submit_button = activity.findViewById(R.id.createVMButton);
+        vent_name_text = activity.findViewById(R.id.et_vm_vn);
+        vm_name_text = activity.findViewById(R.id.et_vm_name);
+        username_text = activity.findViewById(R.id.et_vm_user);
+        password_text = activity.findViewById(R.id.et_vm_psw);
+        vm_size_text = activity.findViewById(R.id.et_vm_size);
+        resource_group_text = activity.findViewById(R.id.et_vm_sourcegroup);
         add_submit_button.setEnabled(false);
 
         TextWatcher watcher = new TextWatcher() {

@@ -1,4 +1,4 @@
-package com.example.azureapp.ui.virtual_machine;
+package com.example.azureapp.ui.virtualmachine;
 
 import android.content.Intent;
 import android.util.Log;
@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.VirtualMachine;

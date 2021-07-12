@@ -94,6 +94,7 @@ public class DataBaseFragment extends Fragment {
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView = requireActivity().findViewById(R.id.db_recycle_view);
+        dbAdapter.dbs.clear();
         dbAdapter.dbs.add(new DataBase("test"));
         Log.d("db", "DataBase");
         //dbAdapter.dbs.add(new DataBase("test"));

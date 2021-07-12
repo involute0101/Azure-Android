@@ -1,4 +1,4 @@
-package com.example.azureapp.ui.virtual_machine;
+package com.example.azureapp.ui.virtualmachine;
 
 import android.os.Bundle;
 
@@ -18,7 +18,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.VirtualMachine;
-import com.example.azureapp.ui.VirtualMachineDescription;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -124,6 +123,7 @@ public class VMFragment extends Fragment {
                     if (statusCode == 200) {
                         String result = EntityUtils.toString(response.getEntity());
                         jsonArray = (JSONArray) JSONArray.parse(result);
+                        vmAdapter.vms.clear();
                         for(int i=0;i<jsonArray.size();i++)
                         {
                             JSONObject object = jsonArray.getJSONObject(i);

@@ -28,7 +28,13 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".WelcomeActivity"></activity>
         <activity android:name=".StartActivity"></activity>
         <activity android:name=".LoginActivity"></activity>
@@ -36,15 +42,11 @@
         <activity android:name=".VerifyActivity"></activity>
         <activity android:name=".VerifyWebActivity"></activity>
         <activity
-            android:name=".ui.virtual_machine.VirtualMachineActivity"
+            android:name=".ui.virtualmachine.VirtualMachineActivity"
             android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".ui.virtual_machine.VMCreateActivity"></activity>
-        <activity android:name=".ui.virtual_machine.VirtualMachineDetailActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ui.virtualmachine.VMCreateActivity"></activity>
+        <activity android:name=".ui.virtualmachine.VirtualMachineDetailActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.database.DataBaseActivity"

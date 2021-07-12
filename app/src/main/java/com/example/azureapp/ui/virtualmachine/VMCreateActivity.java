@@ -1,4 +1,4 @@
-package com.example.azureapp.ui.virtual_machine;
+package com.example.azureapp.ui.virtualmachine;
 
 import androidx.appcompat.app.AppCompatActivity;
 

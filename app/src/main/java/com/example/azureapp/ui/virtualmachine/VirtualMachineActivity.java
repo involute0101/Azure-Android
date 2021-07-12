@@ -25,10 +25,7 @@ public class VirtualMachineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_virtual_machine);
 
     }
-
-
-
-    //添加虚拟机
+//添加虚拟机
 /*
     private boolean addVM(VirtualMachine vm){
         //调用API

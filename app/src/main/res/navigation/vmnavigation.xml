@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/VMFragment"
-        android:name="com.example.azureapp.ui.virtualmachine.VMFragment"
+        android:name="com.example.azureapp.ui.virtual_machine.VMFragment"
         android:label="fragment_v_m"
         tools:layout="@layout/fragment_v_m" >
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/VMAddFragment"
-        android:name="com.example.azureapp.ui.virtualmachine.VMAddFragment"
+        android:name="com.example.azureapp.ui.virtual_machine.VMAddFragment"
         android:label="fragment_v_m_add"
         tools:layout="@layout/fragment_v_m_add" />
 </navigation>

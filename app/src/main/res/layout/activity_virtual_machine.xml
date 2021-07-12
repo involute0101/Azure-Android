@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.virtualmachine.VirtualMachineActivity">
+    tools:context=".ui.virtual_machine.VirtualMachineActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_vm_fragment_activity_main"

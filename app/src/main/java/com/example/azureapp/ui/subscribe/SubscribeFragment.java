@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.Subscribe;
 import com.example.azureapp.ui.VirtualMachine;
-import com.example.azureapp.ui.virtualmachine.VMAdapter;
 
 import java.util.List;
 

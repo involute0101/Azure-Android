@@ -1,4 +1,4 @@
-package com.example.azureapp.ui.virtualmachine;
+package com.example.azureapp.ui.virtual_machine;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -30,8 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import lecho.lib.hellocharts.model.LineChartData;
-
 /**
  * @author 刘非凡
  * @projectName AzureAPP
@@ -57,12 +55,9 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return new LinearViewHolder_Source(LayoutInflater.from(mContext).inflate(R.layout.virtualdetails_source_running,parent,false));
         }
         if(viewType == 3){
-            return new LinearViewHolder_Condition(LayoutInflater.from(mContext).inflate(R.layout.virtualdetails_condition,parent,false));
-        }
-        if(viewType == 4){
             return new LinearViewHolder_Attribute(LayoutInflater.from(mContext).inflate(R.layout.virtualdetails_attribute,parent,false));
         }
-        if(viewType == 5){
+        if(viewType == 4){
             return new LinearViewHolder_Chart(LayoutInflater.from(mContext).inflate(R.layout.virtualdetails_charts,parent,false));
         }
         else{
@@ -99,7 +94,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 5;
     }
 
     /**
@@ -127,7 +122,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public  LinearViewHolder_Blog(View itemView){
             super(itemView);
-            tvBlogCount = itemView.findViewById(R.id.tv_blog_count);
+            tvBlogCount = itemView.findViewById(R.id.tv_vm_blog_count);
         }
     }
 
@@ -140,25 +135,8 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public  LinearViewHolder_Source(View itemView){
             super(itemView);
-            tvSourceState = itemView.findViewById(R.id.tv_source_state);
-            imgSourceState = itemView.findViewById(R.id.img_source_state);
-        }
-    }
-
-    /**
-     *
-     */
-    class LinearViewHolder_Condition extends  RecyclerView.ViewHolder{
-        private TextView tvPowerState;
-        private ImageView imgPowerState;
-        private TextView tvPreplanState;
-        private ImageView imgPreplanState;
-        public  LinearViewHolder_Condition(View itemView){
-            super(itemView);
-            tvPowerState = itemView.findViewById(R.id.tv_condition_power);
-            imgPowerState = itemView.findViewById(R.id.img_condition_power);
-            tvPreplanState = itemView.findViewById(R.id.tv_condition_preplan);
-            imgPreplanState = itemView.findViewById(R.id.img_condition_preplan);
+            tvSourceState = itemView.findViewById(R.id.tv_vm_source_state);
+            imgSourceState = itemView.findViewById(R.id.img_vm_source_state);
         }
     }
 

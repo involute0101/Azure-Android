@@ -137,14 +137,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="操作系统"
+            android:text="定价层"
             android:textSize="14dp"
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Linux"
+            android:text="Basic"
             android:textSize="16dp"
             android:textColor="@color/black"
             android:layout_marginLeft="25dp"
@@ -158,14 +158,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="大小"
+            android:text="SKU"
             android:textSize="14dp"
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2GB"
+            android:text="Basic"
             android:textSize="16dp"
             android:textColor="@color/black"
             android:layout_marginLeft="25dp"
@@ -179,14 +179,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="公共IP地址"
+            android:text="弹性数据库池"
             android:textSize="14dp"
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="255.255.255.255"
+            android:text="-"
             android:textSize="16dp"
             android:textColor="@color/black"
             android:layout_marginLeft="25dp"

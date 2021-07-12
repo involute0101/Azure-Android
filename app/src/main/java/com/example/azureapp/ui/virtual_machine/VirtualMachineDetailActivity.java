@@ -1,26 +1,27 @@
-package com.example.azureapp.ui.virtualmachine;
+package com.example.azureapp.ui.virtual_machine;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSONArray;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.VirtualMachine;
 
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
@@ -28,11 +29,10 @@ import org.apache.http.util.EntityUtils;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 
 /**
  * @author 刘非凡
@@ -60,7 +60,7 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         mTvStart = findViewById(R.id.tv_vm_detail_start);
         mTvDelete = findViewById(R.id.tv_vm_detail_delete);
         isStart = true;
-        stop();
+        getVmInfo();
     }
 
     public void click_Event(View view){
@@ -73,7 +73,6 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
                     mImgDelete.setImageResource(R.drawable.icon_restart);
                     mTvDelete.setText("重启");
                     isStart = false;
-                    mRvVMDetail.setAdapter(new VMDetailAdapter_stop(VirtualMachineDetailActivity.this));
                 }
                 else{
                     mImgStart.setImageResource(R.drawable.icon_start);
@@ -91,7 +90,6 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
                     mImgDelete.setImageResource(R.drawable.icon_restart);
                     mTvDelete.setText("重启");
                     isStart = false;
-                    mRvVMDetail.setAdapter(new VMDetailAdapter_stop(VirtualMachineDetailActivity.this));
                 }
                 else{
                     mImgStart.setImageResource(R.drawable.icon_start);
@@ -105,11 +103,32 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         }
     }
 
-//    public void getVmInfo(){
-//        RestTemplate restTemplate = new RestTemplate();
-//        JSONObject response = restTemplate.getForObject("http://20.92.144.124:8080/Azure/allVM", JSONObject.class);
-//        System.out.println(response);
-//    }
+    public void getVmInfo(){
+        Thread thread = new Thread(new Runnable() {
+            JSONArray jsonArray;
+            @Override
+            public void run() {
+                String url = "http://20.92.144.124:8080/Azure/allVM";
+                HttpClient client = HttpClients.createDefault();
+                HttpGet get = new HttpGet(url);
+                try {
+                    HttpResponse response = client.execute(get);
+                    int statusCode = response.getStatusLine().getStatusCode();
+                    if (statusCode == 200) {
+                        String result = EntityUtils.toString(response.getEntity());
+                        jsonArray = (JSONArray) JSONArray.parse(result);
+                        System.out.println("結果：" + jsonArray);
+
+                    }
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
 
     private void vmOperation(String url){
         JSONObject jsonObject = new JSONObject();

@@ -1,4 +1,4 @@
-package com.example.azureapp.ui.virtualmachine;
+package com.example.azureapp.ui.virtual_machine;
 
 import android.content.Intent;
 import android.view.LayoutInflater;

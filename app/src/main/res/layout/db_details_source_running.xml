@@ -33,7 +33,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/tv_vm_blog_more"
+                android:id="@+id/tv_db_blog_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="查看全部"
@@ -49,13 +49,13 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
         <ImageView
-            android:id="@+id/img_vm_source_state"
+            android:id="@+id/img_db_source_state"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/icon_running_48"
             android:layout_marginLeft="20dp"/>
         <TextView
-            android:id="@+id/tv_vm_source_state"
+            android:id="@+id/tv_db_source_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="正在运行"

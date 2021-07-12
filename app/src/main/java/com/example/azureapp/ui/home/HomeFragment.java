@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.azureapp.R;
 import com.example.azureapp.databinding.FragmentHomeBinding;
 import com.example.azureapp.ui.database.DataBaseActivity;
-import com.example.azureapp.ui.virtualmachine.VMAdapter;
-import com.example.azureapp.ui.virtualmachine.VirtualMachineActivity;
+import com.example.azureapp.ui.virtual_machine.VirtualMachineActivity;
 
 /**
  * fileDesc

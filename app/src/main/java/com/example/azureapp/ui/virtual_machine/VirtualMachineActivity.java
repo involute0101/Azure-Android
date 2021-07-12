@@ -1,21 +1,11 @@
-package com.example.azureapp.ui.virtualmachine;
+package com.example.azureapp.ui.virtual_machine;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
 
 import com.example.azureapp.R;
-import com.example.azureapp.ui.VirtualMachine;
-
-import java.util.List;
 
 public class VirtualMachineActivity extends AppCompatActivity {
     private NavController navController;

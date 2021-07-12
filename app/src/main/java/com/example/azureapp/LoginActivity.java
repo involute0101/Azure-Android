@@ -12,6 +12,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alibaba.fastjson.JSONArray;
+import com.example.azureapp.ui.VirtualMachine;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+
 /**
  * @author 刘非凡
  * @projectName AzureAPP
@@ -42,23 +54,55 @@ public class LoginActivity extends AppCompatActivity {
         forgetTv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         //抗锯齿
         forgetTv.getPaint().setAntiAlias(true);
-        forgetTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri privacy_url = Uri.parse("https://account.live.com/acsr");
-                intent.setData(privacy_url);
-                startActivity(intent);
-            }
+        forgetTv.setOnClickListener(v -> {
+            Intent intent= new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            Uri privacy_url = Uri.parse("https://account.live.com/acsr");
+            intent.setData(privacy_url);
+            startActivity(intent);
         });
         loginBtn = findViewById(R.id.btn_login_2);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(v -> logIn());
+        getDetail();
+    }
+
+    private void getDetail(){
+        Thread thread = new Thread(new Runnable() {
+            JSONArray jsonArray;
             @Override
-            public void onClick(View v) {
-                logIn();
+            public void run() {
+                String url = "http://20.92.144.124:8080/Azure/allVM";
+                HttpClient client = HttpClients.createDefault();
+                HttpGet get = new HttpGet(url);
+                try{
+                    HttpResponse response = client.execute(get);
+                    int statusCode = response.getStatusLine().getStatusCode();
+                    if (statusCode == 200) {
+                        String result = EntityUtils.toString(response.getEntity());
+//                        jsonArray = (JSONArray) JSONArray.parse(result);
+//                        for(int i=0;i<jsonArray.size();i++)
+//                        {
+//                            vmAdapter.vms.add(new VirtualMachine(jsonArray.getJSONObject(i).getString("name")));
+//                        }
+                        System.out.println("結果："+result);
+                        //vmAdapter.notifyDataSetChanged();
+
+                    }
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void logIn(){

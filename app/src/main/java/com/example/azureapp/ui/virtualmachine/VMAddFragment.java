@@ -15,10 +15,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.azureapp.R;
 import com.example.azureapp.ui.VirtualMachine;
+import com.example.azureapp.util.PayHttpUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/9.
+ * Email 1403235458@qq.com
+ */
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link VMAddFragment#newInstance} factory method to
@@ -37,7 +50,7 @@ public class VMAddFragment extends Fragment {
 
     String subscribe_id,vent_name,vm_name,username,password,vm_size,resource_group ;
 
-    EditText subscribe_id_text,vent_name_text,vm_name_text,username_text,password_text,vm_size_text,resource_group_text;
+    EditText vent_name_text,vm_name_text,username_text,password_text,vm_size_text,resource_group_text;
     Button add_submit_button;
     public VMAddFragment() {
         // Required empty public constructor
@@ -82,7 +95,6 @@ public class VMAddFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity activity= requireActivity();
         add_submit_button = activity.findViewById(R.id.add_concretevm_button);
-        subscribe_id_text  = activity.findViewById(R.id.editTextTextSubscribeId);
         vent_name_text = activity.findViewById(R.id.editTextTextVNetName);
         vm_name_text = activity.findViewById(R.id.editTextTextVirtualMachineName);
         username_text = activity.findViewById(R.id.editTextTextVirtualMachineUsername);
@@ -99,7 +111,7 @@ public class VMAddFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                subscribe_id = subscribe_id_text.getText().toString().trim();
+
                 vent_name = vent_name_text.getText().toString().trim();
                 vm_name = vm_name_text.getText().toString().trim();
                 username = username_text.getText().toString().trim();
@@ -107,7 +119,7 @@ public class VMAddFragment extends Fragment {
                 vm_size = vm_size_text.getText().toString().trim();
                 resource_group = resource_group_text.getText().toString().trim();
 
-                add_submit_button.setEnabled(!subscribe_id.isEmpty() && !vent_name.isEmpty()
+                add_submit_button.setEnabled(!vent_name.isEmpty()
                                             && !username.isEmpty() && !password.isEmpty()
                                             && !vm_size.isEmpty() && !resource_group.isEmpty());
             }
@@ -117,7 +129,6 @@ public class VMAddFragment extends Fragment {
 
             }
         };
-        subscribe_id_text.addTextChangedListener(watcher);
         vent_name_text.addTextChangedListener(watcher);
         vm_name_text.addTextChangedListener(watcher);
         username_text.addTextChangedListener(watcher);
@@ -130,14 +141,75 @@ public class VMAddFragment extends Fragment {
             public void onClick(View v) {
                 VirtualMachine virtualMachine = new VirtualMachine(subscribe_id,vent_name,vm_name,username,password,vm_size,resource_group);
                 //创建虚拟机，调用API
-
-
+                //addPostVM(virtualMachine);
                 /*VMFragment vmFragment = (VMFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.VMFragment);
                 vmFragment.addVM(virtualMachine);
                 NavController navController = Navigation.findNavController(v);
                 navController.navigateUp();*/
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("subscription_id","ec269b4d-93af-43c5-9fd6-9a5185235344");
+                    jsonObject.put("VNET_NAME",virtualMachine.vnetName);
+                    jsonObject.put("VM_NAME",virtualMachine.vmName);
+                    jsonObject.put("USERNAME",virtualMachine.username);
+                    jsonObject.put("PASSWORD",virtualMachine.password);
+                    jsonObject.put("VM_SIZE",virtualMachine.vmSize);
+                    jsonObject.put("RESOURCE_GROUP_NAME",virtualMachine.resGroupName);
+                    String url = new String("http://20.92.144.124:8080/Azure/createVm");
+                    Toast.makeText(getContext(), "准备发送", Toast.LENGTH_SHORT).show();
+
+                    PayHttpUtils httpUtils = new PayHttpUtils();
+                    String result = httpUtils.post(url,jsonObject.toString());//json解析字符串网络请求
+                    Toast.makeText(getContext(), "创建", Toast.LENGTH_SHORT).show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
             }
         });
+    }
+    public void addPostVM(VirtualMachine virtualMachine){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("subscription_id","ec269b4d-93af-43c5-9fd6-9a5185235344");
+            jsonObject.put("VNET_NAME",virtualMachine.vnetName);
+            jsonObject.put("VM_NAME",virtualMachine.vmName);
+            jsonObject.put("USERNAME",virtualMachine.username);
+            jsonObject.put("PASSWORD",virtualMachine.password);
+            jsonObject.put("VM_SIZE",virtualMachine.vmSize);
+            jsonObject.put("RESOURCE_GROUP_NAME",virtualMachine.resGroupName);
+
+
+
+            String url = new String("http://20.92.144.124:8080/Azure/createVm");
+
+/*
+            URL url = new URL("http://20.92.144.124:8080/Azure/createVm");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(5000);
+            // 设置允许输出
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            DataOutputStream os = new DataOutputStream( conn.getOutputStream());
+            String content = String.valueOf(jsonObject);
+            os.writeBytes(content);
+            os.flush();
+            os.close();
+            if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                Toast.makeText(getContext(), "创建成功", Toast.LENGTH_SHORT).show();
+                conn.disconnect();
+            }*/
+            PayHttpUtils httpUtils = new PayHttpUtils();
+            String result = httpUtils.post(url,jsonObject.toString());//json解析字符串网络请求
+            Toast.makeText(getContext(), "创建", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

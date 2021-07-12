@@ -15,10 +15,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.alibaba.fastjson.JSONArray;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.VirtualMachine;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+
+import java.io.Console;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -88,9 +101,45 @@ public class VMFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recyclerView = requireActivity().findViewById(R.id.vm_recycle_view);
         vmAdapter = new VMAdapter();
-        vmAdapter.vms.add(new VirtualMachine("test1"));
-        vmAdapter.vms.add(new VirtualMachine("test2"));
-        vmAdapter.vms.add(new VirtualMachine("test3"));
+
+        //
+
+
+        /*new Thread(new Runnable(){
+            JSONArray jsonArray;
+            @Override
+            public void run() {
+                String url = "http://20.92.144.124:8080/Azure/allVM";
+                HttpClient client = HttpClients.createDefault();
+                HttpGet get = new HttpGet(url);
+                try{
+                    HttpResponse response = client.execute(get);
+                    int statusCode = response.getStatusLine().getStatusCode();
+                    if (statusCode == 200) {
+                        String result = EntityUtils.toString(response.getEntity());
+                        Log.d("result", result);
+                        jsonArray = (JSONArray) JSONArray.parse(result);
+                        Log.d("jsonArray", jsonArray.toString());
+                        for(int i=0;i<jsonArray.size();i++)
+                        {
+                            vmAdapter.vms.add(new VirtualMachine(jsonArray.getJSONObject(i).getString("name")));
+                            Log.d("name", jsonArray.getJSONObject(i).getString("name"));
+                        }
+
+
+                        //System.out.println("結果："+result);
+                    }
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();*/
+
+        vmAdapter.vms.add(new VirtualMachine("back"));
+        vmAdapter.vms.add(new VirtualMachine("springboot"));
+        vmAdapter.vms.add(new VirtualMachine("springboot14"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(vmAdapter);

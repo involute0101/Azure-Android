@@ -49,14 +49,16 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
         <ImageView
+            android:id="@+id/img_source_state"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/icon_unkown_64"
+            android:src="@drawable/icon_running_48"
             android:layout_marginLeft="20dp"/>
         <TextView
+            android:id="@+id/tv_source_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="未知"
+            android:text="正在运行"
             android:textSize="14dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"/>

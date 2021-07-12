@@ -21,9 +21,16 @@
         android:roundIcon="@drawable/icon_azure"
         android:supportsRtl="true"
         android:theme="@style/Theme.AzureAPP">
+        <activity android:name=".VerifyWebActivity">
+
+        </activity>
+
         <uses-library android:name="org.apache.http.legacy" android:required ="false" />
-        <activity android:name=".VerifyWebActivity"></activity>
         <activity android:name=".ui.virtualmachine.VirtualMachineDetailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.virtualmachine.VirtualMachineActivity"
@@ -33,16 +40,12 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".WelcomeActivity">
-
         </activity>
         <activity android:name=".StartActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -192,6 +192,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
         <EditText
+            android:text="Standard_B1s"
             android:id="@+id/editTextTextVirtualMachineSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

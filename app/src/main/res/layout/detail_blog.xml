@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="90dp"
     android:background="@color/white"
+    android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:layout_marginHorizontal="10dp"
     android:elevation="2dp">
@@ -20,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="资源运行情况"
+                android:text="活动日志"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -33,7 +34,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/tv_vm_blog_more"
+                android:id="@+id/tv_blog_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="查看全部"
@@ -49,19 +50,17 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
         <ImageView
-            android:id="@+id/img_vm_source_state"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/icon_running_48"
+            android:src="@drawable/icon_blog_48"
             android:layout_marginLeft="20dp"/>
         <TextView
-            android:id="@+id/tv_vm_source_state"
+            android:id="@+id/tv_blog_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="正在运行"
+            android:text="2条信息"
             android:textSize="14dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"/>
     </LinearLayout>
-
 </LinearLayout>

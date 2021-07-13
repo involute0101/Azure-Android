@@ -31,26 +31,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订阅"
+                    android:textSize="14dp"
+                    android:textColor="@color/brown_deeper"
+                    android:layout_marginLeft="10dp"/>
+                <ImageView
+                    android:id="@+id/img_vm_subscription_lock"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/icon_lock"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
             <TextView
+                android:id="@+id/tv_subscription_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="订阅"
-                android:textSize="14dp"
-                android:textColor="@color/brown_deeper"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ec269b4d-93af-43c5-9fd6-9a5185235344"
+                android:text="@string/subscription_default_id"
                 android:textSize="14dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"/>
             <TextView
+                android:id="@+id/tv_subscription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="免费试用"
-                android:textSize="16dp"
+                android:text="@string/subscription_default_name"
+                android:textSize="14dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"/>
@@ -78,10 +92,11 @@
                 android:textColor="@color/brown_deeper"
                 android:layout_marginLeft="10dp"/>
             <TextView
+                android:id="@+id/tv_resource_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Test2"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"/>
@@ -100,6 +115,7 @@
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
+            android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Computer"
@@ -121,6 +137,7 @@
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
+            android:id="@+id/tv_computer_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Computer"
@@ -142,6 +159,7 @@
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
+            android:id="@+id/tv_os"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Linux"
@@ -163,6 +181,7 @@
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
+            android:id="@+id/tv_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2GB"
@@ -176,17 +195,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="公共IP地址"
+                android:textSize="14dp"
+                android:textColor="@color/brown_deeper"
+                android:layout_marginLeft="25dp"/>
+            <ImageView
+                android:id="@+id/img_vm_ip_lock"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/icon_lock"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
         <TextView
+            android:id="@+id/tv_public_ip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="公共IP地址"
-            android:textSize="14dp"
-            android:textColor="@color/brown_deeper"
-            android:layout_marginLeft="25dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="255.255.255.255"
+            android:text="@string/ip_default"
             android:textSize="16dp"
             android:textColor="@color/black"
             android:layout_marginLeft="25dp"

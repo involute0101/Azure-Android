@@ -7,9 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.example.azureapp.R;
+import com.example.azureapp.ui.VirtualMachine;
+import com.example.azureapp.ui.VirtualMachineDescription;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,78 +48,84 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
     private TextView mTvStart;
     private TextView mTvDelete;
     private boolean isStart;
+    private VirtualMachineDescription vmDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_virtualmachine_detail);
+        //获取虚拟机描述信息
+        Intent intent = this.getIntent();
+        vmDetail = (VirtualMachineDescription) intent.getExtras().getSerializable("DetailVM");
+        vmDetail = new VirtualMachineDescription();
+        //获取虚拟机状态
+        getStatus();
+        //初始化RecyclerView
         mRvVMDetail = findViewById(R.id.rv_vm_details);
         mRvVMDetail.setLayoutManager(new LinearLayoutManager(VirtualMachineDetailActivity.this));
-        mRvVMDetail.setAdapter(new VMDetailAdapter(VirtualMachineDetailActivity.this));
+        VMDetailAdapter adapter = new VMDetailAdapter(VirtualMachineDetailActivity.this, vmDetail);
+        mRvVMDetail.setAdapter(adapter);
+        //初始化操作栏
         mImgStart = findViewById(R.id.img_vm_detail_start);
         mImgDelete = findViewById(R.id.img_vm_detail_delete);
         mTvStart = findViewById(R.id.tv_vm_detail_start);
         mTvDelete = findViewById(R.id.tv_vm_detail_delete);
         isStart = true;
-        getVmInfo();
     }
 
     public void click_Event(View view){
+        if(isStart){
+            mImgStart.setImageResource(R.drawable.icon_stop);
+            mTvStart.setText(R.string.stop);
+            mImgDelete.setImageResource(R.drawable.icon_restart);
+            mTvDelete.setText(R.string.restart);
+            isStart = false;
+        }
+        else{
+            mImgStart.setImageResource(R.drawable.icon_start);
+            mTvStart.setText(R.string.start);
+            mImgDelete.setImageResource(R.drawable.icon_vmdetail_delete);
+            mTvDelete.setText(R.string.delete);
+            isStart = true;
+        }
         int id = view.getId();
         switch (id){
             case R.id.img_vm_detail_start:
-                if(isStart){
-                    mImgStart.setImageResource(R.drawable.icon_stop);
-                    mTvStart.setText("停止");
-                    mImgDelete.setImageResource(R.drawable.icon_restart);
-                    mTvDelete.setText("重启");
-                    isStart = false;
-                }
-                else{
-                    mImgStart.setImageResource(R.drawable.icon_start);
-                    mTvStart.setText("启动");
-                    mImgDelete.setImageResource(R.drawable.icon_vmdetail_delete);
-                    mTvDelete.setText("删除");
-                    isStart = true;
-                    mRvVMDetail.setAdapter(new VMDetailAdapter(VirtualMachineDetailActivity.this));
-                }
+                if(isStart)
+                    start();
+                else
+                    stop();
                 break;
             case R.id.img_vm_detail_delete:
-                if(isStart){
-                    mImgStart.setImageResource(R.drawable.icon_stop);
-                    mTvStart.setText("停止");
-                    mImgDelete.setImageResource(R.drawable.icon_restart);
-                    mTvDelete.setText("重启");
-                    isStart = false;
-                }
-                else{
-                    mImgStart.setImageResource(R.drawable.icon_start);
-                    mTvStart.setText("启动");
-                    mImgDelete.setImageResource(R.drawable.icon_vmdetail_delete);
-                    mTvDelete.setText("删除");
-                    isStart = true;
-                    mRvVMDetail.setAdapter(new VMDetailAdapter(VirtualMachineDetailActivity.this));
-                }
+                if(isStart)
+                    delete();
+                else
+                    restart();
                 break;
         }
     }
 
-    public void getVmInfo(){
+    private void getStatus(){
+        String groupName = vmDetail.resourceGroup;
+        String vmName = vmDetail.name;
         Thread thread = new Thread(new Runnable() {
-            JSONArray jsonArray;
             @Override
             public void run() {
-                String url = "http://20.92.144.124:8080/Azure/allVM";
+                String url = "http://20.92.144.124:8080/Azure/getStatus?resourceGroup="+groupName+"&name="+vmName;
                 HttpClient client = HttpClients.createDefault();
                 HttpGet get = new HttpGet(url);
-                try {
+                try{
                     HttpResponse response = client.execute(get);
                     int statusCode = response.getStatusLine().getStatusCode();
                     if (statusCode == 200) {
                         String result = EntityUtils.toString(response.getEntity());
-                        jsonArray = (JSONArray) JSONArray.parse(result);
-                        System.out.println("結果：" + jsonArray);
-
+                        if(result.equals("VM stopped")){
+                            vmDetail.status = "未运行";
+                            Log.d("status", vmDetail.status);
+                        }
+                        else{
+                            vmDetail.status = "正在运行";
+                        }
                     }
                 } catch (ClientProtocolException e) {
                     e.printStackTrace();
@@ -124,7 +134,12 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
                 }
             }
         });
-        thread.start();
+        try{
+            thread.start();
+            thread.join();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void vmOperation(String url){
@@ -170,6 +185,14 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
     private void stop(){
         String url = "http://20.92.144.124:8080/Azure/stopVm";
         vmOperation(url);
+    }
+
+    private void delete(){
+
+    }
+
+    private void restart(){
+
     }
 
     public class MyDecoration extends RecyclerView.ItemDecoration {

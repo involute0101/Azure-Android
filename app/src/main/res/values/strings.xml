@@ -24,4 +24,15 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- Strings used for vm details -->
+    <string name="ip_default">***************</string>
+    <string name="subscription_default_name">****</string>
+    <string name="subscription_default_id">************************</string>
+    <string name="stop">停止</string>
+    <string name="restart">重启</string>
+    <string name="start">启动</string>
+    <string name="delete">删除</string>
+    <string name="allResources">所有资源</string>
+    <string name="resourceSearchHint">搜索名称、类型或标记</string>
+    <string name="resources_search_cancel">取消</string>
 </resources>

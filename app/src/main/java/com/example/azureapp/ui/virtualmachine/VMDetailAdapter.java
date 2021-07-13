@@ -2,12 +2,17 @@ package com.example.azureapp.ui.virtualmachine;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.alibaba.fastjson.JSONArray;
 import com.example.azureapp.R;
+import com.example.azureapp.ui.VirtualMachineDescription;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -27,8 +32,15 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,9 +53,11 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @NotNull
     private Context mContext;
+    private VirtualMachineDescription vm;
 
-    public VMDetailAdapter(Context context){
+    public VMDetailAdapter(Context context, VirtualMachineDescription vm){
         this.mContext = context;
+        this.vm = vm;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
@@ -51,10 +65,10 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return new LinearViewHolder_Head(LayoutInflater.from(mContext).inflate(R.layout.vituraldetails_head,parent,false));
         }
         if(viewType == 1){
-            return new LinearViewHolder_Blog(LayoutInflater.from(mContext).inflate(R.layout.virtualdetails_blog,parent,false));
+            return new LinearViewHolder_Blog(LayoutInflater.from(mContext).inflate(R.layout.detail_blog,parent,false));
         }
         if(viewType == 2){
-            return new LinearViewHolder_Source(LayoutInflater.from(mContext).inflate(R.layout.virtualdetails_source_running,parent,false));
+            return new LinearViewHolder_Source(LayoutInflater.from(mContext).inflate(R.layout.detail_source_running,parent,false));
         }
         if(viewType == 3){
             return new LinearViewHolder_Attribute(LayoutInflater.from(mContext).inflate(R.layout.virtualdetails_attribute,parent,false));
@@ -70,23 +84,38 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if(position == 0){
-            ((LinearViewHolder_Head)holder).tvVmName.setText("back");
-            ((LinearViewHolder_Head)holder).tvVmState.setText("正在运行");
-            ((LinearViewHolder_Head)holder).imgState.setImageResource(R.drawable.icon_running_48);
+            ((LinearViewHolder_Head)holder).tvVmName.setText(vm.name);
+            ((LinearViewHolder_Head)holder).tvVmStatus.setText(vm.status);
+            if(vm.status.equals("正在运行"))
+                ((LinearViewHolder_Head)holder).imgStatus.setImageResource(R.drawable.icon_running_48);
+            else
+                ((LinearViewHolder_Head)holder).imgStatus.setImageResource(R.drawable.icon_stop_64);
         }
 //        if(position == 1){
 //            ((LinearViewHolder_Blog)holder).tvBlogCount.setText("10条信息");
 //        }
-//        if(position == 2){
-//            ((LinearViewHolder_Source)holder).tvSourceState.setText("Source");
-//            ((LinearViewHolder_Source)holder).imgSourceState.setImageResource(R.drawable.icon_stop_64);
-//        }
+        if(position == 2){
+            ((LinearViewHolder_Source)holder).tvSourceStatus.setText(vm.status);
+            if(vm.status.equals("正在运行")){
+                ((LinearViewHolder_Source)holder).imgSourceStatus.setImageResource(R.drawable.icon_running_48);
+            }
+            else{
+                ((LinearViewHolder_Source)holder).imgSourceStatus.setImageResource(R.drawable.icon_stop_64);
+            }
+        }
 //        if(position == 3){
 //            ((LinearViewHolder_Condition)holder).tvPowerState.setText("Power");
 //            ((LinearViewHolder_Condition)holder).imgPowerState.setImageResource(R.drawable.icon_stop_64);
 //            ((LinearViewHolder_Condition)holder).tvPreplanState.setText("Preplan");
 //            ((LinearViewHolder_Condition)holder).imgPreplanState.setImageResource(R.drawable.icon_stop_64);
 //        }
+        if(position == 3){
+            ((LinearViewHolder_Attribute)holder).tvResourceGroup.setText(vm.resourceGroup);
+            ((LinearViewHolder_Attribute)holder).tvLocation.setText(vm.location);
+            ((LinearViewHolder_Attribute)holder).tvVm.setText(vm.name);
+            ((LinearViewHolder_Attribute)holder).tvOs.setText(vm.os);
+            ((LinearViewHolder_Attribute)holder).tvSize.setText(vm.vmSize);
+        }
     }
 
     @Override
@@ -102,17 +131,17 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     /**
      *
      */
-    class LinearViewHolder_Head extends  RecyclerView.ViewHolder{
+    class LinearViewHolder_Head extends  RecyclerView.ViewHolder {
 
         private TextView tvVmName;
-        private ImageView imgState;
-        private TextView tvVmState;
+        private ImageView imgStatus;
+        private TextView tvVmStatus;
 
-        public  LinearViewHolder_Head(View itemView){
+        public LinearViewHolder_Head(View itemView) {
             super(itemView);
             tvVmName = itemView.findViewById(R.id.tv_vm_name);
-            imgState = itemView.findViewById(R.id.img_vm_state);
-            tvVmState = itemView.findViewById(R.id.tv_vm_state);
+            imgStatus = itemView.findViewById(R.id.img_vm_state);
+            tvVmStatus = itemView.findViewById(R.id.tv_vm_state);
         }
     }
 
@@ -124,7 +153,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public  LinearViewHolder_Blog(View itemView){
             super(itemView);
-            tvBlogCount = itemView.findViewById(R.id.tv_vm_blog_count);
+            tvBlogCount = itemView.findViewById(R.id.tv_blog_count);
         }
     }
 
@@ -132,13 +161,13 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      *
      */
     class LinearViewHolder_Source extends  RecyclerView.ViewHolder{
-        private TextView tvSourceState;
-        private ImageView imgSourceState;
+        private TextView tvSourceStatus;
+        private ImageView imgSourceStatus;
 
         public  LinearViewHolder_Source(View itemView){
             super(itemView);
-            tvSourceState = itemView.findViewById(R.id.tv_vm_source_state);
-            imgSourceState = itemView.findViewById(R.id.img_vm_source_state);
+            tvSourceStatus = itemView.findViewById(R.id.tv_source_state);
+            imgSourceStatus = itemView.findViewById(R.id.img_source_state);
         }
     }
 
@@ -146,8 +175,133 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      *
      */
     class LinearViewHolder_Attribute extends  RecyclerView.ViewHolder{
+        private TextView tvResourceGroup;
+        private TextView tvLocation;
+        private TextView tvVm;
+        private TextView tvOs;
+        private TextView tvSize;
+        private TextView tvPublicIp;
+        private TextView tvSubscriptionID;
+        private TextView tvSubscription;
+        private ImageView imgLockSubscription;
+        private ImageView imgLockIp;
+        private boolean subscriptionLock;
+        private boolean ipLock;
+        private boolean isSubscriptionUpdated;
+        private boolean isIpUpdated;
+
         public  LinearViewHolder_Attribute(View itemView){
             super(itemView);
+            subscriptionLock = true;
+            ipLock = true;
+            isSubscriptionUpdated = false;
+            isIpUpdated = false;
+            tvResourceGroup = itemView.findViewById(R.id.tv_resource_group);
+            tvLocation = itemView.findViewById(R.id.tv_location);
+            tvVm = itemView.findViewById(R.id.tv_computer_name);
+            tvOs = itemView.findViewById(R.id.tv_os);
+            tvSize = itemView.findViewById(R.id.tv_size);
+            tvPublicIp = itemView.findViewById(R.id.tv_public_ip);
+            tvSubscription = itemView.findViewById(R.id.tv_subscription);
+            tvSubscriptionID = itemView.findViewById(R.id.tv_subscription_id);
+            imgLockSubscription = itemView.findViewById(R.id.img_vm_subscription_lock);
+            imgLockIp = itemView.findViewById(R.id.img_vm_ip_lock);
+            imgLockSubscription.setOnClickListener(v -> {
+                if(!isSubscriptionUpdated){
+                    getSubscription();
+                    isSubscriptionUpdated = true;
+                }
+                if(subscriptionLock){
+                    tvSubscription.setText(vm.subscriptionName);
+                    tvSubscriptionID.setText(vm.subscriptionId);
+                    imgLockSubscription.setImageResource(R.drawable.icon_unlock);
+                    subscriptionLock = false;
+                }
+                else{
+                    tvSubscription.setText("****");
+                    tvSubscriptionID.setText("************************");
+                    imgLockSubscription.setImageResource(R.drawable.icon_lock);
+                    subscriptionLock = true;
+                }
+            });
+            imgLockIp.setOnClickListener(v -> {
+                if(!isIpUpdated){
+                    getPublicIp();
+                    isIpUpdated = true;
+                }
+                if(ipLock){
+                    tvPublicIp.setText(vm.publicIP);
+                    imgLockIp.setImageResource(R.drawable.icon_lock);
+                    ipLock = false;
+                }
+                else{
+                    tvPublicIp.setText("***************");
+                    imgLockIp.setImageResource(R.drawable.icon_unlock);
+                    ipLock = true;
+                }
+            });
+        }
+
+        private void getPublicIp(){
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    StringBuilder url = new StringBuilder("http://20.92.144.124:8080/Azure/getIp?name=");
+                    url.append(vm.name);
+                    HttpClient client = HttpClients.createDefault();
+                    HttpGet get = new HttpGet(url.toString());
+                    try {
+                        HttpResponse response = client.execute(get);
+                        int statusCode = response.getStatusLine().getStatusCode();
+                        if (statusCode == 200) {
+                            String result = EntityUtils.toString(response.getEntity());
+                            vm.publicIP = result;
+                        }
+                    } catch (ClientProtocolException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            try{
+                thread.start();
+                thread.join();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        private void getSubscription(){
+            Thread thread = new Thread(new Runnable() {
+                JSONArray jsonArray;
+                @Override
+                public void run() {
+                    String url = "http://20.92.144.124:8080/Azure/getSubscription";
+                    HttpClient client = HttpClients.createDefault();
+                    HttpGet get = new HttpGet(url);
+                    try{
+                        HttpResponse response = client.execute(get);
+                        int statusCode = response.getStatusLine().getStatusCode();
+                        if (statusCode == 200) {
+                            String result = EntityUtils.toString(response.getEntity());
+                            jsonArray = (JSONArray) JSONArray.parse(result);
+                            vm.subscriptionName = jsonArray.getString(0);
+                            vm.subscriptionId = jsonArray.getString(1);
+                        }
+                    } catch (ClientProtocolException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            try{
+                thread.start();
+                thread.join();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

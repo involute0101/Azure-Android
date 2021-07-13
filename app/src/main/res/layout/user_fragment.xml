@@ -1,103 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user.UserFragment">
+    tools:context=".ui.user.UserFragment"
+    android:orientation="vertical"
+    android:background="#EDEDED">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!--    头像-->
+    <LinearLayout
+        android:id="@+id/ll_portrait"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+        android:paddingBottom="10dp">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="136dp" />
+        <com.example.azureapp.Widget.RoundImageView
+            android:id="@+id/user_portrait"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/padding_left_and_right"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/head" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="69dp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="446dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/user_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingTop="30dp"
+        android:paddingBottom="10dp">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="538dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="141dp" />
-
-        <ImageButton
-            android:id="@+id/imageButton5"
-            android:layout_width="102dp"
-            android:layout_height="86dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline10"
-            app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.382"
-            tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/username_textView"
-            android:layout_width="120dp"
-            android:layout_height="53dp"
-            android:text="用户名"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline15"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.233"
-            app:layout_constraintStart_toStartOf="@+id/guideline11"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/mail_textView"
-            android:layout_width="128dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="20dp"
+            android:id="@+id/textView3"
+            android:layout_width="80dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:text="邮箱"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.246"
-            app:layout_constraintStart_toStartOf="@+id/guideline11"
-            app:layout_constraintTop_toBottomOf="@+id/username_textView"
-            app:layout_constraintVertical_bias="1.0" />
+            android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="150dp"
-            android:layout_height="58dp"
-            android:text="退出"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:backgroundTint="#FF5722"
-            app:layout_constraintBottom_toTopOf="@+id/guideline14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline13" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+        <TextView
+            android:id="@+id/user_email_tv"
+            android:layout_width="321dp"
+            android:layout_height="33dp"
+            android:text="1403235458@qq.com"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingTop="30dp"
+        android:paddingBottom="10dp">
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="80dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="XX"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/user_info_tv"
+            android:layout_width="321dp"
+            android:layout_height="33dp"
+            android:text="TextView"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/quit_button"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#E65353"
+        android:text="退出"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+
+</LinearLayout>

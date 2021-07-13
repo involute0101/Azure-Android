@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.azureapp.R;
+import com.example.azureapp.databinding.SubscribeFragmentBinding;
 import com.example.azureapp.ui.Subscribe;
 import com.example.azureapp.ui.VirtualMachine;
 
@@ -31,6 +32,7 @@ public class SubscribeFragment extends Fragment {
     RecyclerView recyclerView;
     SubscribeAdapter subscribeAdapter;
     private List<VirtualMachine> vms;
+    SubscribeFragmentBinding binding;
 
     public static SubscribeFragment newInstance() {
         return new SubscribeFragment();
@@ -39,7 +41,15 @@ public class SubscribeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.subscribe_fragment, container, false);
+
+        binding = SubscribeFragmentBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        return root;
+    }
+
+    @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -47,8 +57,9 @@ public class SubscribeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(SubscribeViewModel.class);
         // TODO: Use the ViewModel
-        recyclerView = requireActivity().findViewById(R.id.subscribe_recycle_view);
+        recyclerView = binding.subscribeRecycleView;
         subscribeAdapter = new SubscribeAdapter();
+        subscribeAdapter.subscribes.clear();
         subscribeAdapter.subscribes.add(new Subscribe("免费订阅","ec269b4d-93af-43c5-9fd6-9a5185235344"));
         subscribeAdapter.subscribes.add(new Subscribe("免费订阅2","ec269b4d-93af-43c5-9fd6-9a5185235344"));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));

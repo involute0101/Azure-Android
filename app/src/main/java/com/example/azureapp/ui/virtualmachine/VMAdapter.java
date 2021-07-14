@@ -81,7 +81,7 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
             @Override
             public void run() {
                 //通过资源组和虚拟机名称获得详情信息
-                String url = "http://20.92.144.124:8080/Azure/VmShow?resourceGroup="+vm.resGroupName+"&name="+vm.vmName;
+                String url = "http://20.89.169.250:8080/Azure/VmShow?resourceGroup="+vm.resGroupName+"&name="+vm.vmName;
                 HttpClient client = HttpClients.createDefault();
                 HttpGet get = new HttpGet(url);
                 try{

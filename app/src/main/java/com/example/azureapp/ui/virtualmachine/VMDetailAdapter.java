@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.VirtualMachineDescription;
 import com.github.mikephil.charting.animation.Easing;
@@ -59,6 +60,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.mContext = context;
         this.vm = vm;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         if(viewType == 0){
@@ -86,7 +88,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if(position == 0){
             ((LinearViewHolder_Head)holder).tvVmName.setText(vm.name);
             ((LinearViewHolder_Head)holder).tvVmStatus.setText(vm.status);
-            if(vm.status.equals("正在运行"))
+            if(vm.status != null && vm.status.equals("正在运行"))
                 ((LinearViewHolder_Head)holder).imgStatus.setImageResource(R.drawable.icon_running_48);
             else
                 ((LinearViewHolder_Head)holder).imgStatus.setImageResource(R.drawable.icon_stop_64);
@@ -96,7 +98,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //        }
         if(position == 2){
             ((LinearViewHolder_Source)holder).tvSourceStatus.setText(vm.status);
-            if(vm.status.equals("正在运行")){
+            if(vm.status != null && vm.status.equals("正在运行")){
                 ((LinearViewHolder_Source)holder).imgSourceStatus.setImageResource(R.drawable.icon_running_48);
             }
             else{
@@ -231,12 +233,12 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
                 if(ipLock){
                     tvPublicIp.setText(vm.publicIP);
-                    imgLockIp.setImageResource(R.drawable.icon_lock);
+                    imgLockIp.setImageResource(R.drawable.icon_unlock);
                     ipLock = false;
                 }
                 else{
                     tvPublicIp.setText("***************");
-                    imgLockIp.setImageResource(R.drawable.icon_unlock);
+                    imgLockIp.setImageResource(R.drawable.icon_lock);
                     ipLock = true;
                 }
             });
@@ -246,7 +248,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    StringBuilder url = new StringBuilder("http://20.92.144.124:8080/Azure/getIp?name=");
+                    StringBuilder url = new StringBuilder("http://20.89.169.250:8080/Azure/getIp?name=");
                     url.append(vm.name);
                     HttpClient client = HttpClients.createDefault();
                     HttpGet get = new HttpGet(url.toString());
@@ -277,7 +279,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 JSONArray jsonArray;
                 @Override
                 public void run() {
-                    String url = "http://20.92.144.124:8080/Azure/getSubscription";
+                    String url = "http://20.89.169.250:8080/Azure/getSubscription";
                     HttpClient client = HttpClients.createDefault();
                     HttpGet get = new HttpGet(url);
                     try{
@@ -286,8 +288,10 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         if (statusCode == 200) {
                             String result = EntityUtils.toString(response.getEntity());
                             jsonArray = (JSONArray) JSONArray.parse(result);
-                            vm.subscriptionName = jsonArray.getString(0);
-                            vm.subscriptionId = jsonArray.getString(1);
+
+                            VirtualMachineDescription vmDes = jsonArray.getObject(0,VirtualMachineDescription.class);
+                            vm.subscriptionId = vmDes.subscriptionId;
+                            vm.subscriptionName = vmDes.subscriptionName;
                         }
                     } catch (ClientProtocolException e) {
                         e.printStackTrace();

@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azureapp.R;
-import com.example.azureapp.ui.Alert;
 import com.example.azureapp.ui.Condition;
 
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +53,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<ConditionAdapter.Cond
         TextView conditionTextView;
         public ConditionViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            conditionTextView = itemView.findViewById(R.id.alert_textView);
+            conditionTextView = itemView.findViewById(R.id.log_content_textView);
         }
     }
 }

@@ -49,6 +49,7 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
     private TextView mTvDelete;
     private boolean isStart;
     private VirtualMachineDescription vmDetail;
+    private TextView tvBlogMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,12 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         mImgDelete = findViewById(R.id.img_vm_detail_delete);
         mTvStart = findViewById(R.id.tv_vm_detail_start);
         mTvDelete = findViewById(R.id.tv_vm_detail_delete);
+
         isStart = true;
+        getSupportFragmentManager()    //此处的R.id.fragment_container是要盛放fragment的父容器
+                .beginTransaction()
+                .add(R.id.logfragment_container,new VirtualMachineLogFragment())
+                .commit();
     }
 
     public void click_Event(View view){

@@ -52,7 +52,7 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertViewHol
         TextView alertTextView;
         public AlertViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            alertTextView = itemView.findViewById(R.id.alert_textView);
+            alertTextView = itemView.findViewById(R.id.log_content_textView);
         }
     }
 }

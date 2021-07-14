@@ -20,7 +20,7 @@
         app:layout_constraintGuide_percent="0.85" />
 
     <ImageView
-        android:id="@+id/alert_imageView"
+        android:id="@+id/log_imageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
@@ -33,7 +33,7 @@
         app:srcCompat="@drawable/icon_alert" />
 
     <TextView
-        android:id="@+id/alert_textView"
+        android:id="@+id/log_content_textView"
         android:layout_width="271dp"
         android:layout_height="23dp"
         android:layout_marginTop="8dp"

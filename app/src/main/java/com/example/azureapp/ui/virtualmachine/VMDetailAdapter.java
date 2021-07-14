@@ -1,6 +1,8 @@
 package com.example.azureapp.ui.virtualmachine;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -152,10 +154,13 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     class LinearViewHolder_Blog extends  RecyclerView.ViewHolder{
         private TextView tvBlogCount;
+        private TextView tvBlogMore;
 
         public  LinearViewHolder_Blog(View itemView){
             super(itemView);
             tvBlogCount = itemView.findViewById(R.id.tv_blog_count);
+            tvBlogMore = itemView.findViewById(R.id.tv_blog_more);
+
         }
     }
 
@@ -170,6 +175,13 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             tvSourceStatus = itemView.findViewById(R.id.tv_source_state);
             imgSourceStatus = itemView.findViewById(R.id.img_source_state);
+
+  /*          Activity activity =(Activity)itemView.getContext();
+            activity.getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.xx, new VirtualMachineLogFragment(), null)
+                    .addToBackStack(null)
+                    .commit();*/
         }
     }
 

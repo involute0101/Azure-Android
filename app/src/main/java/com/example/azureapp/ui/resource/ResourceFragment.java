@@ -4,14 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azureapp.R;
+import com.example.azureapp.databinding.FragmentResourceBinding;
+import com.example.azureapp.databinding.SubscribeFragmentBinding;
+import com.example.azureapp.ui.subscribe.SubscribeViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,20 +33,24 @@ public class ResourceFragment extends Fragment {
 
     private RecyclerView mRvResources;
     private List<Resource> resourceList = new ArrayList<>();
+    FragmentResourceBinding binding;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
-            return inflater.inflate(R.layout.fragment_resource, container, false);
+        // Inflate the layout for this fragment
+        binding = FragmentResourceBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setTestResource();
-        mRvResources = requireActivity().findViewById(R.id.rv_resource);
+        ResourceViewModel mViewModel = new ViewModelProvider(this).get(ResourceViewModel.class);
+        mRvResources = binding.rvResource;
         mRvResources.setLayoutManager(new LinearLayoutManager(requireActivity()));
         ResourceListAdapter adapter = new ResourceListAdapter(requireActivity(), resourceList);
         mRvResources.setAdapter(adapter);

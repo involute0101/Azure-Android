@@ -119,7 +119,7 @@ public class VMFragment extends Fragment {
             JSONArray jsonArray;
             @Override
             public void run() {
-                String url = "http://20.92.144.124:8080/Azure/allVM";
+                String url = "http://20.89.169.250:8080/Azure/allVM";
                 HttpClient client = HttpClients.createDefault();
                 HttpGet get = new HttpGet(url);
                 try{
@@ -159,6 +159,7 @@ public class VMFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(vmAdapter);
+        Log.d("allvm","vmall");
     }
 
 /*    public void addVM(VirtualMachine vm ){

@@ -57,9 +57,9 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         //获取虚拟机描述信息
         Intent intent = this.getIntent();
         vmDetail = (VirtualMachineDescription) intent.getExtras().getSerializable("DetailVM");
-        vmDetail = new VirtualMachineDescription();
         //获取虚拟机状态
         getStatus();
+        Log.d("detail","detailhhh");
         //初始化RecyclerView
         mRvVMDetail = findViewById(R.id.rv_vm_details);
         mRvVMDetail.setLayoutManager(new LinearLayoutManager(VirtualMachineDetailActivity.this));
@@ -111,7 +111,7 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://20.92.144.124:8080/Azure/getStatus?resourceGroup="+groupName+"&name="+vmName;
+                String url = "http://20.89.169.250:8080/Azure/getStatus?resourceGroup="+groupName+"&name="+vmName;
                 HttpClient client = HttpClients.createDefault();
                 HttpGet get = new HttpGet(url);
                 try{
@@ -178,12 +178,12 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         }).start();
     }
     private void start(){
-        String url = "http://20.92.144.124:8080/Azure/startVm";
+        String url = "http://20.89.169.250:8888/Azure/startVm";
         vmOperation(url);
     }
 
     private void stop(){
-        String url = "http://20.92.144.124:8080/Azure/stopVm";
+        String url = "http://20.89.169.250:8888/Azure/stopVm";
         vmOperation(url);
     }
 

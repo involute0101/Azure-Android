@@ -57,6 +57,7 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
     public void onBindViewHolder(@NonNull @NotNull VMViewHolder holder, int position) {
         VirtualMachine vm = vms.get(position);
         holder.itemView.setTag(R.id.vm_for_view_holder,vm);
+
         holder.vmNameTextView.setText(vm.vmName);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

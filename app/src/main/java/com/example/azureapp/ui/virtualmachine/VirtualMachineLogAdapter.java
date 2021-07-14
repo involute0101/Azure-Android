@@ -17,6 +17,7 @@ import com.example.azureapp.ui.subscribe.SubscribeAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,14 +27,14 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class VirtualMachineLogAdapter extends RecyclerView.Adapter<VirtualMachineLogAdapter.VMLogViewHolder>{
-    List<Log> logs;
+    List<Log> logs = new ArrayList<>();
 
     @NonNull
     @NotNull
     @Override
     public VMLogViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.cell_subscribe,parent,false);//???
+        View itemView = layoutInflater.inflate(R.layout.cell_log,parent,false);//???
         final VMLogViewHolder holder = new VMLogViewHolder(itemView);
         return holder;
     }
@@ -43,7 +44,7 @@ public class VirtualMachineLogAdapter extends RecyclerView.Adapter<VirtualMachin
         Log log = logs.get(position);
         holder.logContentTextView.setText(log.content);
         holder.logTimeTextView.setText(log.time);
-        if (log.type == "false"){
+        if (log.type.equals("false") ){
             holder.logImage.setImageDrawable(ContextCompat.getDrawable(holder.logImage.getContext(), R.drawable.icon_alert_red));
         }
 

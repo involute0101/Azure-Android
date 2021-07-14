@@ -77,8 +77,8 @@ public class VirtualMachineLogFragment extends Fragment {
         recyclerView = binding.virtualmachineLogRecycleView;
         logAdapter = new VirtualMachineLogAdapter();
 
-        logAdapter.logs.add(new Log("test","true"));
-        logAdapter.logs.add(new Log("test1","false"));
+        logAdapter.logs.add(new Log("test","today","true"));
+        logAdapter.logs.add(new Log("test1","today","false"));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(logAdapter);
     }

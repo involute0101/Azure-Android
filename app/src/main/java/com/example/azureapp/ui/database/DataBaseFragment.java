@@ -102,9 +102,22 @@ public class DataBaseFragment extends Fragment {
         dbAdapter.dbs.clear();
         dbAdapter.dbs.add(new DataBase("test"));
         Log.d("db", "DataBase");
-        //dbAdapter.dbs.add(new DataBase("test"));
+        //getDataBase();
 
-/*        Thread thread = new Thread(new Runnable() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        recyclerView.setAdapter(dbAdapter);
+        addDBButton = requireActivity().findViewById(R.id.addDBButton);
+        addDBButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_DBFragment_to_DBAddFragment);
+            }
+        });
+    }
+
+    private void getDataBase() {
+                Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;
             @Override
             public void run() {
@@ -121,8 +134,6 @@ public class DataBaseFragment extends Fragment {
                         {
                             dbAdapter.dbs.add(new DataBase(jsonArray.getJSONObject(i).getString("name")));
                         }
-                        //System.out.println("結果："+result);
-                        //vmAdapter.notifyDataSetChanged();
 
                     }
                 } catch (ClientProtocolException e) {
@@ -138,17 +149,7 @@ public class DataBaseFragment extends Fragment {
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        recyclerView.setAdapter(dbAdapter);
-        addDBButton = requireActivity().findViewById(R.id.addDBButton);
-        addDBButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_DBFragment_to_DBAddFragment);
-            }
-        });
     }
 }

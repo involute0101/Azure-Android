@@ -35,6 +35,11 @@ import java.util.List;
  * Use the {@link AlertFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/12.
+ * Email 1403235458@qq.com
+ */
 public class AlertFragment extends Fragment {
     RecyclerView recyclerView;
     AlertAdapter alertAdapter;

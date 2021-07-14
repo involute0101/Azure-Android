@@ -115,6 +115,15 @@ public class VMFragment extends Fragment {
         });
         recyclerView = requireActivity().findViewById(R.id.vm_recycle_view);
 
+        getVirtualMachine();
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        recyclerView.setAdapter(vmAdapter);
+        Log.d("allvm","vmall");
+    }
+
+    private void getVirtualMachine() {
         Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;
             @Override
@@ -156,23 +165,7 @@ public class VMFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        recyclerView.setAdapter(vmAdapter);
-        Log.d("allvm","vmall");
     }
 
-/*    public void addVM(VirtualMachine vm ){
-        vmAdapter.vms.add(vm);
-        Log.d("vms", "1");
 
-
-    }*/
-
-    public void getVMS(){
-        //调用API
-        // vmAdapter.vms.
-        // vmAdapter.notifyDataSetChanged();
-
-    }
 }

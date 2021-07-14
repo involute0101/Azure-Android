@@ -1,9 +1,12 @@
 package com.example.azureapp.ui.database;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.azureapp.R;
@@ -47,7 +50,7 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(holder.itemView.getContext(), VirtualMachineDetailActivity.class );
+                /*Intent intent = new Intent(holder.itemView.getContext(), DatabaseDetailActivity.class );
                 intent.putExtra("DB", db);
                 holder.itemView.getContext().startActivity(intent);
                 Toast.makeText(holder.itemView.getContext(), "跳转", Toast.LENGTH_SHORT).show();*/

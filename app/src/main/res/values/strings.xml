@@ -35,4 +35,10 @@
     <string name="allResources">所有资源</string>
     <string name="resourceSearchHint">搜索名称、类型或标记</string>
     <string name="resources_search_cancel">取消</string>
+    <string name="mainPage">主页</string>
+    <string name="azureService">Azure服务</string>
+    <string name="vm">虚拟机</string>
+    <string name="sql">SQL数据库</string>
+    <string name="serviceCondition">服务运行状况</string>
+    <string name="resourceGroup">资源组</string>
 </resources>

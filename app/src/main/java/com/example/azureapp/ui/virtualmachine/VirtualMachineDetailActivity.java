@@ -73,9 +73,9 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         mTvDelete = findViewById(R.id.tv_vm_detail_delete);
 
         isStart = true;
-        getSupportFragmentManager()    //此处的R.id.fragment_container是要盛放fragment的父容器
+        /*getSupportFragmentManager()    //此处的R.id.fragment_container是要盛放fragment的父容器
                 .beginTransaction()
-                .add(R.id.logfragment_container,new VirtualMachineLogFragment());
+                .add(R.id.logfragment_container,new VirtualMachineLogFragment());*/
     }
 
     public void click_Event(View view){

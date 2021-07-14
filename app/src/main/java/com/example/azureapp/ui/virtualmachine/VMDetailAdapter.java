@@ -33,6 +33,8 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.apache.http.HttpResponse;
@@ -160,7 +162,18 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             tvBlogCount = itemView.findViewById(R.id.tv_blog_count);
             tvBlogMore = itemView.findViewById(R.id.tv_blog_more);
-
+            tvBlogMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment logFragment = new VirtualMachineLogFragment();
+                    AppCompatActivity activity =(AppCompatActivity)itemView.getContext();
+                    activity.getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.deatilfragment_container, logFragment, null)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
         }
     }
 
@@ -176,12 +189,6 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvSourceStatus = itemView.findViewById(R.id.tv_source_state);
             imgSourceStatus = itemView.findViewById(R.id.img_source_state);
 
-  /*          Activity activity =(Activity)itemView.getContext();
-            activity.getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.xx, new VirtualMachineLogFragment(), null)
-                    .addToBackStack(null)
-                    .commit();*/
         }
     }
 

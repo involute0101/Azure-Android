@@ -10,6 +10,7 @@
         android:text="@string/allResources"
         android:textColor="@color/black"
         android:textSize="25dp"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"/>
     <LinearLayout
@@ -22,19 +23,25 @@
         android:layout_marginRight="10dp"
         android:focusable="true"
         android:focusableInTouchMode="true">
+
         <EditText
             android:id="@+id/et_search_resources"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:hint="@string/resourceSearchHint"
-            android:textColorHint="@color/brown_input"
-            android:textSize="14dp"
-            android:textColor="@color/brown_input"
-            android:paddingLeft="5dp"
+            android:layout_height="30dp"
             android:layout_weight="8"
+            android:background="@drawable/resources_search_input"
+            android:drawableLeft="@drawable/icon_search_resource_128"
+            android:drawableRight="@drawable/icon_delete_all_128"
             android:drawablePadding="5dp"
-            android:drawableLeft="@drawable/icon_search_16"
-            android:background="@drawable/resources_search_input"/>
+            android:hint="@string/resourceSearchHint"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:singleLine="true"
+            android:textColor="@color/brown_input"
+            android:textColorHint="@color/brown_input"
+            android:textSize="14dp" />
+
         <TextView
             android:id="@+id/tv_search_cancel"
             android:layout_width="wrap_content"

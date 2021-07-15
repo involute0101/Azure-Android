@@ -46,6 +46,11 @@ public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    /**
+     * 设置textview中数据
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if(position!=0 || position < subscribes.size()-1){
@@ -67,6 +72,11 @@ public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     static class SubscibeViewHolder extends  RecyclerView.ViewHolder{
         TextView subscribeTypeTextView,subscribeIdTextView;
+
+        /**
+         * 实例化itemview中的控件
+         * @param itemView
+         */
         public SubscibeViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             subscribeTypeTextView = itemView.findViewById(R.id.subscribe_type_textView);

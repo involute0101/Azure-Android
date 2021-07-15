@@ -7,6 +7,10 @@ import java.io.Serializable;
  * Created by wzk on 2021/7/15.
  * Email 1403235458@qq.com
  */
+
+/**
+ * 数据库详情信息类
+ */
 public class DataBaseDescription implements Serializable {
     public String resourceGroupName;
     public String sqlServerName;

@@ -55,6 +55,7 @@ public class DataBaseAddFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    //attributes of database
     String db_username,db_password,db_name,resource_group;
     EditText db_username_text,db_password_text,db_name_text,resource_group_text;
     Button add_submit_button;
@@ -97,6 +98,10 @@ public class DataBaseAddFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_data_base_add, container, false);
     }
 
+    /**
+     * 绑定界面控件，设置textwatcher，使得所有输入框有数据才可以点击按钮
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -139,6 +144,9 @@ public class DataBaseAddFragment extends Fragment {
         resource_group_text.addTextChangedListener(watcher);
 
 
+        /**
+         * 按钮点击函数，提交数据库
+         */
         add_submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,6 +161,11 @@ public class DataBaseAddFragment extends Fragment {
         });
 
     }
+
+    /**
+     * 将数据库信息提交到服务器处理，添加数据库
+     * @param dataBase
+     */
     public void addPostDB(DataBase dataBase) {
         JSONObject jsonObject = new JSONObject();
         String url = new String("http://20.89.169.250:8080/DB/createDB");

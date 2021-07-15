@@ -28,7 +28,10 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
     List<DataBase> dbs = new ArrayList<>();
     List<DataBaseDescription> dbDescrptions = new ArrayList<>();
 
-    //传入后端得到的虚拟机列表
+    /**
+     * 传入后端得到的虚拟机列表
+     * @param dbs
+     */
     public void setDbs (List<DataBase> dbs){
         this.dbs = dbs;
     }
@@ -44,6 +47,11 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
         return holder;
     }
 
+    /**
+     * 设置每一个itemView中的控件以及响应事件
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull DataBaseViewHolder holder, int position) {
         DataBase db = dbs.get(position);
@@ -72,6 +80,11 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
 
     static class DataBaseViewHolder extends  RecyclerView.ViewHolder{
         TextView dbNameTextView;
+
+        /**
+         * 绑定控件中的textView
+         * @param itemView
+         */
         public DataBaseViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             dbNameTextView = itemView.findViewById(R.id.db_name_textView);

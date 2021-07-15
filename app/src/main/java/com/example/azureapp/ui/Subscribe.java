@@ -5,6 +5,10 @@ package com.example.azureapp.ui;
  * Created by wzk on 2021/7/10.
  * Email 1403235458@qq.com
  */
+
+/**
+ * 订阅类
+ */
 public class Subscribe {
    public String subscribeType;
    public String subscribeId;

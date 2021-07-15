@@ -7,6 +7,10 @@ import java.io.Serializable;
  * Created by wzk on 2021/7/12.
  * Email 1403235458@qq.com
  */
+
+/**
+ * 数据库类
+ */
 public class DataBase implements Serializable {
     public String dataBaseUsername;
     public String dataBasePassword;

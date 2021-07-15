@@ -7,6 +7,10 @@ import java.io.Serializable;
  * Created by wzk on 2021/7/8.
  * Email 1403235458@qq.com
  */
+
+/**
+ * 虚拟机类
+ */
 public class VirtualMachine implements Serializable{
     public String subscribeId;
     public String vnetName;

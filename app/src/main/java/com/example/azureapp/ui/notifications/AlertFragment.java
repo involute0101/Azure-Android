@@ -93,6 +93,10 @@ public class AlertFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_alert, container, false);
     }
 
+    /**
+     * 实例化recycleView以及数据绑定adapter，
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -109,6 +113,9 @@ public class AlertFragment extends Fragment {
         recyclerView.setAdapter(alertAdapter);
     }
 
+    /**
+     * 从服务器端获取所有警报
+     */
     private void getAlerts() {
         Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;

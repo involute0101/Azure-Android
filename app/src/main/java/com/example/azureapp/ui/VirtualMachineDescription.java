@@ -7,6 +7,10 @@ import java.io.Serializable;
  * Created by wzk on 2021/7/12.
  * Email 1403235458@qq.com
  */
+
+/**
+ * 虚拟机详情信息类
+ */
 public class VirtualMachineDescription implements Serializable {
     public String resourceGroup;
     public String os;

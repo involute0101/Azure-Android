@@ -42,6 +42,7 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class DataBaseFragment extends Fragment {
+
     RecyclerView recyclerView;
     DataBaseAdapter dbAdapter;
     private List<DataBase> dbs;
@@ -78,6 +79,10 @@ public class DataBaseFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * 创建adapter实例
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +102,12 @@ public class DataBaseFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_data_base, container, false);
     }
 
+    /**
+     * 实例化recycleView，获取服务器端数据库
+     * 添加相应按钮点击事件，点击页面跳转
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -118,6 +129,9 @@ public class DataBaseFragment extends Fragment {
         });
     }
 
+    /**
+     * 开启线程访问服务器获取用户所有的数据库
+     */
     private void getDataBase() {
                 Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;

@@ -101,6 +101,10 @@ public class VMFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_v_m, container, false);
     }
 
+    /**
+     * 设置按钮点击事件，初始实例化显示控件以及数据控制adapter
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -123,6 +127,9 @@ public class VMFragment extends Fragment {
         Log.d("allvm","vmall");
     }
 
+    /**
+     * 从服务器端获取所有的虚拟机列表
+     */
     private void getVirtualMachine() {
         Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;

@@ -7,6 +7,10 @@ import java.io.Serializable;
  * Created by wzk on 2021/7/14.
  * Email 1403235458@qq.com
  */
+
+/**
+ * 日志类
+ */
 public class Log implements Serializable {
     public String content;
     public String time;

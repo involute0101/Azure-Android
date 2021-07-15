@@ -91,6 +91,10 @@ public class VMAddFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_v_m_add, container, false);
     }
 
+    /**
+     * 设置虚拟机添加界面控件，只有均有数据才可以点击按钮
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -149,6 +153,10 @@ public class VMAddFragment extends Fragment {
         });
     }
 
+    /**
+     * 向服务器发送添加虚拟机的请求
+     * @param virtualMachine
+     */
     public void addPostVM(VirtualMachine virtualMachine){
         JSONObject jsonObject = new JSONObject();
         String url = new String("http://20.92.144.124:8080/Azure/createVm");

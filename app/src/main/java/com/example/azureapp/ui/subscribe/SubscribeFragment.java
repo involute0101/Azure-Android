@@ -63,6 +63,10 @@ public class SubscribeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * 初始化recycleView和adapter
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -79,8 +83,7 @@ public class SubscribeFragment extends Fragment {
     }
 
     /**
-     *
-     *获取用户订阅
+     *从服务器端获取用户订阅
      */
     private void getSubscribe() {
 

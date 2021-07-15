@@ -39,6 +39,11 @@ public class VirtualMachineLogAdapter extends RecyclerView.Adapter<VirtualMachin
         return holder;
     }
 
+    /**
+     * 设置日志界面的控件信息以及图片
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull VMLogViewHolder holder, int position) {
         Log log = logs.get(position);

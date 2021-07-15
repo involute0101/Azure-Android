@@ -53,6 +53,11 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
         return holder;
     }
 
+    /**
+     * 虚拟机每个条目设置数据以及添加按钮点击跳转界面
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull VMViewHolder holder, int position) {
         VirtualMachine vm = vms.get(position);
@@ -75,6 +80,11 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
         });
     }
 
+    /**
+     * 从服务器端获取选中虚拟机的详情信息
+     * @param vm
+     * @return该虚拟机的一系列详情信息
+     */
     private VirtualMachineDescription getDetailVirtualMachine(VirtualMachine vm){
         VirtualMachineDescription detailVM = new VirtualMachineDescription();
         Thread thread = new Thread(new Runnable() {

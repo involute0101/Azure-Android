@@ -71,6 +71,10 @@ public class VirtualMachineLogFragment extends Fragment {
 
     }
 
+    /**
+     * 实例化日志的recycleView和adapter
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -79,8 +83,15 @@ public class VirtualMachineLogFragment extends Fragment {
 
         logAdapter.logs.add(new Log("test","today","true"));
         logAdapter.logs.add(new Log("test1","today","false"));
+        getLogs();
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(logAdapter);
+    }
+
+    /**
+     * 从服务器端取得虚拟机的日志
+     */
+    private void getLogs() {
     }
 
     @Override

@@ -49,6 +49,10 @@ public class NotificationsFragment extends Fragment {
         return root;
     }
 
+    /**
+     * 设置viewPager
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -62,6 +66,11 @@ public class NotificationsFragment extends Fragment {
        // tabLayout.setTabsFromPagerAdapter(viewPager.getAdapter());
     }
 
+    /**
+     * 将警报界面以及服务运行状况界面添加到notification界面
+     * @param viewPager
+     * @param list
+     */
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> list) {
         NotificationAdapter notificationAdapter = new NotificationAdapter(getFragmentManager());
         //fragment

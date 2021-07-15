@@ -93,6 +93,10 @@ public class ConditionFragment extends Fragment {
         return root;
     }
 
+    /**
+     * 实例化recycleView以及数据绑定adapter，
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -108,6 +112,9 @@ public class ConditionFragment extends Fragment {
         recyclerView.setAdapter(conditionAdapter);
     }
 
+    /**
+     * 从服务器端获取所有服务运行状况
+     */
     private void getConditions() {
         Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;

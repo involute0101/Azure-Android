@@ -5,8 +5,8 @@
         <item name="colorPrimary">@color/brown_input</item>
 
         <item name="colorPrimaryDark">#3a7bd5</item>
-        <item name="colorAccent">@android:color/holo_blue_light</item>
-        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorAccent">@color/azure_deep</item>
+        <item name="colorPrimaryVariant">@color/azure_deep</item>
         <item name="colorOnPrimary">@android:color/holo_blue_bright</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

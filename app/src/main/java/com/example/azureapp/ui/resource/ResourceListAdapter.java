@@ -59,20 +59,26 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if(position!=0 && position <= showList.size()){
             Resource resource = showList.get(position-1);
-            if(resource.type.equals("虚拟机"))
+            if(resource.type.equals("disk"))
+                ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_disk);
+            else if(resource.type.equals("virtualMachine"))
                 ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_virtualmachine);
-            else if(resource.type.equals("资源组"))
+            else if(resource.type.equals("networkInterface"))
+                ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_network_interface);
+            else if(resource.type.equals("networkSecurityGroup"))
+                ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_network_security);
+            else if(resource.type.equals("publicIPAddresse"))
+                ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_public_ip);
+            else if(resource.type.equals("virtualNetwork"))
+                ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_virtual_network);
+            else if(resource.type.equals("networkWatcher"))
+                ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_network_watcher);
+            else if(resource.type.equals("resourceGroup"))
                 ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_resource_group);
-            else if(resource.type.equals("数据库"))
-                ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_db);
-            else if(resource.type.equals("磁盘"))
-                ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_db);
+            else
+                ((LinearViewHolder)holder).mResourceImg.setImageResource(R.drawable.icon_unknown_resource);
             ((LinearViewHolder)holder).mResourceNameTv.setText(resource.name);
             ((LinearViewHolder)holder).mResourceTypeTv.setText(resource.type);
-            if(resource.status.equals("stop"))
-                ((LinearViewHolder)holder).mResourceStatusImg.setImageResource(R.drawable.icon_stop_hollow_128);
-            else
-                ((LinearViewHolder)holder).mResourceStatusImg.setImageResource(R.drawable.icon_running_hollow_128);
         }
     }
 
@@ -186,14 +192,12 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView mResourceNameTv;
         private TextView mResourceTypeTv;
         private ImageView mResourceImg;
-        private ImageView mResourceStatusImg;
 
         public LinearViewHolder( View itemView) {
             super(itemView);
             mResourceNameTv = itemView.findViewById(R.id.tv_resource_name);
             mResourceTypeTv = itemView.findViewById(R.id.tv_resource_type);
             mResourceImg = itemView.findViewById(R.id.img_resource);
-            mResourceStatusImg = itemView.findViewById(R.id.img_resource_status);
         }
     }
 }

@@ -47,4 +47,7 @@
     <string name="alert">警报</string>
     <string name="service_running_condition">资源运行状况</string>
     <string name="azureAccount">Azure账户</string>
+    <string name="ad1">从 Azure 免费试用版开始</string>
+    <string name="ad2">管理 Azure Active Directory</string>
+    <string name="access_student_right">访问学生权益</string>
 </resources>

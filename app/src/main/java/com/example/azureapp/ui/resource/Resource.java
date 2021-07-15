@@ -11,12 +11,10 @@ public class Resource implements Serializable {
 
     public String name;
     public String type;
-    public String status;
 
-    public Resource(String name, String type, String status) {
+    public Resource(String name, String type) {
         this.name = name;
         this.type = type;
-        this.status = status;
     }
 
     @Override
@@ -24,7 +22,6 @@ public class Resource implements Serializable {
         return "Resource{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", status='" + status + '\'' +
                 '}';
     }
 }

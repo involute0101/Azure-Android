@@ -60,7 +60,6 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         vmDetail = (VirtualMachineDescription) intent.getExtras().getSerializable("DetailVM");
         //获取虚拟机状态
         getStatus();
-        Log.d("detail","detailhhh");
         //初始化RecyclerView
         mRvVMDetail = findViewById(R.id.rv_vm_details);
         mRvVMDetail.setLayoutManager(new LinearLayoutManager(VirtualMachineDetailActivity.this));
@@ -150,9 +149,9 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
     private void vmOperation(String url){
         JSONObject jsonObject = new JSONObject();
         try{
-            jsonObject.put("GROUP_NAME","NologinTest");
-            jsonObject.put("OS_DISK_NAME","springboot_OsDisk_1_b9d829ffeeec4973a626dd87150ba0eb");
-            jsonObject.put("VM_NAME","springboot");
+            jsonObject.put("GROUP_NAME",vmDetail.resourceGroup);
+            jsonObject.put("OS_DISK_NAME",vmDetail.diskName);
+            jsonObject.put("VM_NAME",vmDetail.name);
         }catch (JSONException e) {
             e.printStackTrace();
         }
@@ -193,7 +192,8 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
     }
 
     private void delete(){
-
+        String url = "http://20.89.169.250:8080/Azure/deleteVm";
+        vmOperation(url);
     }
 
     private void restart(){

@@ -79,7 +79,7 @@ public class ResourceFragment extends Fragment {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://20.89.169.250:8888/Resource/getAllResource?subscriptionId=fc4bf4a7-37a5-46c5-bd67-002062908beb";
+                String url = "http://20.89.169.250:8080/Resource/getAllResource";
                 HttpClient client = HttpClients.createDefault();
                 HttpGet get = new HttpGet(url);
                 try{

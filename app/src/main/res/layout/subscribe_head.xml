@@ -5,6 +5,7 @@
     android:orientation="horizontal"
     android:background="@drawable/search_underline">
     <TextView
+        android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/subscription"

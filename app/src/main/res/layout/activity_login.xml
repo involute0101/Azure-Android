@@ -66,8 +66,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forget_password"
-            android:layout_marginLeft="40dp"
-            android:textColor="#006BFF"/>
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/azure_deep"/>
         <Button
             android:id="@+id/btn_login_2"
             android:layout_width="100dp"

@@ -40,7 +40,6 @@
     <string name="vm">虚拟机</string>
     <string name="sql">SQL数据库</string>
     <string name="serviceCondition">服务运行状况</string>
-    <string name="resourceGroup">资源组</string>
     <string name="subscription">订阅</string>
     <string name="notification">通知</string>
     <string name="account">账户</string>
@@ -50,4 +49,5 @@
     <string name="ad1">从 Azure 免费试用版开始</string>
     <string name="ad2">管理 Azure Active Directory</string>
     <string name="access_student_right">访问学生权益</string>
+    <string name="resourceGroup">资源组</string>
 </resources>

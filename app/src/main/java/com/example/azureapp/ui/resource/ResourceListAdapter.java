@@ -103,8 +103,8 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mCancelTv = itemView.findViewById(R.id.tv_search_cancel);
             Drawable left = mSearchEt.getCompoundDrawables()[0];
             Drawable right = mSearchEt.getCompoundDrawables()[2];
-            left.setBounds(0,0,50,50);
-            right.setBounds(0,0,50,50);
+            left.setBounds(0,0,30,30);
+            right.setBounds(0,0,30,30);
             mSearchEt.setCompoundDrawables(left,null,null,null);
             mSearchEt.setOnFocusChangeListener((v, hasFocus) -> {
                 if(mSearchEt.hasFocus()){

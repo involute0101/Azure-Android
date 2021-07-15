@@ -17,6 +17,7 @@ public class VirtualMachineDescription implements Serializable {
     public String vmSize;
     public String subscriptionId;
     public String status;
+    public String diskName;
 
     public VirtualMachineDescription(String resourceGroup, String os, String subscriptionName, String name, String location, String publicIP, String vmSize, String subscriptionId, String status) {
         this.resourceGroup = resourceGroup;
@@ -53,6 +54,7 @@ public class VirtualMachineDescription implements Serializable {
                 ", vmSize='" + vmSize + '\'' +
                 ", subscriptionId='" + subscriptionId + '\'' +
                 ", status='" + status + '\'' +
+                ", diskName='" + diskName + '\'' +
                 '}';
     }
 }

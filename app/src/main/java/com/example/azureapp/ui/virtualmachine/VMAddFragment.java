@@ -147,6 +147,7 @@ public class VMAddFragment extends Fragment {
                 VirtualMachine virtualMachine = new VirtualMachine(subscribe_id,vent_name,vm_name,username,password,vm_size,resource_group);
 
                 addPostVM(virtualMachine);
+                Toast.makeText(getContext(),"创建成功，过程需要2~3min，请稍等",Toast.LENGTH_SHORT).show();
                 NavController navController = Navigation.findNavController(v);
                 navController.navigateUp();
             }
@@ -183,7 +184,7 @@ public class VMAddFragment extends Fragment {
                         HttpEntity httpEntity = response.getEntity();
                         String s = EntityUtils.toString(httpEntity, "UTF-8");
                         System.out.println(s);
-                        Toast.makeText(getContext(),"创建成功，过程需要2~3min，请稍等",Toast.LENGTH_SHORT).show();
+
 
 
                     } catch (UnsupportedEncodingException e) {

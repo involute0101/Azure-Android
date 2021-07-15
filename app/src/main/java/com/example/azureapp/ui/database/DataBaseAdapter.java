@@ -55,7 +55,7 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
     @Override
     public void onBindViewHolder(@NonNull @NotNull DataBaseViewHolder holder, int position) {
         DataBase db = dbs.get(position);
-        DataBaseDescription dataBaseDescription= dbDescrptions.get(position);
+        //DataBaseDescription dataBaseDescription= dbDescrptions.get(position);
         holder.itemView.setTag(R.id.db_for_view_holder,db);
         holder.dbNameTextView.setText(db.dataBaseName);
 
@@ -65,7 +65,7 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
                 Intent intent = new Intent(holder.itemView.getContext(), DatabaseDetailActivity.class );
 
                 //传入数据库细节
-                intent.putExtra("DB", dataBaseDescription);
+                //intent.putExtra("DB", dataBaseDescription);
 
                 holder.itemView.getContext().startActivity(intent);
                 Toast.makeText(holder.itemView.getContext(), "跳转", Toast.LENGTH_SHORT).show();

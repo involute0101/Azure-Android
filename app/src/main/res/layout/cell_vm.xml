@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:foreground="?selectableItemBackground"
-    android:clickable="true">
+    android:background="@drawable/search_underline"
+    android:clickable="true"
+    android:foreground="?selectableItemBackground">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"

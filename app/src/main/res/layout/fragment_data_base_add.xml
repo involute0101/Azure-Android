@@ -55,6 +55,7 @@
                 android:layout_height="25dp"
                 android:textSize="15dp"
                 android:paddingLeft="5dp"
+                android:hint="包含字母"
                 android:textCursorDrawable="@drawable/text_cursor"
                 android:background="@drawable/vm_create_input"
                 android:layout_marginTop="5dp"/>
@@ -91,6 +92,7 @@
                 android:layout_height="25dp"
                 android:textSize="15dp"
                 android:paddingLeft="5dp"
+                android:hint="包含字母"
                 android:textCursorDrawable="@drawable/text_cursor"
                 android:background="@drawable/vm_create_input"
                 android:layout_marginTop="5dp"/>
@@ -126,6 +128,7 @@
                 android:layout_height="25dp"
                 android:textSize="15dp"
                 android:paddingLeft="5dp"
+                android:hint="含有大写、小写、数字、特殊字符"
                 android:textCursorDrawable="@drawable/text_cursor"
                 android:background="@drawable/vm_create_input"
                 android:layout_marginTop="5dp"/>

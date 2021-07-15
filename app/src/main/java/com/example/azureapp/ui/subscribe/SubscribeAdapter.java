@@ -25,13 +25,13 @@ import java.util.List;
  * Created by wzk on 2021/7/10.
  * Email 1403235458@qq.com
  */
-public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.SubscibeViewHolder> {
 
     List<Subscribe> subscribes = new ArrayList<>();
     @NonNull
     @NotNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public SubscibeViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         if(viewType == 0){
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View itemView = layoutInflater.inflate(R.layout.subscribe_head,parent,false);
@@ -52,17 +52,19 @@ public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
-        if(position!=0 || position < subscribes.size()-1){
-            Subscribe subscribe = subscribes.get(position);
-            ((SubscibeViewHolder)holder).subscribeTypeTextView.setText(subscribe.subscribeType);
-            ((SubscibeViewHolder)holder).subscribeIdTextView.setText(subscribe.subscribeId);
+    public void onBindViewHolder(@NonNull @NotNull SubscibeViewHolder holder, int position) {
+        if (position!=0){
+            Subscribe subscribe = subscribes.get(position-1);
+            holder.subscribeTypeTextView.setText(subscribe.subscribeType);
+            holder.subscribeIdTextView.setText(subscribe.subscribeId);
         }
+
+
     }
 
     @Override
     public int getItemCount() {
-        return subscribes.size();
+        return subscribes.size()+1;
     }
 
     @Override

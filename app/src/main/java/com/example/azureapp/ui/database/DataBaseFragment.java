@@ -113,9 +113,9 @@ public class DataBaseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recyclerView = requireActivity().findViewById(R.id.db_recycle_view);
         dbAdapter.dbs.clear();
-        dbAdapter.dbs.add(new DataBase("test"));
+        //dbAdapter.dbs.add(new DataBase("test"));
         Log.d("db", "DataBase");
-        //getDataBase();
+        getDataBase();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(dbAdapter);
@@ -137,7 +137,7 @@ public class DataBaseFragment extends Fragment {
             JSONArray jsonArray;
             @Override
             public void run() {
-                String url = "http://20.89.169.250:8080/DB/allDB";
+                String url = "http://20.78.56.235:8080/DB/allDB";
                 HttpClient client = HttpClients.createDefault();
                 HttpGet get = new HttpGet(url);
                 try{

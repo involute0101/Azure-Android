@@ -59,6 +59,8 @@ public class DataBaseAddFragment extends Fragment {
     String db_username,db_password,db_name,resource_group;
     EditText db_username_text,db_password_text,db_name_text,resource_group_text;
     Button add_submit_button;
+    static String PW_PATTERN = "^(?![A-Za-z0-9]+$)(?![a-z0-9\\W]+$)(?![A-Za-z\\W]+$)(?![A-Z0-9\\W]+$)[a-zA-Z0-9\\W]{8,}$";
+    static String USERNAME = "/^[0-9a-zA-Z]*$/g";
 
     public DataBaseAddFragment() {
         // Required empty public constructor
@@ -121,7 +123,6 @@ public class DataBaseAddFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 db_username = db_username_text.getText().toString().trim();
                 db_password = db_password_text.getText().toString().trim();
                 db_name = db_name_text.getText().toString().trim();
@@ -130,11 +131,12 @@ public class DataBaseAddFragment extends Fragment {
 
                 add_submit_button.setEnabled(!db_username.isEmpty()
                         && !db_password.isEmpty() && !db_name.isEmpty()
-                        && !resource_group.isEmpty() );
+                        && !resource_group.isEmpty());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+
 
             }
         };
@@ -150,11 +152,23 @@ public class DataBaseAddFragment extends Fragment {
         add_submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataBase dataBase = new DataBase(db_username,db_password,db_name,resource_group);
+                /*if (!db_username.matches(USERNAME)){
+                    db_username_text.setText("");
+                }
+                else return;*/
 
-                addPostDB(dataBase);
-                NavController navController = Navigation.findNavController(v);
-                navController.navigateUp();
+                if (!db_password.matches(PW_PATTERN)){
+                    db_password_text.setText("");
+                }
+
+                else {
+                    DataBase dataBase = new DataBase(db_username, db_password, db_name, resource_group);
+
+                    addPostDB(dataBase);
+                    Toast.makeText(getContext(), "创建成功，过程需要2~3min，请稍等", Toast.LENGTH_SHORT).show();
+                    NavController navController = Navigation.findNavController(v);
+                    navController.navigateUp();
+                }
             }
 
 
@@ -168,7 +182,7 @@ public class DataBaseAddFragment extends Fragment {
      */
     public void addPostDB(DataBase dataBase) {
         JSONObject jsonObject = new JSONObject();
-        String url = new String("http://20.89.169.250:8080/DB/createDB");
+        String url = new String("http://20.78.56.235:8080/DB/createDB");
         try {
             jsonObject.put("userName",dataBase.dataBaseUsername);
             jsonObject.put("password",dataBase.dataBasePassword);
@@ -190,7 +204,7 @@ public class DataBaseAddFragment extends Fragment {
                         HttpEntity httpEntity = response.getEntity();
                         String s = EntityUtils.toString(httpEntity, "UTF-8");
                         System.out.println(s);
-                        Toast.makeText(getContext(),"创建成功，过程需要2~3min，请稍等",Toast.LENGTH_SHORT).show();
+
 
 
                     } catch (UnsupportedEncodingException e) {

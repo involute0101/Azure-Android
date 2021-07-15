@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,8 +29,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
-    ImageButton vmButton,dbButton;
-    RecyclerView recyclerView;
+    ImageView vmImg,dbImg;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,10 +39,10 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        vmButton = root.findViewById(R.id.vmButton);
-        dbButton = root.findViewById(R.id.dbButton);
+        vmImg = root.findViewById(R.id.img_vm);
+        dbImg = root.findViewById(R.id.img_sql);
 
-        vmButton.setOnClickListener(new View.OnClickListener() {
+        vmImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), VirtualMachineActivity.class);
@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        dbButton.setOnClickListener(new View.OnClickListener() {
+        dbImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DataBaseActivity.class);

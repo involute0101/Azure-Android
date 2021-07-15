@@ -8,6 +8,22 @@
     android:orientation="vertical"
     android:background="#EDEDED">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@drawable/search_underline">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/azureAccount"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"/>
+    </LinearLayout>
     <!--    头像-->
     <LinearLayout
         android:id="@+id/ll_portrait"

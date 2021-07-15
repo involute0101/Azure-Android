@@ -7,7 +7,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.notifications.NotificationsFragment">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@drawable/search_underline">
+        <TextView
+            android:id="@+id/tv_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/notification"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"/>
+    </LinearLayout>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/notification_tab_layout"
         android:layout_width="409dp"

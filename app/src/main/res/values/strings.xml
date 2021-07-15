@@ -41,4 +41,10 @@
     <string name="sql">SQL数据库</string>
     <string name="serviceCondition">服务运行状况</string>
     <string name="resourceGroup">资源组</string>
+    <string name="subscription">订阅</string>
+    <string name="notification">通知</string>
+    <string name="account">账户</string>
+    <string name="alert">警报</string>
+    <string name="service_running_condition">资源运行状况</string>
+    <string name="azureAccount">Azure账户</string>
 </resources>

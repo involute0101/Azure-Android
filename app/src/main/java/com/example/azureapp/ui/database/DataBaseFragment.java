@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.DataBase;
+import com.example.azureapp.ui.DataBaseDescription;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.apache.http.HttpResponse;
@@ -121,7 +123,7 @@ public class DataBaseFragment extends Fragment {
             JSONArray jsonArray;
             @Override
             public void run() {
-                String url = "http://20.92.144.124:8080/Azure/allVM";
+                String url = "http://20.89.169.250:8080/DB/allDB";
                 HttpClient client = HttpClients.createDefault();
                 HttpGet get = new HttpGet(url);
                 try{
@@ -132,7 +134,12 @@ public class DataBaseFragment extends Fragment {
                         jsonArray = (JSONArray) JSONArray.parse(result);
                         for(int i=0;i<jsonArray.size();i++)
                         {
-                            dbAdapter.dbs.add(new DataBase(jsonArray.getJSONObject(i).getString("name")));
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            dbAdapter.dbs.add(new DataBase(jsonObject.getString("name")));
+                            dbAdapter.dbDescrptions.add(new DataBaseDescription(jsonObject.getString("resourceGroupName"),jsonObject.getString("sqlServerName"),
+                                    jsonObject.getString("regionName"),jsonObject.getString("name"),
+                                    jsonObject.getString("id"),jsonObject.getString("creationDate"),
+                                    jsonObject.getString("status")));
                         }
 
                     }

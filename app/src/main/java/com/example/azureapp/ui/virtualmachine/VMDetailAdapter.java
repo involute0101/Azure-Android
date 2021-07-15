@@ -169,7 +169,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     AppCompatActivity activity =(AppCompatActivity)itemView.getContext();
                     activity.getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.deatilfragment_container, logFragment, null)
+                            .replace(R.id.virtualmachine_deatilfragment_container, logFragment, null)
                             .addToBackStack(null)
                             .commit();
                 }

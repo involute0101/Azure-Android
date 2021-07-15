@@ -8,9 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azureapp.R;
+import com.example.azureapp.ui.virtualmachine.VirtualMachineLogFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -84,10 +87,24 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     class LinearViewHolder_Blog extends  RecyclerView.ViewHolder{
         private TextView tvBlogCount;
+        private TextView tvBlogMore;
 
         public  LinearViewHolder_Blog(View itemView){
             super(itemView);
             tvBlogCount = itemView.findViewById(R.id.tv_blog_count);
+            tvBlogMore = itemView.findViewById(R.id.tv_blog_more);
+            tvBlogMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment logFragment = new DataBaseLogFragment();
+                    AppCompatActivity activity =(AppCompatActivity)itemView.getContext();
+                    activity.getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.database_deatilfragment_container, logFragment, null)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
         }
     }
 

@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.DataBase;
+import com.example.azureapp.ui.DataBaseDescription;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.List;
 public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBaseViewHolder> {
 
     List<DataBase> dbs = new ArrayList<>();
+    List<DataBaseDescription> dbDescrptions = new ArrayList<>();
 
     //传入后端得到的虚拟机列表
     public void setDbs (List<DataBase> dbs){
@@ -44,16 +47,20 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
     @Override
     public void onBindViewHolder(@NonNull @NotNull DataBaseViewHolder holder, int position) {
         DataBase db = dbs.get(position);
+        DataBaseDescription dataBaseDescription= dbDescrptions.get(position);
         holder.itemView.setTag(R.id.db_for_view_holder,db);
         holder.dbNameTextView.setText(db.dataBaseName);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(holder.itemView.getContext(), DatabaseDetailActivity.class );
-                intent.putExtra("DB", db);
+                Intent intent = new Intent(holder.itemView.getContext(), DatabaseDetailActivity.class );
+
+                //传入数据库细节
+                intent.putExtra("DB", dataBaseDescription);
+
                 holder.itemView.getContext().startActivity(intent);
-                Toast.makeText(holder.itemView.getContext(), "跳转", Toast.LENGTH_SHORT).show();*/
+                Toast.makeText(holder.itemView.getContext(), "跳转", Toast.LENGTH_SHORT).show();
             }
         });
     }

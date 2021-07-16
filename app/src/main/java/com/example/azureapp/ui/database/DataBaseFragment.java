@@ -153,7 +153,7 @@ public class DataBaseFragment extends Fragment {
                             dbAdapter.dbDescrptions.add(new DataBaseDescription(jsonObject.getString("resourceGroupName"),jsonObject.getString("sqlServerName"),
                                     jsonObject.getString("regionName"),jsonObject.getString("name"),
                                     jsonObject.getString("id"),jsonObject.getString("creationDate"),
-                                    jsonObject.getString("status")));
+                                    jsonObject.getString("status"),jsonObject.getString("maxSizeBytes"),jsonObject.getString("SqlServerId")));
                         }
 
                     }

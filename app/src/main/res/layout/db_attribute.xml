@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="540dp"
+    android:layout_height="600dp"
     android:layout_marginBottom="10dp"
     android:layout_marginHorizontal="10dp"
     android:elevation="2dp"
@@ -28,29 +28,43 @@
             android:layout_marginLeft="20dp"
             android:layout_gravity="center_vertical"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订阅"
+                    android:textSize="14dp"
+                    android:textColor="@color/brown_deeper"
+                    android:layout_marginLeft="10dp"/>
+                <ImageView
+                    android:id="@+id/img_db_subscription_lock"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/icon_lock"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
             <TextView
+                android:id="@+id/tv_subscription_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="订阅"
-                android:textSize="14dp"
-                android:textColor="@color/brown_deeper"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ec269b4d-93af-43c5-9fd6-9a5185235344"
+                android:text="@string/subscription_default_id"
                 android:textSize="14dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"/>
             <TextView
+                android:id="@+id/tv_subscription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="免费试用"
-                android:textSize="16dp"
+                android:text="@string/subscription_default_name"
+                android:textSize="14dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"/>
@@ -67,7 +81,7 @@
             android:src="@drawable/icon_resource_group"
             android:layout_marginLeft="20dp"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
@@ -78,6 +92,7 @@
                 android:textColor="@color/brown_deeper"
                 android:layout_marginLeft="10dp"/>
             <TextView
+                android:id="@+id/tv_group_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Test2"
@@ -88,7 +103,7 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
@@ -100,6 +115,7 @@
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
+            android:id="@+id/tv_db_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Computer"
@@ -109,18 +125,19 @@
             android:layout_marginTop="5dp"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="计算机名"
+            android:text="@string/dbName"
             android:textSize="14dp"
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
+            android:id="@+id/tv_db_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Computer"
@@ -130,18 +147,19 @@
             android:layout_marginTop="5dp"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="定价层"
+            android:text="@string/ServerName"
             android:textSize="14dp"
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
+            android:id="@+id/tv_server_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Basic"
@@ -151,18 +169,19 @@
             android:layout_marginTop="5dp"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SKU"
+            android:text="@string/maxSizeBytes"
             android:textSize="14dp"
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
+            android:id="@+id/tv_max_bytes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Basic"
@@ -172,18 +191,53 @@
             android:layout_marginTop="5dp"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/id"
+                android:textSize="14dp"
+                android:textColor="@color/brown_deeper"
+                android:layout_marginLeft="25dp"/>
+            <ImageView
+                android:id="@+id/img_db_id_lock"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/icon_lock"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_db_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ip_default"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="弹性数据库池"
+            android:text="@string/createTime"
             android:textSize="14dp"
             android:textColor="@color/brown_deeper"
             android:layout_marginLeft="25dp"/>
         <TextView
+            android:id="@+id/tv_db_create_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
@@ -193,7 +247,7 @@
             android:layout_marginTop="5dp"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp">

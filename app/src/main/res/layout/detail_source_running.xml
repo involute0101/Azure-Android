@@ -27,21 +27,7 @@
                 android:layout_gravity="left|center_vertical"
                 android:layout_marginLeft="20dp"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_blog_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="查看全部"
-                android:textSize="16dp"
-                android:textColor="@color/azure_deep"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="20dp"/>
-        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

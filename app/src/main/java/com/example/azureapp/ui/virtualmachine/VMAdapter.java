@@ -85,7 +85,7 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
      * @param vm
      * @return该虚拟机的一系列详情信息
      */
-    private VirtualMachineDescription getDetailVirtualMachine(VirtualMachine vm){
+    public VirtualMachineDescription getDetailVirtualMachine(VirtualMachine vm){
         VirtualMachineDescription detailVM = new VirtualMachineDescription();
         Thread thread = new Thread(new Runnable() {
             JSONObject object;

@@ -91,7 +91,7 @@ public class VirtualMachineLogFragment extends Fragment {
     /**
      * 从服务器端取得虚拟机的日志
      */
-    private void getLogs() {
+    public void getLogs() {
     }
 
     @Override

@@ -130,7 +130,7 @@ public class VMFragment extends Fragment {
     /**
      * 从服务器端获取所有的虚拟机列表
      */
-    private void getVirtualMachine() {
+    public void getVirtualMachine() {
         Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;
             @Override

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -44,6 +45,7 @@ public class ConditionFragment extends Fragment {
     RecyclerView recyclerView;
     ConditionAdapter conditionAdapter;
     FragmentConditionBinding biding;
+    ImageView imageView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -102,12 +104,17 @@ public class ConditionFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Log.d("noti", "onActivityCreated: condition");
         recyclerView = biding.conditionRecycleView;
+        imageView = biding.conditionImageView;
         conditionAdapter = new ConditionAdapter();
         conditionAdapter.conditions.clear();
         conditionAdapter.conditions.add(new Condition("test"));
         conditionAdapter.conditions.add(new Condition("test"));
         conditionAdapter.conditions.add(new Condition("test"));
         //getConditions();
+
+        if (conditionAdapter.conditions.size()==0)imageView.setImageResource(R.drawable.icon_no_condition);
+        else imageView.setVisibility(View.GONE);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(conditionAdapter);
     }

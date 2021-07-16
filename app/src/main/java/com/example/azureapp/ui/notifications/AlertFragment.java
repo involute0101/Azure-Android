@@ -3,6 +3,7 @@ package com.example.azureapp.ui.notifications;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,13 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.Alert;
-import com.example.azureapp.ui.Condition;
-import com.example.azureapp.ui.virtualmachine.VMAdapter;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -27,8 +29,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +43,7 @@ import java.util.List;
 public class AlertFragment extends Fragment {
     RecyclerView recyclerView;
     AlertAdapter alertAdapter;
+    ImageView imageView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -102,13 +103,17 @@ public class AlertFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Log.d("noti", "onActivityCreated: alert");
         recyclerView = requireActivity().findViewById(R.id.alert_recycle_view);
+        imageView = requireActivity().findViewById(R.id.alertImageView);
         alertAdapter = new AlertAdapter();
         alertAdapter.alerts.clear();
+        /*alertAdapter.alerts.add(new Alert("test"));
         alertAdapter.alerts.add(new Alert("test"));
-        alertAdapter.alerts.add(new Alert("test"));
-        alertAdapter.alerts.add(new Alert("test"));
+        alertAdapter.alerts.add(new Alert("test"));*/
 
         //getAlerts();
+        if (alertAdapter.alerts.size()==0)imageView.setImageResource(R.drawable.icon_no_alert);
+        else imageView.setVisibility(View.GONE);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(alertAdapter);
     }
@@ -121,8 +126,9 @@ public class AlertFragment extends Fragment {
             JSONArray jsonArray;
             @Override
             public void run() {
-                String url = "http://20.89.169.250:8080/Azure/getSubscription";
+                String url = "http://20.89.169.250:8080/Log/allAlert";
                 HttpClient client = HttpClients.createDefault();
+
                 HttpGet get = new HttpGet(url);
                 try{
                     HttpResponse response = client.execute(get);
@@ -134,8 +140,8 @@ public class AlertFragment extends Fragment {
                         for(int i=0;i<jsonArray.size();i++)
                         {
                             JSONObject object = jsonArray.getJSONObject(i);
-                            Alert alert = new Alert(object.getString("alert"));
-                            Log.d("subscribe", alert.alert);
+                            Alert alert = new Alert(object.getString("operationName"));
+                            //Log.d("alert",);
                             //获取到数据库的描述信息
                             alertAdapter.alerts.add(alert);
                         }

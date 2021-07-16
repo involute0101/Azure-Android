@@ -40,7 +40,7 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertViewHol
     public void onBindViewHolder(@NonNull @NotNull AlertViewHolder holder, int position) {
         Alert alert = alerts.get(position);
 
-        holder.alertTextView.setText(alert.alert);
+        holder.alertTextView.setText(alert.operationName);
     }
 
     @Override

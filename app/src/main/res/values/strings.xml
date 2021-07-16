@@ -50,4 +50,14 @@
     <string name="ad2">管理 Azure Active Directory</string>
     <string name="access_student_right">访问学生权益</string>
     <string name="resourceGroup">资源组</string>
+    <string name="ServerName">服务器名</string>
+    <string name="maxSizeBytes">最大字节数</string>
+    <string name="createTime">创建时间</string>
+    <string name="dbName">数据库名</string>
+    <string name="id">数据库ID</string>
+    <string name="stop_going">停止 正在进行</string>
+    <string name="start_going">启动 正在进行</string>
+    <string name="restart_going">重启 正在进行</string>
+    <string name="delete_going">删除 正在进行</string>
+    <string name="delete_db_going">删除 正在进行</string>
 </resources>

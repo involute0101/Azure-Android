@@ -19,8 +19,12 @@ public class DataBaseDescription implements Serializable {
     public String id;
     public String creationDate;
     public String status;
+    public String maxBytes;
+    public String subscriptionName;
+    public String subscriptionId;
+    public String sqlServerId;
 
-    public DataBaseDescription(String resourceGroupName, String sqlServerName, String regionName, String name, String id, String creationDate, String status) {
+    public DataBaseDescription(String resourceGroupName, String sqlServerName, String regionName, String name, String id, String creationDate, String status, String maxBytes, String sqlServerId) {
         this.resourceGroupName = resourceGroupName;
         this.sqlServerName = sqlServerName;
         this.regionName = regionName;
@@ -28,5 +32,7 @@ public class DataBaseDescription implements Serializable {
         this.id = id;
         this.creationDate = creationDate;
         this.status = status;
+        this.maxBytes = maxBytes;
+        this.sqlServerId = sqlServerId;
     }
 }

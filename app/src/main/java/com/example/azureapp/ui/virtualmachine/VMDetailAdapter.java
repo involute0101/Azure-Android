@@ -92,10 +92,15 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if(position == 0){
             ((LinearViewHolder_Head)holder).tvVmName.setText(vm.name);
             ((LinearViewHolder_Head)holder).tvVmStatus.setText(vm.status);
-            if(vm.status != null && vm.status.equals("正在运行"))
+            if(vm.status != null && vm.status.equals("正在运行")){
                 ((LinearViewHolder_Head)holder).imgStatus.setImageResource(R.drawable.icon_running_48);
-            else
+            }
+            else if(vm.status.equals("已停止")){
                 ((LinearViewHolder_Head)holder).imgStatus.setImageResource(R.drawable.icon_stop_64);
+            }
+            else{
+                ((LinearViewHolder_Head)holder).imgStatus.setImageResource(R.drawable.icon_doing);
+            }
         }
 //        if(position == 1){
 //            ((LinearViewHolder_Blog)holder).tvBlogCount.setText("10条信息");
@@ -105,8 +110,11 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if(vm.status != null && vm.status.equals("正在运行")){
                 ((LinearViewHolder_Source)holder).imgSourceStatus.setImageResource(R.drawable.icon_running_48);
             }
-            else{
+            else if(vm.status.equals("已停止")){
                 ((LinearViewHolder_Source)holder).imgSourceStatus.setImageResource(R.drawable.icon_stop_64);
+            }
+            else{
+                ((LinearViewHolder_Source)holder).imgSourceStatus.setImageResource(R.drawable.icon_doing);
             }
         }
 //        if(position == 3){
@@ -293,7 +301,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
         }
 
-        private void getSubscription(){
+        public void getSubscription(){
             Thread thread = new Thread(new Runnable() {
                 JSONArray jsonArray;
                 @Override

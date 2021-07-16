@@ -23,7 +23,7 @@ import java.util.List;
  * Created by wzk on 2021/7/12.
  * Email 1403235458@qq.com
  */
-public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBaseViewHolder> {
+public class DataBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<DataBase> dbs = new ArrayList<>();
     List<DataBaseDescription> dbDescrptions = new ArrayList<>();
@@ -39,12 +39,19 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
     @NonNull
     @NotNull
     @Override
-    public DataBaseViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.cell_db,parent,false);
-
-        final DataBaseViewHolder holder = new DataBaseViewHolder(itemView);
-        return holder;
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        if(viewType == 0){
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View itemView = layoutInflater.inflate(R.layout.subscribe_head,parent,false);
+            final DataBaseViewHolder_Head holder = new DataBaseViewHolder_Head(itemView);
+            return holder;
+        }
+        else{
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View itemView = layoutInflater.inflate(R.layout.cell_db,parent,false);
+            final DataBaseViewHolder holder = new DataBaseViewHolder(itemView);
+            return holder;
+        }
     }
 
     /**
@@ -53,29 +60,36 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull @NotNull DataBaseViewHolder holder, int position) {
-        DataBase db = dbs.get(position);
-        //DataBaseDescription dataBaseDescription= dbDescrptions.get(position);
-        holder.itemView.setTag(R.id.db_for_view_holder,db);
-        holder.dbNameTextView.setText(db.dataBaseName);
+    public void onBindViewHolder(@NonNull @NotNull  RecyclerView.ViewHolder holder, int position) {
+        if(position == 0){
+            ((DataBaseViewHolder_Head)holder).mTvName.setText("SQL数据库");
+        }
+        else{
+            DataBase db = dbs.get(position-1);
+            DataBaseDescription dataBaseDescription= dbDescrptions.get(position-1);
+            holder.itemView.setTag(R.id.db_for_view_holder,db);
+            ((DataBaseViewHolder)holder).dbNameTextView.setText(db.dataBaseName);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(holder.itemView.getContext(), DatabaseDetailActivity.class );
 
                 //传入数据库细节
-                //intent.putExtra("DB", dataBaseDescription);
+                intent.putExtra("DB", dataBaseDescription);
 
                 holder.itemView.getContext().startActivity(intent);
                 Toast.makeText(holder.itemView.getContext(), "跳转", Toast.LENGTH_SHORT).show();
-            }
-        });
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
-        return dbs.size();
+        return dbs.size()+1;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     static class DataBaseViewHolder extends  RecyclerView.ViewHolder{
@@ -88,6 +102,14 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.DataBa
         public DataBaseViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             dbNameTextView = itemView.findViewById(R.id.db_name_textView);
+        }
+    }
+
+    class DataBaseViewHolder_Head extends  RecyclerView.ViewHolder{
+        private TextView mTvName;
+        public DataBaseViewHolder_Head(@NonNull @NotNull View itemView) {
+            super(itemView);
+            mTvName = itemView.findViewById(R.id.tv_name);
         }
     }
 }

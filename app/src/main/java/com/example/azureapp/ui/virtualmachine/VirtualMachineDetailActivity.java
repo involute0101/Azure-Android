@@ -14,9 +14,12 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -49,7 +52,7 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
     private TextView mTvDelete;
     private boolean isStart;
     private VirtualMachineDescription vmDetail;
-    private TextView tvBlogMore;
+    private VMDetailAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,18 +66,28 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         //初始化RecyclerView
         mRvVMDetail = findViewById(R.id.rv_vm_details);
         mRvVMDetail.setLayoutManager(new LinearLayoutManager(VirtualMachineDetailActivity.this));
-        VMDetailAdapter adapter = new VMDetailAdapter(VirtualMachineDetailActivity.this, vmDetail);
+        adapter = new VMDetailAdapter(VirtualMachineDetailActivity.this, vmDetail);
         mRvVMDetail.setAdapter(adapter);
         //初始化操作栏
         mImgStart = findViewById(R.id.img_vm_detail_start);
         mImgDelete = findViewById(R.id.img_vm_detail_delete);
         mTvStart = findViewById(R.id.tv_vm_detail_start);
         mTvDelete = findViewById(R.id.tv_vm_detail_delete);
-
-        isStart = true;
-        /*getSupportFragmentManager()    //此处的R.id.fragment_container是要盛放fragment的父容器
-                .beginTransaction()
-                .add(R.id.logfragment_container,new VirtualMachineLogFragment());*/
+        //是否已经启动
+        if(vmDetail.status.equals("正在运行")){
+            isStart = true;
+            mImgStart.setImageResource(R.drawable.icon_stop);
+            mTvStart.setText(R.string.stop);
+            mImgDelete.setImageResource(R.drawable.icon_restart);
+            mTvDelete.setText(R.string.restart);
+        }
+        else{
+            isStart = false;
+            mImgStart.setImageResource(R.drawable.icon_start);
+            mTvStart.setText(R.string.start);
+            mImgDelete.setImageResource(R.drawable.icon_vmdetail_delete);
+            mTvDelete.setText(R.string.delete);
+        }
     }
 
     public void click_Event(View view){
@@ -95,21 +108,33 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
             case R.id.img_vm_detail_start:
                 if(isStart){
                     stop();
+                    getStatus();
+                    adapter.notifyDataSetChanged();
+                    showToast(getString(R.string.stop_going));
                     System.out.println("SSSSSSSSSSSSSSSSStop");
                     isStart = false;
                 }
                 else{
                     start();
+                    getStatus();
+                    adapter.notifyDataSetChanged();
+                    showToast(getString(R.string.start_going));
                     isStart = true;
                 }
                 break;
             case R.id.img_vm_detail_delete:
                 if(isStart){
                     restart();
+                    getStatus();
+                    adapter.notifyDataSetChanged();
+                    showToast(getString(R.string.restart_going));
                     isStart = false;
                 }
                 else{
                     delete();
+                    getStatus();
+                    adapter.notifyDataSetChanged();
+                    showToast(getString(R.string.delete_going));
                     isStart = true;
                 }
                 break;
@@ -131,11 +156,23 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
                     if (statusCode == 200) {
                         String result = EntityUtils.toString(response.getEntity());
                         if(result.equals("VM stopped")){
-                            vmDetail.status = "未运行";
+                            vmDetail.status = "已停止";
                             Log.d("status", vmDetail.status);
                         }
-                        else{
+                        else if(result.equals("VM starting")){
+                            vmDetail.status = "正在启动";
+                        }
+                        else if(result.equals("VM stopping")){
+                            vmDetail.status = "正在停止";
+                        }
+                        else if(result.equals("VM deallocating")){
+                            vmDetail.status = "正在分配";
+                        }
+                        else if (result.equals("VM running")){
                             vmDetail.status = "正在运行";
+                        }
+                        else{
+                            vmDetail.status = "取消分配";
                         }
                     }
                 } catch (ClientProtocolException e) {
@@ -188,6 +225,7 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
             }
         }).start();
     }
+
     private void start(){
         String url = "http://20.89.169.250:8080/Azure/startVm";
         vmOperation(url);
@@ -204,7 +242,19 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
     }
 
     private void restart(){
+        start();
+    }
 
+    private void showToast(String tip){
+        LayoutInflater inflater = LayoutInflater.from(VirtualMachineDetailActivity.this);
+        View toastView =inflater.inflate(R.layout.toast,null);
+        TextView textView = toastView.findViewById(R.id.tv_tip);
+        textView.setText(tip);
+        Toast toast=new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(toastView);
+        toast.setGravity(Gravity.CENTER,0, 0);
+        toast.show();
     }
 
     public class MyDecoration extends RecyclerView.ItemDecoration {

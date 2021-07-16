@@ -25,48 +25,31 @@
         android:layout_marginBottom="5dp"
         android:layout_weight="0.25">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/img_db_detail_start"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/icon_stop"
-                android:layout_gravity="center"
-                android:onClick="click_Event"/>
-            <TextView
-                android:id="@+id/tv_db_detail_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="停止"
-                android:textSize="16dp"
-                android:textColor="@color/azure_deep"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="vertical">
-            <ImageView
-                android:id="@+id/img_db_detail_delete"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/icon_restart"
-                android:layout_gravity="center"
-                android:onClick="click_Event"/>
-            <TextView
-                android:id="@+id/tv_db_detail_delete"
+            <LinearLayout
+                android:id="@+id/ll_db_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="重启"
-                android:textSize="16dp"
-                android:textColor="@color/azure_deep"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"/>
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal">
+                <ImageView
+                    android:id="@+id/img_db__delete"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_vmdetail_delete"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/tv_db_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete"
+                    android:textSize="16dp"
+                    android:textColor="@color/azure_deep"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

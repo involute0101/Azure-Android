@@ -33,7 +33,7 @@ import java.util.List;
  * Created by wzk on 2021/7/8.
  * Email 1403235458@qq.com
  */
-public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
+public class VMAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<VirtualMachine> vms = new ArrayList<>();
 
@@ -45,12 +45,21 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
     @NonNull
     @NotNull
     @Override
-    public VMViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.cell_vm,parent,false);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        if(viewType == 0){
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View itemView = layoutInflater.inflate(R.layout.subscribe_head,parent,false);
 
-        final VMViewHolder holder = new VMViewHolder(itemView);
-        return holder;
+            final VMViewHolder_Head holder = new VMViewHolder_Head(itemView);
+            return holder;
+        }
+        else{
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View itemView = layoutInflater.inflate(R.layout.cell_vm,parent,false);
+
+            final VMViewHolder holder = new VMViewHolder(itemView);
+            return holder;
+        }
     }
 
     /**
@@ -59,15 +68,15 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull @NotNull VMViewHolder holder, int position) {
-        VirtualMachine vm = vms.get(position);
-        holder.itemView.setTag(R.id.vm_for_view_holder,vm);
-
-        holder.vmNameTextView.setText(vm.vmName);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+        if(position == 0){
+            ((VMViewHolder_Head)holder).mTvName.setText("虚拟机");
+        }
+        else{
+            VirtualMachine vm = vms.get(position-1);
+            holder.itemView.setTag(R.id.vm_for_view_holder,vm);
+            ((VMViewHolder)holder).vmNameTextView.setText(vm.vmName);
+            holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(holder.itemView.getContext(),VirtualMachineDetailActivity.class );
                 System.out.println(vm.resGroupName+vm.vmName);
                 VirtualMachineDescription detailVM = getDetailVirtualMachine(vm);
@@ -76,8 +85,8 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
 
                 Toast.makeText(holder.itemView.getContext(), "跳转", Toast.LENGTH_SHORT).show();
                 holder.itemView.getContext().startActivity(intent);
-            }
-        });
+            });
+        }
     }
 
     /**
@@ -131,7 +140,12 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
 
     @Override
     public int getItemCount() {
-        return vms.size();
+        return vms.size()+1;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     static class VMViewHolder extends  RecyclerView.ViewHolder{
@@ -141,5 +155,14 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
              vmNameTextView = itemView.findViewById(R.id.vm_name_textView);
          }
      }
+
+     class VMViewHolder_Head extends  RecyclerView.ViewHolder{
+         private TextView mTvName;
+         public VMViewHolder_Head(@NonNull @NotNull View itemView) {
+             super(itemView);
+             mTvName = itemView.findViewById(R.id.tv_name);
+         }
+     }
+
 
 }

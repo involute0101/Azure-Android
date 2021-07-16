@@ -107,7 +107,7 @@ public class VMAdapter extends RecyclerView.Adapter<VMAdapter.VMViewHolder> {
                         detailVM.location = object.getString("location");
                         detailVM.vmSize = object.getString("vmSize");
                         detailVM.diskName = object.getString("OS_Disk_name");
-                        Log.d("detail", detailVM.resourceGroup+"--"+ detailVM.location+"--"+detailVM.vmSize);
+                        Log.d("detail", detailVM.resourceGroup+"--"+ detailVM.location+"--"+detailVM.vmSize+"--"+detailVM.diskName);
 
                     }
                 } catch (ClientProtocolException e) {

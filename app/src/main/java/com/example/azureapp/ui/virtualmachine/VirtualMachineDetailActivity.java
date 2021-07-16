@@ -79,32 +79,39 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
 
     public void click_Event(View view){
         if(isStart){
-            mImgStart.setImageResource(R.drawable.icon_stop);
-            mTvStart.setText(R.string.stop);
-            mImgDelete.setImageResource(R.drawable.icon_restart);
-            mTvDelete.setText(R.string.restart);
-            isStart = false;
-        }
-        else{
             mImgStart.setImageResource(R.drawable.icon_start);
             mTvStart.setText(R.string.start);
             mImgDelete.setImageResource(R.drawable.icon_vmdetail_delete);
             mTvDelete.setText(R.string.delete);
-            isStart = true;
+        }
+        else{
+            mImgStart.setImageResource(R.drawable.icon_stop);
+            mTvStart.setText(R.string.stop);
+            mImgDelete.setImageResource(R.drawable.icon_restart);
+            mTvDelete.setText(R.string.restart);
         }
         int id = view.getId();
         switch (id){
             case R.id.img_vm_detail_start:
-                if(isStart)
-                    start();
-                else
+                if(isStart){
                     stop();
+                    System.out.println("SSSSSSSSSSSSSSSSStop");
+                    isStart = false;
+                }
+                else{
+                    start();
+                    isStart = true;
+                }
                 break;
             case R.id.img_vm_detail_delete:
-                if(isStart)
-                    delete();
-                else
+                if(isStart){
                     restart();
+                    isStart = false;
+                }
+                else{
+                    delete();
+                    isStart = true;
+                }
                 break;
         }
     }
@@ -182,12 +189,12 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         }).start();
     }
     private void start(){
-        String url = "http://20.89.169.250:8888/Azure/startVm";
+        String url = "http://20.89.169.250:8080/Azure/startVm";
         vmOperation(url);
     }
 
     private void stop(){
-        String url = "http://20.89.169.250:8888/Azure/stopVm";
+        String url = "http://20.89.169.250:8080/Azure/stopVm";
         vmOperation(url);
     }
 

@@ -160,9 +160,9 @@ public class VMAddFragment extends Fragment {
      */
     public void addPostVM(VirtualMachine virtualMachine){
         JSONObject jsonObject = new JSONObject();
-        String url = new String("http://20.92.144.124:8080/Azure/createVm");
+        String url = new String("http://20.89.169.250:8080/Azure/createVm");
         try {
-            jsonObject.put("subscription_id","ec269b4d-93af-43c5-9fd6-9a5185235344");
+            jsonObject.put("subscription_id","fc4bf4a7-37a5-46c5-bd67-002062908beb");
             jsonObject.put("VNET_NAME",virtualMachine.vnetName);
             jsonObject.put("VM_NAME",virtualMachine.vmName);
             jsonObject.put("USERNAME",virtualMachine.username);

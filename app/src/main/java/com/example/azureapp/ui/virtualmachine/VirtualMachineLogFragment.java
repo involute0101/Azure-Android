@@ -11,8 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.databinding.FragmentVirtualMachineLogBinding;
 import com.example.azureapp.ui.entity.Log;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +37,7 @@ public class VirtualMachineLogFragment extends Fragment {
     RecyclerView recyclerView;
     FragmentVirtualMachineLogBinding binding;
     VirtualMachineLogAdapter logAdapter;
+    List<Log> logList = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,6 +101,36 @@ public class VirtualMachineLogFragment extends Fragment {
      * 从服务器端取得虚拟机的日志
      */
     public void getLogs() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = "http://20.89.169.250:8080/Log/LogInGroup?resourceGroup=NologinTest";
+                HttpClient client = HttpClients.createDefault();
+                HttpGet get = new HttpGet(url);
+                try{
+                    HttpResponse response = client.execute(get);
+                    int statusCode = response.getStatusLine().getStatusCode();
+                    if (statusCode == 200) {
+                        String result = EntityUtils.toString(response.getEntity());
+                        JSONArray jsonArray = (JSONArray) JSONArray.parse(result);
+                        for(int index= 0; index<jsonArray.size();index++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(index);
+                            logList.add(new Log(jsonObject.getString("operationName"),jsonObject.getString("status"),jsonObject.getString("2021-07-17T02:12:53.101574+00:00")));
+                        }
+                    }
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        try{
+            thread.start();
+            thread.join();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

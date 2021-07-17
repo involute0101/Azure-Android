@@ -30,4 +30,9 @@ public class Log implements Serializable {
         this.time = time;
         this.type = type;
     }
+
+    public void changeTime(){
+        String[] times = time.substring(0,16).split("T");
+        time = times[0] + times[1];
+    }
 }

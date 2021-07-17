@@ -27,6 +27,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -107,13 +108,18 @@ public class DataBaseLogFragment extends Fragment {
                         for(int i=0;i<jsonArray.size();i++)
                         {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            logAdapter.logs.add(new Log(jsonObject.getString("operationName")+" "+jsonObject.getString("status"),jsonObject.getString("submissionTimestamp")));
+                            Log log = new Log(jsonObject.getString("operationName")+" "+jsonObject.getString("status"),jsonObject.getString("submissionTimestamp"));
+                            log.changeTime();
+                            logAdapter.logs.add(log);
+
                         }
 
                     }
                 } catch (ClientProtocolException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }

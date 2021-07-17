@@ -31,10 +31,18 @@ public class VirtualMachineLogAdapter extends RecyclerView.Adapter<VirtualMachin
     @NotNull
     @Override
     public VMLogViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.cell_log,parent,false);//???
-        final VMLogViewHolder holder = new VMLogViewHolder(itemView);
-        return holder;
+        if(viewType == 0){
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View itemView = layoutInflater.inflate(R.layout.log_head,parent,false);//???
+            final VMLogViewHolder holder = new VMLogViewHolder(itemView);
+            return holder;
+        }
+        else{
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View itemView = layoutInflater.inflate(R.layout.cell_log,parent,false);//???
+            final VMLogViewHolder holder = new VMLogViewHolder(itemView);
+            return holder;
+        }
     }
 
     /**
@@ -44,20 +52,26 @@ public class VirtualMachineLogAdapter extends RecyclerView.Adapter<VirtualMachin
      */
     @Override
     public void onBindViewHolder(@NonNull @NotNull VMLogViewHolder holder, int position) {
-        Log log = logs.get(position);
-        holder.logContentTextView.setText(log.content);
-        holder.logTimeTextView.setText(log.time);
-        if (log.type.equals("false") ){
-            holder.logImage.setImageDrawable(ContextCompat.getDrawable(holder.logImage.getContext(), R.drawable.icon_alert_red));
+        if(position!=0){
+            Log log = logs.get(position-1);
+            holder.logContentTextView.setText(log.content);
+            holder.logTimeTextView.setText(log.time);
+            if (log.type.equals("false") ){
+                holder.logImage.setImageDrawable(ContextCompat.getDrawable(holder.logImage.getContext(), R.drawable.icon_alert_red));
+            }
         }
-
 
     }
 
 
     @Override
     public int getItemCount() {
-        return logs.size();
+        return logs.size()+1;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     static class VMLogViewHolder extends  RecyclerView.ViewHolder{

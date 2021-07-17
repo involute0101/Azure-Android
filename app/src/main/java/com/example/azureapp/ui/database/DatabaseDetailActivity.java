@@ -79,14 +79,14 @@ public class DatabaseDetailActivity extends AppCompatActivity {
             @Override
             public void run() {
                 HttpClient client = HttpClients.createDefault();
-                HttpDelete httpDelete = new HttpDelete(url);
-                httpDelete.setHeader("Content-Type", "application/json;charset=UTF-8");
+                HttpPost httpPost = new HttpPost(url);
+                httpPost.setHeader("Content-Type", "application/json;charset=UTF-8");
 
                 try {
-//                    StringEntity stringEntity = new StringEntity(jsonObject.toString());
-//                    stringEntity.setContentType("CONTENT_TYPE_TEXT_JSON");
-//                    httpDelete.setEntity(stringEntity);
-                    CloseableHttpResponse response = (CloseableHttpResponse) client.execute(httpDelete);
+                    StringEntity stringEntity = new StringEntity(jsonObject.toString());
+                    stringEntity.setContentType("CONTENT_TYPE_TEXT_JSON");
+                    httpPost.setEntity(stringEntity);
+                    CloseableHttpResponse response = (CloseableHttpResponse) client.execute(httpPost);
                     HttpEntity httpEntity = response.getEntity();
                     String s = EntityUtils.toString(httpEntity, "UTF-8");
                     System.out.println(s);

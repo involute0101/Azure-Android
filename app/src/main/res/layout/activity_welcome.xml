@@ -6,16 +6,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".WelcomeActivity">
-    <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:src="@drawable/icon_azure"
-        android:layout_marginTop="100dp"
-        android:layout_gravity="center_horizontal"/>
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:src="@drawable/icon_microsoft"
-        android:layout_marginTop="280dp"
-        android:layout_gravity="center_horizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/icon_azure"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_microsoft"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="100dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </LinearLayout>

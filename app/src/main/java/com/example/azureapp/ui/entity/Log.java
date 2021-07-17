@@ -20,9 +20,9 @@ public class Log implements Serializable {
         this.content = content;
     }
 
-    public Log(String content, String type) {
+    public Log(String content, String time) {
         this.content = content;
-        this.type = type;
+        this.time = time;
     }
 
     public Log(String content, String time, String type) {

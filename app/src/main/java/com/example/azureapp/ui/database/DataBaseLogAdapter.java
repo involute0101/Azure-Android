@@ -41,9 +41,9 @@ public class DataBaseLogAdapter extends RecyclerView.Adapter<DataBaseLogAdapter.
         Log log = logs.get(position);
         holder.logContentTextView.setText(log.content);
         holder.logTimeTextView.setText(log.time);
-        if (log.type.equals("false") ){
+        /*if (log.type.equals("false") ){
             holder.logImage.setImageDrawable(ContextCompat.getDrawable(holder.logImage.getContext(), R.drawable.icon_alert_red));
-        }
+        }*/
 
 
     }

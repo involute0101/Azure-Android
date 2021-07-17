@@ -37,7 +37,7 @@ import java.io.UnsupportedEncodingException;
 public class DatabaseDetailActivity extends AppCompatActivity {
 
     private RecyclerView mRvDBDetail;
-    private DataBaseDescription dbDetail;
+    public DataBaseDescription dbDetail;
     private LinearLayout llDelete;
 
     @Override

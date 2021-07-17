@@ -135,13 +135,16 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvBlogCount = itemView.findViewById(R.id.tv_blog_count);
             tvBlogMore = itemView.findViewById(R.id.tv_blog_more);
             tvBlogMore.setOnClickListener(v -> {
-                Fragment logFragment = new DataBaseLogFragment();
-                AppCompatActivity activity =(AppCompatActivity)itemView.getContext();
+                DataBaseLogFragment logFragment = new DataBaseLogFragment();
+
+                DatabaseDetailActivity activity =(DatabaseDetailActivity)itemView.getContext();
+                logFragment.resourceGroup = activity.dbDetail.resourceGroupName;
                 activity.getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.database_deatilfragment_container, logFragment, null)
                         .addToBackStack(null)
                         .commit();
+
             });
         }
     }

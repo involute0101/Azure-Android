@@ -105,9 +105,9 @@ public class ConditionFragment extends Fragment {
         imageView = biding.conditionImageView;
         conditionAdapter = new ConditionAdapter();
         conditionAdapter.conditions.clear();
+        /*conditionAdapter.conditions.add(new Condition("test"));
         conditionAdapter.conditions.add(new Condition("test"));
-        conditionAdapter.conditions.add(new Condition("test"));
-        conditionAdapter.conditions.add(new Condition("test"));
+        conditionAdapter.conditions.add(new Condition("test"));*/
         //getConditions();
 
         if (conditionAdapter.conditions.size()==0)imageView.setImageResource(R.drawable.icon_no_condition);

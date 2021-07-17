@@ -1,5 +1,6 @@
 package com.example.azureapp.ui.database;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -11,8 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.databinding.FragmentDataBaseLogBinding;
+import com.example.azureapp.ui.entity.DataBase;
+import com.example.azureapp.ui.entity.DataBaseDescription;
 import com.example.azureapp.ui.entity.Log;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +38,7 @@ public class DataBaseLogFragment extends Fragment {
     FragmentDataBaseLogBinding binding;
     DataBaseLogAdapter logAdapter;
 
+    public String resourceGroup;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -67,11 +82,49 @@ public class DataBaseLogFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recyclerView = binding.databaseLogRecycleView;
         logAdapter = new DataBaseLogAdapter();
-
-        logAdapter.logs.add(new Log("test","today","true"));
-        logAdapter.logs.add(new Log("test1","today","false"));
+        logAdapter.logs.clear();
+        getDataBaseLog(resourceGroup);
+        /*logAdapter.logs.add(new Log("test","today","true"));
+        logAdapter.logs.add(new Log("test1","today","false"));*/
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(logAdapter);
+    }
+
+    private void getDataBaseLog(String resourceGroup) {
+        Thread thread = new Thread(new Runnable() {
+            JSONArray jsonArray;
+            @Override
+            public void run() {
+                String url = "http://20.89.169.250:8080/Log/LogInGroup?resourceGroup="+resourceGroup;
+                HttpClient client = HttpClients.createDefault();
+                HttpGet get = new HttpGet(url);
+                try{
+                    HttpResponse response = client.execute(get);
+                    int statusCode = response.getStatusLine().getStatusCode();
+                    if (statusCode == 200) {
+                        String result = EntityUtils.toString(response.getEntity());
+                        jsonArray = (JSONArray) JSONArray.parse(result);
+                        for(int i=0;i<jsonArray.size();i++)
+                        {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            logAdapter.logs.add(new Log(jsonObject.getString("operationName")+" "+jsonObject.getString("status"),jsonObject.getString("submissionTimestamp")));
+                        }
+
+                    }
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

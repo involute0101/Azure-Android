@@ -135,7 +135,7 @@ public class DataBaseFragment extends Fragment {
      * 开启线程访问服务器获取用户所有的数据库
      */
     private void getDataBase() {
-                Thread thread = new Thread(new Runnable() {
+            Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;
             @Override
             public void run() {

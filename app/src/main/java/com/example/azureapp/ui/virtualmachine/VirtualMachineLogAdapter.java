@@ -11,9 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azureapp.R;
-import com.example.azureapp.ui.Log;
-import com.example.azureapp.ui.Subscribe;
-import com.example.azureapp.ui.subscribe.SubscribeAdapter;
+import com.example.azureapp.ui.entity.Log;
 
 import org.jetbrains.annotations.NotNull;
 

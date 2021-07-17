@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
-import com.example.azureapp.ui.VirtualMachine;
-import com.example.azureapp.ui.VirtualMachineDescription;
+import com.example.azureapp.ui.entity.VirtualMachine;
+import com.example.azureapp.ui.entity.VirtualMachineDescription;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

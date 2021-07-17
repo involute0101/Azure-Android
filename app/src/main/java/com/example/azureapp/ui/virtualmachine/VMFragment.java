@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
-import com.example.azureapp.ui.VirtualMachine;
+import com.example.azureapp.ui.entity.VirtualMachine;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 

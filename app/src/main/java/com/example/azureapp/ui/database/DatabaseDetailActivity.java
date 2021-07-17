@@ -14,18 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.azureapp.R;
-import com.example.azureapp.ui.DataBaseDescription;
-import com.example.azureapp.ui.VirtualMachineDescription;
-import com.example.azureapp.ui.virtualmachine.VMDetailAdapter;
-import com.example.azureapp.ui.virtualmachine.VirtualMachineDetailActivity;
+import com.example.azureapp.ui.entity.DataBaseDescription;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;

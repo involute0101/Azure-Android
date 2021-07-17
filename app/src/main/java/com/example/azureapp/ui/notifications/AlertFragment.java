@@ -3,7 +3,6 @@ package com.example.azureapp.ui.notifications;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,14 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
-import com.example.azureapp.ui.Alert;
+import com.example.azureapp.ui.entity.Alert;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

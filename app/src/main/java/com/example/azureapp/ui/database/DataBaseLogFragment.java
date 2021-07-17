@@ -11,11 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.azureapp.R;
 import com.example.azureapp.databinding.FragmentDataBaseLogBinding;
-import com.example.azureapp.databinding.FragmentVirtualMachineLogBinding;
-import com.example.azureapp.ui.Log;
-import com.example.azureapp.ui.virtualmachine.VirtualMachineLogAdapter;
+import com.example.azureapp.ui.entity.Log;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.fastjson.JSONArray;
-import com.example.azureapp.ui.VirtualMachine;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

@@ -10,14 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.example.azureapp.R;
 import com.example.azureapp.databinding.FragmentVirtualMachineLogBinding;
-import com.example.azureapp.databinding.SubscribeFragmentBinding;
-import com.example.azureapp.ui.Log;
-
-import java.util.List;
+import com.example.azureapp.ui.entity.Log;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -92,6 +92,7 @@
             android:orientation="horizontal"
             android:layout_marginVertical="5dp">
             <LinearLayout
+                android:id="@+id/service_condition_linear_ayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

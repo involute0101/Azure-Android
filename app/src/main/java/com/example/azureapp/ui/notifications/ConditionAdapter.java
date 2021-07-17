@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azureapp.R;
-import com.example.azureapp.ui.Condition;
+import com.example.azureapp.ui.entity.Condition;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.fastjson.JSONArray;
 import com.example.azureapp.R;
-import com.example.azureapp.ui.VirtualMachine;
-import com.example.azureapp.ui.VirtualMachineDescription;
+import com.example.azureapp.ui.entity.VirtualMachineDescription;
 
 import android.content.Intent;
 import android.graphics.Rect;

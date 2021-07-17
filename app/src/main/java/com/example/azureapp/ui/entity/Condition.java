@@ -1,4 +1,4 @@
-package com.example.azureapp.ui;
+package com.example.azureapp.ui.entity;
 
 /**
  * fileDesc

@@ -1,6 +1,5 @@
 package com.example.azureapp.ui.subscribe;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azureapp.R;
-import com.example.azureapp.ui.Subscribe;
-import com.example.azureapp.ui.virtualmachine.VMDetailAdapter;
+import com.example.azureapp.ui.entity.Subscribe;
 
 
 import org.jetbrains.annotations.NotNull;

@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.azureapp.R;
-import com.example.azureapp.ui.VirtualMachine;
+import com.example.azureapp.ui.entity.VirtualMachine;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;

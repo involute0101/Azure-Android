@@ -19,8 +19,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
-import com.example.azureapp.ui.DataBase;
-import com.example.azureapp.ui.VirtualMachine;
+import com.example.azureapp.ui.entity.DataBase;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;

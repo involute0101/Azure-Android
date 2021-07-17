@@ -17,9 +17,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.R;
 import com.example.azureapp.databinding.FragmentConditionBinding;
-import com.example.azureapp.ui.Alert;
-import com.example.azureapp.ui.Condition;
-import com.example.azureapp.ui.Subscribe;
+import com.example.azureapp.ui.entity.Condition;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

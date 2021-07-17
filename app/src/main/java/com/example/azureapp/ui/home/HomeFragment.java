@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azureapp.LoginActivity;
@@ -39,7 +41,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
-    LinearLayout llVm,llSql,llResourceGroup;
+    LinearLayout llVm,llSql,llResourceGroup,llServiceCondition;
     LinearLayout llAd1,llAd2,llAd3;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,6 +60,7 @@ public class HomeFragment extends Fragment {
         llAd3 = root.findViewById(R.id.ll_ad3);
         //资源组
         llResourceGroup = root.findViewById(R.id.ll_resource_group);
+        llServiceCondition = root.findViewById(R.id.service_condition_linear_ayout);
 
         llVm.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), VirtualMachineActivity.class);
@@ -96,6 +99,15 @@ public class HomeFragment extends Fragment {
         llResourceGroup.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ResourceGroupActivity.class);
             startActivity(intent);
+        });
+
+        llServiceCondition.setOnClickListener(v ->{
+            Bundle bundle = new Bundle();
+            bundle.putString("condition","condition");
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.action_navigation_home_to_navigation_notifications,bundle);
+
+
         });
         return root;
     }

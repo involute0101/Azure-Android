@@ -10,8 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.azureapp.R;
-import com.example.azureapp.ui.DataBase;
-import com.example.azureapp.ui.DataBaseDescription;
+import com.example.azureapp.ui.entity.DataBase;
+import com.example.azureapp.ui.entity.DataBaseDescription;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.example.azureapp.R;
-import com.example.azureapp.ui.DataBaseDescription;
-import com.example.azureapp.ui.VirtualMachineDescription;
-import com.example.azureapp.ui.virtualmachine.VMDetailAdapter;
-import com.example.azureapp.ui.virtualmachine.VirtualMachineLogFragment;
+import com.example.azureapp.ui.entity.DataBaseDescription;
+import com.example.azureapp.ui.entity.VirtualMachineDescription;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

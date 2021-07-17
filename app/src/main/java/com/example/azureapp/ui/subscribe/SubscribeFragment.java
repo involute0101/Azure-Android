@@ -17,10 +17,9 @@ import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.azureapp.R;
 import com.example.azureapp.databinding.SubscribeFragmentBinding;
-import com.example.azureapp.ui.Subscribe;
-import com.example.azureapp.ui.VirtualMachine;
+import com.example.azureapp.ui.entity.Subscribe;
+import com.example.azureapp.ui.entity.VirtualMachine;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

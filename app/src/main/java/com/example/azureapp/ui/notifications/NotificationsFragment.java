@@ -47,6 +47,7 @@ public class NotificationsFragment extends Fragment {
             //textView.setText(s);
         });
         return root;
+
     }
 
     /**
@@ -64,6 +65,8 @@ public class NotificationsFragment extends Fragment {
 
         binding.notificationTabLayout.setupWithViewPager(binding.notificationViewPager);
        // tabLayout.setTabsFromPagerAdapter(viewPager.getAdapter());
+        Bundle bundle = getArguments();
+        if (bundle!=null&&bundle.getString("condition").equals("condition"))binding.notificationViewPager.setCurrentItem(1);
     }
 
     /**
@@ -88,6 +91,7 @@ public class NotificationsFragment extends Fragment {
         notificationAdapter.addFragment(conditionFragment,list.get(1));
 
         viewPager.setAdapter(notificationAdapter);
+
 
     }
 

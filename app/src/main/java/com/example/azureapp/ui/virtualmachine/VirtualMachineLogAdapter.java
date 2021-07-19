@@ -27,6 +27,9 @@ import java.util.List;
 public class VirtualMachineLogAdapter extends RecyclerView.Adapter<VirtualMachineLogAdapter.VMLogViewHolder>{
     List<Log> logs = new ArrayList<>();
 
+    public VirtualMachineLogAdapter(List<Log> logs){
+        this.logs = logs;
+    }
     @NonNull
     @NotNull
     @Override
@@ -56,9 +59,6 @@ public class VirtualMachineLogAdapter extends RecyclerView.Adapter<VirtualMachin
             Log log = logs.get(position-1);
             holder.logContentTextView.setText(log.content);
             holder.logTimeTextView.setText(log.time);
-            if (log.type.equals("false") ){
-                holder.logImage.setImageDrawable(ContextCompat.getDrawable(holder.logImage.getContext(), R.drawable.icon_alert_red));
-            }
         }
 
     }

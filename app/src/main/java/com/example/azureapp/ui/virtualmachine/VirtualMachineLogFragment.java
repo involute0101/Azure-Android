@@ -24,6 +24,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class VirtualMachineLogFragment extends Fragment {
     FragmentVirtualMachineLogBinding binding;
     VirtualMachineLogAdapter logAdapter;
     List<Log> logList = new ArrayList<>();
+    public String resourceGroup;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,12 +89,9 @@ public class VirtualMachineLogFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getLogs(resourceGroup);
         recyclerView = binding.virtualmachineLogRecycleView;
-        logAdapter = new VirtualMachineLogAdapter();
-
-        logAdapter.logs.add(new Log("test","today","true"));
-        logAdapter.logs.add(new Log("test1","today","false"));
-        getLogs();
+        logAdapter = new VirtualMachineLogAdapter(logList);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(logAdapter);
     }
@@ -100,11 +99,11 @@ public class VirtualMachineLogFragment extends Fragment {
     /**
      * 从服务器端取得虚拟机的日志
      */
-    public void getLogs() {
+    public void getLogs(String resourceGroup) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://20.89.169.250:8080/Log/LogInGroup?resourceGroup=NologinTest";
+                String url = "http://20.89.169.250:8080/Log/LogInGroup?resourceGroup="+resourceGroup;
                 HttpClient client = HttpClients.createDefault();
                 HttpGet get = new HttpGet(url);
                 try{
@@ -115,12 +114,16 @@ public class VirtualMachineLogFragment extends Fragment {
                         JSONArray jsonArray = (JSONArray) JSONArray.parse(result);
                         for(int index= 0; index<jsonArray.size();index++){
                             JSONObject jsonObject = jsonArray.getJSONObject(index);
-                            logList.add(new Log(jsonObject.getString("operationName"),jsonObject.getString("status"),jsonObject.getString("2021-07-17T02:12:53.101574+00:00")));
+                            Log log = new Log(jsonObject.getString("operationName")+" "+jsonObject.getString("status"),jsonObject.getString("submissionTimestamp"));
+                            log.changeTime();
+                            logList.add(log);
                         }
                     }
                 } catch (ClientProtocolException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }

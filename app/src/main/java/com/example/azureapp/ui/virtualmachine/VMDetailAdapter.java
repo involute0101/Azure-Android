@@ -168,8 +168,9 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvBlogMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment logFragment = new VirtualMachineLogFragment();
-                    AppCompatActivity activity =(AppCompatActivity)itemView.getContext();
+                    VirtualMachineLogFragment logFragment = new VirtualMachineLogFragment();
+                    VirtualMachineDetailActivity activity =(VirtualMachineDetailActivity)itemView.getContext();
+                    logFragment.resourceGroup = vm.resourceGroup;
                     activity.getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.virtualmachine_deatilfragment_container, logFragment, null)

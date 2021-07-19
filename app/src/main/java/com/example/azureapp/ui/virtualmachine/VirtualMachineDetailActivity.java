@@ -106,16 +106,12 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
             case R.id.img_vm_detail_start:
                 if(isStart){
                     stop();
-                    getStatus();
-                    adapter.notifyDataSetChanged();
                     showToast(getString(R.string.stop_going));
                     System.out.println("SSSSSSSSSSSSSSSSStop");
                     isStart = false;
                 }
                 else{
                     start();
-                    getStatus();
-                    adapter.notifyDataSetChanged();
                     showToast(getString(R.string.start_going));
                     isStart = true;
                 }
@@ -123,20 +119,18 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
             case R.id.img_vm_detail_delete:
                 if(isStart){
                     restart();
-                    getStatus();
-                    adapter.notifyDataSetChanged();
                     showToast(getString(R.string.restart_going));
                     isStart = false;
                 }
                 else{
                     delete();
-                    getStatus();
-                    adapter.notifyDataSetChanged();
                     showToast(getString(R.string.delete_going));
                     isStart = true;
                 }
                 break;
         }
+        getStatus();
+        adapter.notifyDataSetChanged();
     }
 
     private void getStatus(){
@@ -159,18 +153,23 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
                         }
                         else if(result.equals("VM starting")){
                             vmDetail.status = "正在启动";
+                            Log.d("status", vmDetail.status);
                         }
                         else if(result.equals("VM stopping")){
                             vmDetail.status = "正在停止";
+                            Log.d("status", vmDetail.status);
                         }
                         else if(result.equals("VM deallocating")){
                             vmDetail.status = "正在分配";
+                            Log.d("status", vmDetail.status);
                         }
                         else if (result.equals("VM running")){
                             vmDetail.status = "正在运行";
+                            Log.d("status", vmDetail.status);
                         }
                         else{
                             vmDetail.status = "取消分配";
+                            Log.d("status", vmDetail.status);
                         }
                     }
                 } catch (ClientProtocolException e) {

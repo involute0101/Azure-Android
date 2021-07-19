@@ -12,7 +12,6 @@
         android:id="@+id/tv_verify_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BDGT-HUIM-Y78G-7G9H"
         android:textSize="20dp"
         android:layout_gravity="center"
         android:paddingVertical="5dp"

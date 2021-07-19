@@ -41,7 +41,7 @@
             android:layout_height="60dp"
             android:layout_marginLeft="@dimen/padding_left_and_right"
             android:scaleType="centerCrop"
-            android:src="@mipmap/head" />
+            android:src="@drawable/logo" />
 
 
     </LinearLayout>
@@ -89,11 +89,11 @@
             android:layout_height="33dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:text="XX"
+            android:text="类型"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/user_info_tv"
+            android:id="@+id/user_type_tv"
             android:layout_width="321dp"
             android:layout_height="33dp"
             android:text="TextView"

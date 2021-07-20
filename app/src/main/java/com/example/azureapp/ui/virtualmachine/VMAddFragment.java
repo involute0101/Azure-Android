@@ -11,8 +11,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import com.example.azureapp.R;
 import com.example.azureapp.ui.entity.VirtualMachine;
@@ -27,6 +30,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * fileDesc
@@ -49,10 +54,16 @@ public class VMAddFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    static String PW_PATTERN = "^(?![A-Za-z0-9]+$)(?![a-z0-9\\W]+$)(?![A-Za-z\\W]+$)(?![A-Z0-9\\W]+$)[a-zA-Z0-9\\W]{8,}$";
     String subscribe_id,vent_name,vm_name,username,password,vm_size,resource_group ;
 
     EditText vent_name_text,vm_name_text,username_text,password_text,vm_size_text,resource_group_text;
     Button add_submit_button;
+
+    private Spinner spinner;
+    private List<String> sizeList;
+    private ArrayAdapter<String> sizeAdapter;
+
     public VMAddFragment() {
         // Required empty public constructor
     }
@@ -104,9 +115,35 @@ public class VMAddFragment extends Fragment {
         vm_name_text = activity.findViewById(R.id.et_vm_name);
         username_text = activity.findViewById(R.id.et_vm_user);
         password_text = activity.findViewById(R.id.et_vm_psw);
-        vm_size_text = activity.findViewById(R.id.et_vm_size);
+
+        //vm_size_text = activity.findViewById(R.id.et_vm_size);
         resource_group_text = activity.findViewById(R.id.et_vm_sourcegroup);
         add_submit_button.setEnabled(false);
+        spinner = activity.findViewById(R.id.sp_vm_size);
+
+        sizeList = new ArrayList<>();
+        sizeList.add("Standard_B1s");
+        sizeList.add("Standard_B2s");
+        sizeList.add("Standard_B1ls");
+        sizeList.add("Standard_B1ms");
+        sizeList.add("Standard_A0");
+        //适配器
+        sizeAdapter = new ArrayAdapter<String>(requireActivity(), android.R.layout.simple_spinner_item, sizeList);
+        //设置样式
+        sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //加载适配器
+        spinner.setAdapter(sizeAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                vm_size = spinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         TextWatcher watcher = new TextWatcher() {
             @Override
@@ -121,12 +158,12 @@ public class VMAddFragment extends Fragment {
                 vm_name = vm_name_text.getText().toString().trim();
                 username = username_text.getText().toString().trim();
                 password = password_text.getText().toString().trim();
-                vm_size = vm_size_text.getText().toString().trim();
+                //vm_size = vm_size_text.getText().toString().trim();
                 resource_group = resource_group_text.getText().toString().trim();
 
                 add_submit_button.setEnabled(!vent_name.isEmpty()
                                             && !username.isEmpty() && !password.isEmpty()
-                                            && !vm_size.isEmpty() && !resource_group.isEmpty());
+                                            /*&& !vm_size.isEmpty()*/ && !resource_group.isEmpty());
             }
 
             @Override
@@ -138,18 +175,24 @@ public class VMAddFragment extends Fragment {
         vm_name_text.addTextChangedListener(watcher);
         username_text.addTextChangedListener(watcher);
         password_text.addTextChangedListener(watcher);
-        vm_size_text.addTextChangedListener(watcher);
+        //vm_size_text.addTextChangedListener(watcher);
         resource_group_text.addTextChangedListener(watcher);
 
         add_submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VirtualMachine virtualMachine = new VirtualMachine(subscribe_id,vent_name,vm_name,username,password,vm_size,resource_group);
+                if (!password.matches(PW_PATTERN)){
+                    password_text.setText("");
+                }
 
-                addPostVM(virtualMachine);
-                Toast.makeText(getContext(),"创建成功，过程需要2~3min，请稍等",Toast.LENGTH_SHORT).show();
-                NavController navController = Navigation.findNavController(v);
-                navController.navigateUp();
+                else {
+                    VirtualMachine virtualMachine = new VirtualMachine(subscribe_id, vent_name, vm_name, username, password, vm_size, resource_group);
+
+                    addPostVM(virtualMachine);
+                    Toast.makeText(getContext(), "创建成功，过程需要2~3min，请稍等", Toast.LENGTH_SHORT).show();
+                    NavController navController = Navigation.findNavController(v);
+                    navController.navigateUp();
+                }
             }
         });
     }

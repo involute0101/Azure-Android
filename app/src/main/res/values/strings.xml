@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AzureAPP</string>
+    <string name="app_name">Azure</string>
     <string name="title_home">Home</string>
     <string name="title_resource">Dashboard</string>
     <string name="title_notifications">Notifications</string>

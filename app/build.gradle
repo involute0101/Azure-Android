@@ -6,6 +6,8 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
     useLibrary 'org.apache.http.legacy'
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
 
     defaultConfig {
         applicationId "com.example.azureapp"
@@ -19,8 +21,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            zipAlignEnabled true //4字节对齐，减少运行内存消耗　
+            minifyEnabled true  //false = 关闭混淆
         }
     }
     compileOptions {

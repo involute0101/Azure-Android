@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(120000);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         String channelId = "007";
                         String channelName = "James Bond";
@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
                         NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
                         notificationManager.createNotificationChannel(notificationChannel);
                         Notification notification = new NotificationCompat.Builder(MainActivity.this, "007")
-                                .setContentTitle("警告")
-                                .setContentText("服务出现问题")
+                                .setContentTitle("Alert")
+                                .setContentText("You’ve used 90% of your Azure for Students credit")
                                 .setWhen(System.currentTimeMillis())
                                 .setSmallIcon(R.drawable.icon_alert)
                                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon_alert))

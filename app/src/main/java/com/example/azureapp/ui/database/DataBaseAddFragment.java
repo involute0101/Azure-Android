@@ -163,8 +163,8 @@ public class DataBaseAddFragment extends Fragment {
                 else {
                     DataBase dataBase = new DataBase(db_username, db_password, db_name, resource_group);
 
+                    Toast.makeText(getContext(), "创建成功，过程需要2~3min，请稍等", Toast.LENGTH_LONG).show();
                     addPostDB(dataBase);
-                    Toast.makeText(getContext(), "创建成功，过程需要2~3min，请稍等", Toast.LENGTH_SHORT).show();
                     NavController navController = Navigation.findNavController(v);
                     navController.navigateUp();
                 }

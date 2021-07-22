@@ -187,9 +187,10 @@ public class VMAddFragment extends Fragment {
 
                 else {
                     VirtualMachine virtualMachine = new VirtualMachine(subscribe_id, vent_name, vm_name, username, password, vm_size, resource_group);
-
+                    Toast.makeText(getContext(), "创建成功，过程需要2~3min，请稍等", Toast.LENGTH_LONG).show();
                     addPostVM(virtualMachine);
-                    Toast.makeText(getContext(), "创建成功，过程需要2~3min，请稍等", Toast.LENGTH_SHORT).show();
+
+
                     NavController navController = Navigation.findNavController(v);
                     navController.navigateUp();
                 }

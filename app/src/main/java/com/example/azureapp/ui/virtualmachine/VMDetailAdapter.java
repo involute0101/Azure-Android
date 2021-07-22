@@ -118,7 +118,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //        if(position == 1){
 //            ((LinearViewHolder_Blog)holder).tvBlogCount.setText("10条信息");
 //        }
-        if(position == 2){
+        if(position == 3){
             ((LinearViewHolder_Source)holder).tvSourceStatus.setText(vm.status);
             if(vm.status != null && vm.status.equals("正在运行")){
                 ((LinearViewHolder_Source)holder).imgSourceStatus.setImageResource(R.drawable.icon_running_48);
@@ -130,13 +130,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((LinearViewHolder_Source)holder).imgSourceStatus.setImageResource(R.drawable.icon_doing);
             }
         }
-//        if(position == 3){
-//            ((LinearViewHolder_Condition)holder).tvPowerState.setText("Power");
-//            ((LinearViewHolder_Condition)holder).imgPowerState.setImageResource(R.drawable.icon_stop_64);
-//            ((LinearViewHolder_Condition)holder).tvPreplanState.setText("Preplan");
-//            ((LinearViewHolder_Condition)holder).imgPreplanState.setImageResource(R.drawable.icon_stop_64);
-//        }
-        if(position == 3){
+        if(position == 4){
             ((LinearViewHolder_Attribute)holder).tvResourceGroup.setText(vm.resourceGroup);
             ((LinearViewHolder_Attribute)holder).tvLocation.setText(vm.location);
             ((LinearViewHolder_Attribute)holder).tvVm.setText(vm.name);
@@ -372,10 +366,10 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             valueList.add(0f);
             valueList.add(0f);
             valueList.add(0f);
-            valueList.add(62.56f);
+            valueList.add(30.65f);
             valueList.add(0f);
             valueList.add(0f);
-            valueList.add(0f);
+            valueList.add(65.23f);
             valueList.add(0f);
             setChartStyle(mLineChart);
             showLineChart(mLineChart, getLineChartData());
@@ -390,11 +384,11 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
            xAxis.setDrawGridLines(false);
            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
            xAxis.setTextColor(Color.parseColor("#787272"));
-           xAxis.setTextSize(8);
+           xAxis.setTextSize(6);
            lineChart.getAxisRight().setEnabled(false);
            YAxis yAxis = lineChart.getAxisLeft();
            yAxis.setDrawAxisLine(false);
-           yAxis.setAxisMaximum(7f);
+           yAxis.setAxisMaximum(100f);
            yAxis.setGranularity(0.5f);
            yAxis.setTextColor(Color.parseColor("#787272"));
            yAxis.setTextSize(8);
@@ -417,6 +411,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             dataset.setDrawValues(false);//不显示数据
             dataset.setDrawFilled(true);//填充色
             dataset.setFillDrawable(mContext.getResources().getDrawable(R.drawable.chart_fill_sky));
+            dataset.setColor(Color.parseColor("#3a7bd5"));
             LineData data = new LineData(dataset);
             lineChart.setData(data);
         }

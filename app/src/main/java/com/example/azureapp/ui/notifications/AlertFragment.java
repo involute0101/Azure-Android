@@ -103,8 +103,8 @@ public class AlertFragment extends Fragment {
         imageView = requireActivity().findViewById(R.id.alertImageView);
         alertAdapter = new AlertAdapter();
         alertAdapter.alerts.clear();
+        alertAdapter.alerts.add(new Alert("You’ve used 90% of your Azure for Students credit"));
         /*alertAdapter.alerts.add(new Alert("test"));
-        alertAdapter.alerts.add(new Alert("test"));
         alertAdapter.alerts.add(new Alert("test"));*/
 
         //getAlerts();

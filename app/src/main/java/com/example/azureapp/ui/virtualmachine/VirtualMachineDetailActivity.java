@@ -248,7 +248,7 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         TextView textView = toastView.findViewById(R.id.tv_tip);
         textView.setText(tip);
         Toast toast=new Toast(getApplicationContext());
-        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(toastView);
         toast.setGravity(Gravity.CENTER,0, 0);
         toast.show();

@@ -43,15 +43,27 @@ import java.io.UnsupportedEncodingException;
  **/
 public class VirtualMachineDetailActivity extends AppCompatActivity {
 
+    //容纳item的表格
     private RecyclerView mRvVMDetail;
+    //显示开始的图标
     private ImageView mImgStart;
+    //显示删除的图标
     private ImageView mImgDelete;
+    //显示开始的文本框
     private TextView mTvStart;
+    //显示删除的文本框
     private TextView mTvDelete;
+    //资源是否以及启动
     private boolean isStart;
+    //虚拟机详细信息
     private VirtualMachineDescription vmDetail;
+    //虚拟机详细信息adapter
     private VMDetailAdapter adapter;
 
+    /**
+     * 界面初始化
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +100,10 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 资源操纵点击事件
+     * @param view
+     */
     public void click_Event(View view){
         if(isStart){
             mImgStart.setImageResource(R.drawable.icon_start);
@@ -102,6 +118,7 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
             mTvDelete.setText(R.string.restart);
         }
         int id = view.getId();
+        //判断点击按钮类型
         switch (id){
             case R.id.img_vm_detail_start:
                 if(isStart){
@@ -133,6 +150,9 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * 获取资源的状态
+     */
     private void getStatus(){
         String groupName = vmDetail.resourceGroup;
         String vmName = vmDetail.name;
@@ -187,6 +207,10 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 根据url对虚拟机进行操作
+     * @param url
+     */
     private void vmOperation(String url){
         JSONObject jsonObject = new JSONObject();
         try{
@@ -223,25 +247,41 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         }).start();
     }
 
+    /**
+     * 开启虚拟机
+     */
     private void start(){
         String url = "http://20.89.169.250:8080/Azure/startVm";
         vmOperation(url);
     }
 
+    /**
+     * 停止虚拟机
+     */
     private void stop(){
         String url = "http://20.89.169.250:8080/Azure/stopVm";
         vmOperation(url);
     }
 
+    /**
+     * 删除虚拟机
+     */
     private void delete(){
         String url = "http://20.89.169.250:8080/Azure/deleteVm";
         vmOperation(url);
     }
 
+    /**
+     * 重启虚拟机
+     */
     private void restart(){
         start();
     }
 
+    /**
+     * 自定义对话框
+     * @param tip
+     */
     private void showToast(String tip){
         LayoutInflater inflater = LayoutInflater.from(VirtualMachineDetailActivity.this);
         View toastView =inflater.inflate(R.layout.toast,null);
@@ -254,6 +294,9 @@ public class VirtualMachineDetailActivity extends AppCompatActivity {
         toast.show();
     }
 
+    /**
+     * item之间的样式修饰
+     */
     public class MyDecoration extends RecyclerView.ItemDecoration {
         @Override
         public void getItemOffsets(@NonNull @NotNull Rect outRect, @NonNull @NotNull View view, @NonNull @NotNull RecyclerView parent, @NonNull @NotNull RecyclerView.State state) {

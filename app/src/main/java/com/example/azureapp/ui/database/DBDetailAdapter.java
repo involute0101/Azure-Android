@@ -35,15 +35,28 @@ import java.io.IOException;
 public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @NotNull
+    //传入的activity
     private Context mContext;
+    //数据库描述信息
     private DataBaseDescription db;
 
+    /**
+     * 构造函数
+     * @param context
+     * @param db
+     */
     public DBDetailAdapter(Context context, DataBaseDescription db){
         mContext = context;
         this.db = db;
     }
 
 
+    /**
+     * 通过对不同item类型设置，完成构造自定义的view
+     * @param parent
+     * @param viewType
+     * @return 返回recyclerview的容器
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         if(viewType == 0){
@@ -62,6 +75,11 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return null;
     }
 
+    /**
+     * 对每一个item进行特殊的数据渲染
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if(position == 0){
@@ -96,25 +114,41 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     }
 
+    /**
+     * 返回表格中项目数量
+     * @return item数目
+     */
     @Override
     public int getItemCount() {
         return 4;
     }
 
+    /**
+     * 对每一个item设置对应的类型
+     * @param position
+     * @return item的类型
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
     }
 
     /**
-     *
+     * 头部item类
      */
     class LinearViewHolder_Head extends  RecyclerView.ViewHolder{
 
+        //显示数据库名字的文本框
         private TextView tvDBName;
+        //显示数据库运行状态的图像框
         private ImageView imgStatus;
+        //显示数据库状态的文本框
         private TextView tvDBStatus;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public  LinearViewHolder_Head(View itemView){
             super(itemView);
             tvDBName = itemView.findViewById(R.id.tv_db_name);
@@ -124,12 +158,18 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     /**
-     *
+     *日志item类
      */
     class LinearViewHolder_Blog extends  RecyclerView.ViewHolder{
+        //显示日志数量的文本框
         private TextView tvBlogCount;
+        //显示更多日志的文本框
         private TextView tvBlogMore;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public  LinearViewHolder_Blog(View itemView){
             super(itemView);
             tvBlogCount = itemView.findViewById(R.id.tv_blog_count);
@@ -150,12 +190,18 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     /**
-     *
+     *资源运行状况item类
      */
     class LinearViewHolder_Source extends  RecyclerView.ViewHolder{
+        //显示资源状态的文本框
         private TextView tvSourceStatus;
+        //显示资源状态的图像框
         private ImageView imgSourceStatus;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public  LinearViewHolder_Source(View itemView){
             super(itemView);
             tvSourceStatus = itemView.findViewById(R.id.tv_source_state);
@@ -164,24 +210,42 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     /**
-     *
+     *属性item类
      */
     class LinearViewHolder_Attribute extends  RecyclerView.ViewHolder{
+        //显示订阅id文本框
         private TextView tvSubscriptionID;
+        //显示订阅名的文本框
         private TextView tvSubscription;
+        //显示资源组的文本框
         private TextView tvResourceGroup;
+        //显示位置的文本框
         private TextView tvLocation;
+        //显示数据库名字的文本框
         private TextView tvDBName;
+        //显示服务器名字的文本框
         private TextView tvServerName;
+        //显示最大字节数的文本框
         private TextView tvMaxBytes;
+        //显示数据库id的文本框
         private TextView tvDBId;
+        //显示创建时间的文本框
         private TextView tvCreateTime;
+        //显示订阅锁的图片框
         private ImageView imgLockSubscription;
+        //显示id锁的图片框
         private ImageView imgLockId;
+        //订阅是否可见
         private boolean subscriptionLock;
+        //id是否可见
         private boolean idLock;
+        //订阅是否已更新
         private boolean isSubscriptionUpdated;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public  LinearViewHolder_Attribute(View itemView){
             super(itemView);
             subscriptionLock = true;
@@ -198,6 +262,7 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvCreateTime = itemView.findViewById(R.id.tv_db_create_time);
             imgLockSubscription = itemView.findViewById(R.id.img_db_subscription_lock);
             imgLockId = itemView.findViewById(R.id.img_db_id_lock);
+            //订阅是否可见的点击监听
             imgLockSubscription.setOnClickListener(v -> {
                 if(!isSubscriptionUpdated){
                     getSubscription();
@@ -216,6 +281,7 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     subscriptionLock = true;
                 }
             });
+            //id是否可见的点击监听
             imgLockId.setOnClickListener(v -> {
                 if(idLock){
                     tvDBId.setText(db.id);
@@ -230,6 +296,9 @@ public class DBDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             });
         }
 
+        /**
+         * 从服务器端获取订阅
+         */
         public void getSubscription(){
             Thread thread = new Thread(new Runnable() {
                 JSONArray jsonArray;

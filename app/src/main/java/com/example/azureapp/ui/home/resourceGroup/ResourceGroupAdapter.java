@@ -26,13 +26,27 @@ import java.util.List;
  **/
 public class ResourceGroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    //activity的context
     private Context mContext;
+    //资源组列表
     private List<ResourceGroup> resourceGroupList = new ArrayList<>();
 
+    /**
+     * 构造函数
+     * @param context
+     * @param resourceGroupList
+     */
     public ResourceGroupAdapter(Context context, List<ResourceGroup> resourceGroupList){
         this.mContext = context;
         this.resourceGroupList = resourceGroupList;
     }
+
+    /**
+     * 页面创建的初始化
+     * @param parent
+     * @param viewType
+     * @return 对应位置的item类型
+     */
     @NonNull
     @NotNull
     @Override
@@ -45,6 +59,11 @@ public class ResourceGroupAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    /**
+     * 对不同类型的item进行数据渲染
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if(position == 0){
@@ -58,11 +77,20 @@ public class ResourceGroupAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    /**
+     * 设置item数量
+     * @return item数量
+     */
     @Override
     public int getItemCount() {
         return resourceGroupList.size()+1;
     }
 
+    /**
+     * 用整型数据表示不同类型的item
+     * @param position
+     * @return 对应位置的item类型
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
@@ -76,12 +104,22 @@ public class ResourceGroupAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    /**
+     * 详细item类
+     */
     class LinearViewHolder_Item extends  RecyclerView.ViewHolder {
 
+        //显示资源名称的文本框
         private TextView mResourceNameTv;
+        //显示资源位置的文本框
         private TextView mResourceLocationTv;
+        //显示资源的图片框
         private ImageView mResourceImg;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public LinearViewHolder_Item(View itemView) {
             super(itemView);
             mResourceNameTv = itemView.findViewById(R.id.tv_resource_name);

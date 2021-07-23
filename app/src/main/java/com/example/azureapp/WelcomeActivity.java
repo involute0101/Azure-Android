@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
  **/
 public class WelcomeActivity extends AppCompatActivity {
 
+    /**
+     * 跳转
+     */
     private Handler handler = new Handler(){
         public void handleMessage(Message msg){
             super.handleMessage(msg);
@@ -23,6 +26,10 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * 初始化
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

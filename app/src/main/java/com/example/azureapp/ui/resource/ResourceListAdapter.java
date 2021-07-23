@@ -33,11 +33,20 @@ import java.util.regex.Pattern;
  **/
 public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    //activity的内容
     private Context mContext;
+    //展示的资源列表
     private List<Resource> showList = new ArrayList<>();
+    //所有资源列表
     private List<Resource> allList = new ArrayList<>();
+    //搜索资源列表
     private List<Resource> searchList = new ArrayList<>();
 
+    /**
+     * 构造函数
+     * @param context
+     * @param resourceList
+     */
     public ResourceListAdapter(Context context, List<Resource> resourceList){
         mContext = context;
         this.allList = resourceList;
@@ -45,6 +54,12 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.searchList = resourceList;
     }
 
+    /**
+     * 界面初始化
+     * @param parent
+     * @param viewType
+     * @return 容纳item的容器
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         if(viewType == 0){
@@ -55,6 +70,11 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    /**
+     * 对不同类型的item进行数据渲染
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if(position!=0 && position <= showList.size()){
@@ -82,30 +102,50 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    /**
+     * 设置item的数量
+     * @return item数量
+     */
     @Override
     public int getItemCount() {
         return showList.size()+1;
     }
 
+    /**
+     * 用整型数据表示不同类型的item
+     * @param position
+     * @return 对应位置的item类型
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
     }
 
+    /**
+     * 资源列表的头部类
+     */
     class LinearViewHolder_Head extends RecyclerView.ViewHolder{
 
+        //显示搜索的输入框
         private EditText mSearchEt;
+        //显示取消的文本框
         private TextView mCancelTv;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public LinearViewHolder_Head( View itemView) {
             super(itemView);
             mSearchEt = itemView.findViewById(R.id.et_search_resources);
             mCancelTv = itemView.findViewById(R.id.tv_search_cancel);
             Drawable left = mSearchEt.getCompoundDrawables()[0];
             Drawable right = mSearchEt.getCompoundDrawables()[2];
+            //修改输入框的图标大小
             left.setBounds(0,0,30,30);
             right.setBounds(0,0,30,30);
             mSearchEt.setCompoundDrawables(left,null,null,null);
+            //设置鼠标位置改变监听
             mSearchEt.setOnFocusChangeListener((v, hasFocus) -> {
                 if(mSearchEt.hasFocus()){
                     mCancelTv.setText(R.string.resources_search_cancel);
@@ -113,6 +153,7 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     mCancelTv.setText("");
                 }
             });
+            //点击搜索框的监听
             mSearchEt.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -128,6 +169,7 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     return false;
                 }
             });
+            //搜索框编辑监听
             mSearchEt.setOnEditorActionListener(new EditText.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -143,6 +185,7 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 }
             });
+            //搜索框文字改变监听
             mSearchEt.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -172,6 +215,10 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             });
         }
 
+        /**
+         * 搜索资源方法
+         * @param searchString
+         */
         private void search(String searchString){
             searchList = new ArrayList<>();
             System.out.println(allList);
@@ -187,12 +234,22 @@ public class ResourceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
+    /**
+     * 资源列表item
+     */
     class LinearViewHolder extends RecyclerView.ViewHolder{
 
+        //显示资源名称的文本框
         private TextView mResourceNameTv;
+        //显示资源类型的文本框
         private TextView mResourceTypeTv;
+        //显示资源的图片
         private ImageView mResourceImg;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public LinearViewHolder( View itemView) {
             super(itemView);
             mResourceNameTv = itemView.findViewById(R.id.tv_resource_name);

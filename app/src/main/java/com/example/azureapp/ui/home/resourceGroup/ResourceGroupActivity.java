@@ -31,8 +31,15 @@ import java.util.List;
  **/
 public class ResourceGroupActivity extends AppCompatActivity {
 
+    //容纳item的容器
     RecyclerView recyclerView;
+    //资源组列表数组
     private List<ResourceGroup> resourceGroupList = new ArrayList<>();
+
+    /**
+     * 界面的初始化方法
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +51,9 @@ public class ResourceGroupActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * 从服务器端获取所有资源组
+     */
     private void getResourceGroups(){
         Thread thread = new Thread(new Runnable() {
             @Override

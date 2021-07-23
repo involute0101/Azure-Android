@@ -28,14 +28,27 @@ import java.io.IOException;
  **/
 public class LoginActivity extends AppCompatActivity {
 
+    //用户名输入框
     private EditText userEt;
+    //密码输入框
     private EditText pswEt;
+    //用户提示框
     private TextView userTipTv;
+    //密码提示框
     private TextView pswTipTv;
+    //用户提示字符串
     private String userTip;
+    //密码提示字符串
     private String pswTip;
+    //登录按钮
     private Button loginBtn;
+    //忘记密码文本框
     private TextView forgetTv;
+
+    /**
+     * 界面初始化
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         forgetTv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         //抗锯齿
         forgetTv.getPaint().setAntiAlias(true);
+        //忘记密码，跳转都网页
         forgetTv.setOnClickListener(v -> {
             Intent intent= new Intent();
             intent.setAction("android.intent.action.VIEW");
@@ -60,9 +74,13 @@ public class LoginActivity extends AppCompatActivity {
         });
         loginBtn = findViewById(R.id.btn_login_2);
         loginBtn.setOnClickListener(v -> logIn());
+        //获取详细信息
         getDetail();
     }
 
+    /**
+     * 获取虚拟机详细信息
+     */
     private void getDetail(){
         Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;
@@ -102,6 +120,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 登录
+     */
     private void logIn(){
         Boolean userValid = true, pswValid = true;
         String userName = userEt.getText().toString();

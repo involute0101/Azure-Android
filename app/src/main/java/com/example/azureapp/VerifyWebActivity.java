@@ -27,9 +27,17 @@ import java.io.IOException;
  **/
 public class VerifyWebActivity extends AppCompatActivity {
 
+    //显示验证网页
     WebView verifyWebView;
+    //渐变色设备码
     GradientColorTextView mTvCode;
+    //是否已经跳转
     boolean isTransform;
+
+    /**
+     * 初始化
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +46,7 @@ public class VerifyWebActivity extends AppCompatActivity {
         verifyWebView = findViewById(R.id.wv_verify);
         mTvCode = findViewById(R.id.tv_verify_code);
         verifyWebView.getSettings().setJavaScriptEnabled(true);
+        //如果登陆完成，跳转到主页
         verifyWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -45,8 +54,10 @@ public class VerifyWebActivity extends AppCompatActivity {
                 return super.shouldOverrideUrlLoading(view, url);
             }
         });
+        //设置跳转到微软网页
         verifyWebView.loadUrl("https://microsoft.com/devicelogin");
         getCode();
+        //设置对url进行监听
         verifyWebView.setWebViewClient(new WebViewClient(){
             @Override
             public void onLoadResource(WebView view, String url) {
@@ -61,6 +72,11 @@ public class VerifyWebActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 从服务器
+     * 获取
+     * 设备码
+     */
     private void getCode(){
         Thread thread = new Thread(new Runnable() {
             JSONObject object;

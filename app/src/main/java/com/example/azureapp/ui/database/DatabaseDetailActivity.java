@@ -38,10 +38,17 @@ import java.io.UnsupportedEncodingException;
  **/
 public class DatabaseDetailActivity extends AppCompatActivity {
 
+    //RecyclerView用于放置不同类型的item
     private RecyclerView mRvDBDetail;
+    //一个数据库的详细数据
     public DataBaseDescription dbDetail;
+    //点击进行删除数据库
     private LinearLayout llDelete;
 
+    /**
+     * 界面的启动方法
+     * @param状态bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +61,7 @@ public class DatabaseDetailActivity extends AppCompatActivity {
         mRvDBDetail.setLayoutManager(new LinearLayoutManager(DatabaseDetailActivity.this));
         mRvDBDetail.setAdapter(new DBDetailAdapter(DatabaseDetailActivity.this, dbDetail));
         llDelete = findViewById(R.id.ll_db_delete);
+        //监听删除
         llDelete.setOnClickListener(v -> {
             LayoutInflater inflater = LayoutInflater.from(DatabaseDetailActivity.this);
             View toastView =inflater.inflate(R.layout.toast,null);
@@ -69,6 +77,10 @@ public class DatabaseDetailActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 根据传入的url对数据库进行相应的操作
+     * @param url
+     */
     private void dbOperation(String url){
         JSONObject jsonObject = new JSONObject();
         try{
@@ -103,6 +115,9 @@ public class DatabaseDetailActivity extends AppCompatActivity {
         }).start();
     }
 
+    /**
+     * 删除数据库
+     */
     private void delete(){
         String url = "http://20.78.56.235:8080/DB/deleteDB";
         dbOperation(url);

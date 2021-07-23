@@ -70,14 +70,27 @@ import java.util.Set;
 public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @NotNull
+    //activity内容
     private Context mContext;
+    //虚拟机详细信息
     private VirtualMachineDescription vm;
 
+    /**
+     * 构造函数
+     * @param context
+     * @param vm
+     */
     public VMDetailAdapter(Context context, VirtualMachineDescription vm){
         this.mContext = context;
         this.vm = vm;
     }
 
+    /**
+     * 界面初始化
+     * @param parent
+     * @param viewType
+     * @return 容纳item的容器
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         if(viewType == 0){
@@ -100,6 +113,11 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    /**
+     * 对不同类型的item进行数据渲染
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if(position == 0){
@@ -145,25 +163,41 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    /**
+     * 用整型数据表示不同类型的item
+     * @param position
+     * @return 对应位置的item类型
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
     }
 
+    /**
+     * 设置item的数量
+     * @return item数量
+     */
     @Override
     public int getItemCount() {
         return 5;
     }
 
     /**
-     *
+     *虚拟机头部类
      */
     class LinearViewHolder_Head extends  RecyclerView.ViewHolder {
 
+        //显示虚拟机名字的文本框
         private TextView tvVmName;
+        //显示虚拟机状态的图片
         private ImageView imgStatus;
+        //显示虚拟机状态的文本框
         private TextView tvVmStatus;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public LinearViewHolder_Head(View itemView) {
             super(itemView);
             tvVmName = itemView.findViewById(R.id.tv_vm_name);
@@ -173,16 +207,23 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     /**
-     *
+     *日志item类
      */
     class LinearViewHolder_Blog extends  RecyclerView.ViewHolder{
+        //日志数量文本框
         private TextView tvBlogCount;
+        //更多日志文本框
         private TextView tvBlogMore;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public  LinearViewHolder_Blog(View itemView){
             super(itemView);
             tvBlogCount = itemView.findViewById(R.id.tv_blog_count);
             tvBlogMore = itemView.findViewById(R.id.tv_blog_more);
+            //点击更多日志监听
             tvBlogMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -200,12 +241,18 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     /**
-     *
+     *资源item类
      */
     class LinearViewHolder_Source extends  RecyclerView.ViewHolder{
+        //显示资源状态文本框
         private TextView tvSourceStatus;
+        //显示图片资源状态
         private ImageView imgSourceStatus;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public  LinearViewHolder_Source(View itemView){
             super(itemView);
             tvSourceStatus = itemView.findViewById(R.id.tv_source_state);
@@ -215,24 +262,42 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     /**
-     *
+     *属性item类
      */
     class LinearViewHolder_Attribute extends  RecyclerView.ViewHolder{
+        //资源组名称
         private TextView tvResourceGroup;
+        //显示位置的文本框
         private TextView tvLocation;
+        //显示虚拟机名字的文本框
         private TextView tvVm;
+        //显示操作系统的文本框
         private TextView tvOs;
+        //显示大小的文本框
         private TextView tvSize;
+        //显示ip的文本框
         private TextView tvPublicIp;
+        //显示订阅id的文本框
         private TextView tvSubscriptionID;
+        //显示订阅的文本框
         private TextView tvSubscription;
+        //显示订阅锁的图标
         private ImageView imgLockSubscription;
+        //显示ip锁的图标
         private ImageView imgLockIp;
+        //订阅是否可见
         private boolean subscriptionLock;
+        //ip是否可见
         private boolean ipLock;
+        //订阅是否更新
         private boolean isSubscriptionUpdated;
+        //ip是否更新
         private boolean isIpUpdated;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public  LinearViewHolder_Attribute(View itemView){
             super(itemView);
             subscriptionLock = true;
@@ -249,6 +314,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvSubscriptionID = itemView.findViewById(R.id.tv_subscription_id);
             imgLockSubscription = itemView.findViewById(R.id.img_vm_subscription_lock);
             imgLockIp = itemView.findViewById(R.id.img_vm_ip_lock);
+            //订阅监听
             imgLockSubscription.setOnClickListener(v -> {
                 if(!isSubscriptionUpdated){
                     getSubscription();
@@ -267,6 +333,7 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     subscriptionLock = true;
                 }
             });
+            //ip监听
             imgLockIp.setOnClickListener(v -> {
                 if(!isIpUpdated){
                     getPublicIp();
@@ -285,6 +352,11 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             });
         }
 
+        /**
+         * 从服务器端
+         * 获取
+         * 公共ip
+         */
         private void getPublicIp(){
             Thread thread = new Thread(new Runnable() {
                 @Override
@@ -315,6 +387,13 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
         }
 
+        /**
+         * 从服务器端
+         * 获取
+         * 订阅
+         * 包括订阅名称
+         * 订阅id
+         */
         public void getSubscription(){
             Thread thread = new Thread(new Runnable() {
                 JSONArray jsonArray;
@@ -350,16 +429,26 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    /**
+     * 表格item类
+     */
     class LinearViewHolder_Chart extends  RecyclerView.ViewHolder {
 
+        //事件列表
         private List<String> timeList = new ArrayList<>();
+        //数值列表
         private List<Float> valueList = new ArrayList<>();
-
+        //线性表
         private LineChart mLineChart;
 
+        /**
+         * 构造函数
+         * @param itemView
+         */
         public LinearViewHolder_Chart(View itemView) {
             super(itemView);
             mLineChart = itemView.findViewById(R.id.line_chart);
+            //初始化数据
             timeList.add("8小时以前");
             timeList.add("7小时以前");
             timeList.add("6小时以前");
@@ -377,10 +466,16 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             valueList.add(0f);
             valueList.add(0f);
             valueList.add(0f);
+            //设置表格样式
             setChartStyle(mLineChart);
+            //绘制表格
             showLineChart(mLineChart, getLineChartData());
         }
 
+        /**
+         * 设置表格样式
+         * @param lineChart
+         */
         private void setChartStyle(LineChart lineChart){
             XAxis xAxis = lineChart.getXAxis();
 
@@ -401,6 +496,11 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
            lineChart.getDescription().setEnabled(false);
             //lineChart.setBackgroundColor(Color.parseColor("#3a7bd5"));
         }
+
+        /**
+         * 设置图标的数据对
+         * @return 数据键值对
+         */
         private List<Entry> getLineChartData() {
             List<Entry> lineEntry = new ArrayList<>();
             for(int index=0; index< valueList.size(); index++){
@@ -414,13 +514,21 @@ public class VMDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             dataset.setDrawCircleHole(false);
             dataset.setDrawCircles(false);
             dataset.setLineWidth(0);
-            dataset.setDrawValues(false);//不显示数据
-            dataset.setDrawFilled(true);//填充色
+            //不显示数据
+            dataset.setDrawValues(false);
+            //填充色
+            dataset.setDrawFilled(true);
             dataset.setFillDrawable(mContext.getResources().getDrawable(R.drawable.chart_fill_sky));
             LineData data = new LineData(dataset);
             lineChart.setData(data);
         }
 
+        /**
+         * 设置
+         * x轴
+         * 的值为
+         * 字符串日期
+         */
         public class XAxisValueFormatter implements IAxisValueFormatter {
 
             private final String[] mLabels;

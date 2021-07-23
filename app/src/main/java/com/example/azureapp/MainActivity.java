@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(120000);
+                    Thread.sleep(5000);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         String channelId = "007";
                         String channelName = "James Bond";

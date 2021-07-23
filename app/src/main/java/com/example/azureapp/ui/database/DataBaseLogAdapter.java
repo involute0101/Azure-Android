@@ -24,8 +24,15 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class DataBaseLogAdapter extends RecyclerView.Adapter<DataBaseLogAdapter.DBLogViewHolder>{
+    //数据库日志
     List<Log> logs = new ArrayList<>();
 
+    /**
+     * 日志视图管理创建
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @NotNull
     @Override
@@ -36,6 +43,11 @@ public class DataBaseLogAdapter extends RecyclerView.Adapter<DataBaseLogAdapter.
         return holder;
     }
 
+    /**
+     * 日志视图绑定
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull DBLogViewHolder holder, int position) {
         Log log = logs.get(position);
@@ -44,16 +56,20 @@ public class DataBaseLogAdapter extends RecyclerView.Adapter<DataBaseLogAdapter.
         /*if (log.type.equals("false") ){
             holder.logImage.setImageDrawable(ContextCompat.getDrawable(holder.logImage.getContext(), R.drawable.icon_alert_red));
         }*/
-
-
     }
 
-
+    /**
+     * 获取日志列表数码
+     * @return
+     */
     @Override
     public int getItemCount() {
         return logs.size();
     }
 
+    /**
+     * 数据库日志视图绑定类
+     */
     static class DBLogViewHolder extends  RecyclerView.ViewHolder{
         TextView logContentTextView,logTimeTextView;
         ImageView logImage;

@@ -12,7 +12,10 @@ import com.example.azureapp.R;
  * Email 1403235458@qq.com
  */
 public class DataBaseActivity extends AppCompatActivity {
-
+    /**
+     * 数据库activity界面创建函数
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

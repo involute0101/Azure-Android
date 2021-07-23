@@ -56,11 +56,18 @@ public class DataBaseAddFragment extends Fragment {
 
     //attributes of database
     String db_username,db_password,db_name,resource_group;
+    //编辑控件
     EditText db_username_text,db_password_text,db_name_text,resource_group_text;
+    //添加提交按钮
     Button add_submit_button;
+    //密码正则匹配
     static String PW_PATTERN = "^(?![A-Za-z0-9]+$)(?![a-z0-9\\W]+$)(?![A-Za-z\\W]+$)(?![A-Z0-9\\W]+$)[a-zA-Z0-9\\W]{8,}$";
+    //用户名正则匹配
     static String USERNAME = "/^[0-9a-zA-Z]*$/g";
 
+    /**
+     * 数据库添加界面构造函数
+     */
     public DataBaseAddFragment() {
         // Required empty public constructor
     }
@@ -83,6 +90,10 @@ public class DataBaseAddFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * 数据库添加界面创建
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +103,13 @@ public class DataBaseAddFragment extends Fragment {
         }
     }
 
+    /**
+     * 数据库创建界面视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -203,8 +221,6 @@ public class DataBaseAddFragment extends Fragment {
                         HttpEntity httpEntity = response.getEntity();
                         String s = EntityUtils.toString(httpEntity, "UTF-8");
                         System.out.println(s);
-
-
 
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();

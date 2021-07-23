@@ -24,8 +24,9 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class DataBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    //数据库列表
     List<DataBase> dbs = new ArrayList<>();
+    //数据库描述信息列表
     List<DataBaseDescription> dbDescrptions = new ArrayList<>();
 
     /**
@@ -36,6 +37,12 @@ public class DataBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.dbs = dbs;
     }
 
+    /**
+     *视图容器创建
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @NotNull
     @Override
@@ -75,23 +82,34 @@ public class DataBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                 //传入数据库细节
                 intent.putExtra("DB", dataBaseDescription);
-
                 holder.itemView.getContext().startActivity(intent);
                 Toast.makeText(holder.itemView.getContext(), "跳转", Toast.LENGTH_SHORT).show();
             });
         }
     }
 
+    /**
+     *
+     * @return 数据库列表数目+1
+     */
     @Override
     public int getItemCount() {
         return dbs.size()+1;
     }
 
+    /**
+     * 获取单元目录位置
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
     }
 
+    /**
+     * 数据库视图绑定类
+     */
     static class DataBaseViewHolder extends  RecyclerView.ViewHolder{
         TextView dbNameTextView;
 
@@ -104,7 +122,9 @@ public class DataBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             dbNameTextView = itemView.findViewById(R.id.db_name_textView);
         }
     }
-
+    /**
+     * 数据库视图头绑定类
+     */
     class DataBaseViewHolder_Head extends  RecyclerView.ViewHolder{
         private TextView mTvName;
         public DataBaseViewHolder_Head(@NonNull @NotNull View itemView) {

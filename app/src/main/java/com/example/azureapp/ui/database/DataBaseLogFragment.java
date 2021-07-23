@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.azureapp.databinding.FragmentDataBaseLogBinding;
-import com.example.azureapp.ui.entity.DataBase;
-import com.example.azureapp.ui.entity.DataBaseDescription;
 import com.example.azureapp.ui.entity.Log;
 
 import org.apache.http.HttpResponse;
@@ -35,8 +33,11 @@ import java.text.ParseException;
  * create an instance of this fragment.
  */
 public class DataBaseLogFragment extends Fragment {
+    //日志视图控件
     RecyclerView recyclerView;
+    //界面绑定
     FragmentDataBaseLogBinding binding;
+    //数据库日志数据管理
     DataBaseLogAdapter logAdapter;
 
     public String resourceGroup;
@@ -49,6 +50,9 @@ public class DataBaseLogFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    /**
+     * 数据库日志界面创建
+     */
     public DataBaseLogFragment() {
         // Required empty public constructor
     }
@@ -71,6 +75,10 @@ public class DataBaseLogFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * 数据库日志界面创建
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +87,11 @@ public class DataBaseLogFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
+    /**
+     * 数据库activity创建同时产生
+     * @param savedInstanceState
+     */
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView = binding.databaseLogRecycleView;
@@ -91,6 +104,10 @@ public class DataBaseLogFragment extends Fragment {
         recyclerView.setAdapter(logAdapter);
     }
 
+    /**
+     * 获取数据库日志
+     * @param resourceGroup 资源组名
+     */
     private void getDataBaseLog(String resourceGroup) {
         Thread thread = new Thread(new Runnable() {
             JSONArray jsonArray;
@@ -105,6 +122,7 @@ public class DataBaseLogFragment extends Fragment {
                     if (statusCode == 200) {
                         String result = EntityUtils.toString(response.getEntity());
                         jsonArray = (JSONArray) JSONArray.parse(result);
+                        //从返回的json获取数据并添加
                         for(int i=0;i<jsonArray.size();i++)
                         {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -124,7 +142,7 @@ public class DataBaseLogFragment extends Fragment {
                 }
             }
         });
-
+        //添加线程
         try {
             thread.start();
             thread.join();
@@ -133,6 +151,13 @@ public class DataBaseLogFragment extends Fragment {
         }
     }
 
+    /**
+     * 视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

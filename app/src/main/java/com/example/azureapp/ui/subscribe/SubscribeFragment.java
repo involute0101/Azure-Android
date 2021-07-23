@@ -37,17 +37,30 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class SubscribeFragment extends Fragment {
-
+    //订阅视图模型
     private SubscribeViewModel mViewModel;
+    //试图控件
     RecyclerView recyclerView;
+    //界面控制
     SubscribeAdapter subscribeAdapter;
-    private List<VirtualMachine> vms;
+    //订阅视图绑定
     SubscribeFragmentBinding binding;
 
+    /**
+     * 获取界面实例
+     * @return 订阅界面实例
+     */
     public static SubscribeFragment newInstance() {
         return new SubscribeFragment();
     }
 
+    /**
+     * 视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -57,6 +70,10 @@ public class SubscribeFragment extends Fragment {
         return root;
     }
 
+    /**
+     * 界面创建
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +136,7 @@ public class SubscribeFragment extends Fragment {
                 }
             }
         });
-
+        //添加线程
         try {
             thread.start();
             thread.join();

@@ -22,8 +22,15 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertViewHolder> {
+    //警报列表
     List<Alert> alerts = new ArrayList<>();
 
+    /**
+     * 视图容器
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @NotNull
     @Override
@@ -36,6 +43,11 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertViewHol
         return holder;
     }
 
+    /**
+     * 绑定视图
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull AlertViewHolder holder, int position) {
         Alert alert = alerts.get(position);
@@ -43,11 +55,18 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertViewHol
         holder.alertTextView.setText(alert.operationName);
     }
 
+    /**
+     * 获取列表数目
+     * @return 警报书数目
+     */
     @Override
     public int getItemCount() {
         return alerts.size();
     }
 
+    /**
+     * 警报视图控制类
+     */
     static class AlertViewHolder extends  RecyclerView.ViewHolder{
         TextView alertTextView;
         public AlertViewHolder(@NonNull @NotNull View itemView) {

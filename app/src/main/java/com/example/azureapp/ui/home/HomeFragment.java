@@ -36,14 +36,25 @@ import java.util.zip.Inflater;
  * Email 1403235458@qq.com
  */
 
+/**
+ * 主界面
+ */
 public class HomeFragment extends Fragment {
-
+    //
     private HomeViewModel homeViewModel;
+    //主机名数
     private FragmentHomeBinding binding;
-
+    //线性布局
     LinearLayout llVm,llSql,llResourceGroup,llServiceCondition;
     LinearLayout llAd1,llAd2,llAd3;
 
+    /**
+     * 主页视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -60,18 +71,19 @@ public class HomeFragment extends Fragment {
         llAd3 = root.findViewById(R.id.ll_ad3);
         //资源组
         llResourceGroup = root.findViewById(R.id.ll_resource_group);
+        //服务运行状况
         llServiceCondition = root.findViewById(R.id.service_condition_linear_ayout);
-
+        //虚拟机点击
         llVm.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), VirtualMachineActivity.class);
             startActivity(intent);
         });
-
+        //数据库点击
         llSql.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), DataBaseActivity.class);
             startActivity(intent);
         });
-
+        //广告点击按钮函数
         llAd1.setOnClickListener(v -> {
             Intent intent= new Intent();
             intent.setAction("android.intent.action.VIEW");
@@ -79,7 +91,7 @@ public class HomeFragment extends Fragment {
             intent.setData(privacy_url);
             startActivity(intent);
         });
-
+        //广告点击按钮函数
         llAd2.setOnClickListener(v -> {
             Intent intent= new Intent();
             intent.setAction("android.intent.action.VIEW");
@@ -87,7 +99,7 @@ public class HomeFragment extends Fragment {
             intent.setData(privacy_url);
             startActivity(intent);
         });
-
+        //广告点击按钮函数
         llAd3.setOnClickListener(v -> {
             Intent intent= new Intent();
             intent.setAction("android.intent.action.VIEW");
@@ -95,12 +107,12 @@ public class HomeFragment extends Fragment {
             intent.setData(privacy_url);
             startActivity(intent);
         });
-
+        //资源组点击
         llResourceGroup.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ResourceGroupActivity.class);
             startActivity(intent);
         });
-
+        //服务运行状况点击
         llServiceCondition.setOnClickListener(v ->{
             Bundle bundle = new Bundle();
             bundle.putString("condition","condition");
@@ -112,6 +124,9 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    /**
+     * 销毁视图
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();

@@ -22,8 +22,15 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class ConditionAdapter extends RecyclerView.Adapter<ConditionAdapter.ConditionViewHolder> {
-
+    //服务运行状况列表
     List<Condition> conditions = new ArrayList<>();
+
+    /**
+     * 视图控制创建
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @NotNull
     @Override
@@ -36,6 +43,11 @@ public class ConditionAdapter extends RecyclerView.Adapter<ConditionAdapter.Cond
         return holder;
     }
 
+    /**
+     * 视图绑定
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull @NotNull ConditionViewHolder holder, int position) {
 
@@ -44,11 +56,18 @@ public class ConditionAdapter extends RecyclerView.Adapter<ConditionAdapter.Cond
         holder.conditionTextView.setText(condition.condition);
     }
 
+    /**
+     * 获取列表数目
+     * @return
+     */
     @Override
     public int getItemCount() {
         return conditions.size();
     }
 
+    /**
+     * 服务运行状况控制类
+     */
     static class ConditionViewHolder extends  RecyclerView.ViewHolder{
         TextView conditionTextView;
         public ConditionViewHolder(@NonNull @NotNull View itemView) {

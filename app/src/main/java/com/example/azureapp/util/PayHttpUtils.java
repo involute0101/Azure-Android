@@ -13,15 +13,21 @@ import okhttp3.Response;
  * Created by wzk on 2021/7/10.
  * Email 1403235458@qq.com
  */
+
+/**
+ * http访问工具
+ */
 public class PayHttpUtils {
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
+    //http访问client
     OkHttpClient client = new OkHttpClient();
-
-    public String post(String url, String json) throws IOException {//post请求，返回String类型
+    //发送post请求，返回String类型
+    public String post(String url, String json) throws IOException {
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
-                .addHeader("Content-Type","application/json")//添加头部
+                //添加头部
+                .addHeader("Content-Type","application/json")
                 .url(url)
                 .post(body)
                 .build();

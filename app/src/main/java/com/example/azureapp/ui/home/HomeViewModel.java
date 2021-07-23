@@ -9,14 +9,21 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class HomeViewModel extends ViewModel {
-
+    //动态数据
     private MutableLiveData<String> mText;
 
+    /**
+     * 构造函数
+     */
     public HomeViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is home fragment");
     }
 
+    /**
+     * 获取数据
+     * @return 数据
+     */
     public LiveData<String> getText() {
         return mText;
     }

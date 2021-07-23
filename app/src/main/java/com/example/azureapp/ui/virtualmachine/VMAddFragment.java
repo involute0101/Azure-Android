@@ -53,15 +53,31 @@ public class VMAddFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    //虚拟机密码正则匹配
     static String PW_PATTERN = "^(?![A-Za-z0-9]+$)(?![a-z0-9\\W]+$)(?![A-Za-z\\W]+$)(?![A-Z0-9\\W]+$)[a-zA-Z0-9\\W]{8,}$";
-    String subscribe_id,vent_name,vm_name,username,password,vm_size,resource_group ;
-
+    //虚拟机订阅ID
+    String subscribe_id;
+    //虚拟机网络名
+    String vent_name;
+    //虚拟机名
+    String vm_name;
+    //用户名
+    String username;
+    //密码
+    String password;
+    //虚拟机大小
+    String vm_size;
+    //虚拟机资源组
+    String resource_group;
+    //虚拟机信息控件
     EditText vent_name_text,vm_name_text,username_text,password_text,vm_size_text,resource_group_text;
+    //虚拟机添加按钮
     Button add_submit_button;
-
+    //虚拟机spinner
     private Spinner spinner;
+    //大小列表
     private List<String> sizeList;
+    //大小适配
     private ArrayAdapter<String> sizeAdapter;
 
     public VMAddFragment() {
@@ -86,6 +102,10 @@ public class VMAddFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * 界面创建
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +115,13 @@ public class VMAddFragment extends Fragment {
         }
     }
 
+    /**
+     * 视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -144,7 +171,9 @@ public class VMAddFragment extends Fragment {
 
             }
         });
-
+        /**
+         * 文本控件观察器
+         */
         TextWatcher watcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -177,7 +206,7 @@ public class VMAddFragment extends Fragment {
         password_text.addTextChangedListener(watcher);
         //vm_size_text.addTextChangedListener(watcher);
         resource_group_text.addTextChangedListener(watcher);
-
+        //添加提交按钮函数
         add_submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

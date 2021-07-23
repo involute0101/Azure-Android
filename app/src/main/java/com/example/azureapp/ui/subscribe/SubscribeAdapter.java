@@ -36,8 +36,15 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.SubscibeViewHolder> {
-
+    //订阅列表
     List<Subscribe> subscribes = new ArrayList<>();
+
+    /**
+     * 订阅视图创建
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @NotNull
     @Override
@@ -119,16 +126,28 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.Subs
         }
     }
 
+    /**
+     * 获取订阅数
+     * @return
+     */
     @Override
     public int getItemCount() {
         return subscribes.size()+1;
     }
 
+    /**
+     * 获取当前item位置
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
     }
 
+    /**
+     * 订阅视图控制类
+     */
     static class SubscibeViewHolder extends  RecyclerView.ViewHolder{
         TextView subscribeTypeTextView,subscribeIdTextView;
 
@@ -144,6 +163,9 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.Subs
         }
     }
 
+    /**
+     * 订阅视图头控制类
+     */
     class SubscribeViewHolder_Head extends  RecyclerView.ViewHolder{
 
         public SubscribeViewHolder_Head(@NonNull @NotNull View itemView) {

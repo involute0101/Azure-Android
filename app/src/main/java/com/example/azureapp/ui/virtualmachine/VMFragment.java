@@ -43,10 +43,13 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class VMFragment extends Fragment {
-
+    //虚拟机列表视图控件
     RecyclerView recyclerView;
+    //虚拟机控制器
     VMAdapter vmAdapter;
+    //虚拟机列表
     private List<VirtualMachine> vms;
+    //虚拟机添加按钮
     FloatingActionButton addVMButton;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -80,6 +83,10 @@ public class VMFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * 虚拟机界面创建
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,13 +94,20 @@ public class VMFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+        //适配器实例化
         vmAdapter = new VMAdapter();
         Log.d("vm", "VirtualMachine");
 
 
     }
 
+    /**
+     * 视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -165,7 +179,7 @@ public class VMFragment extends Fragment {
                 }
             }
         });
-
+        //添加线程
         try {
             thread.start();
             thread.join();

@@ -30,10 +30,18 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class NotificationsFragment extends Fragment {
-
+    //
     private NotificationsViewModel notificationsViewModel;
+    //
     private FragmentNotificationsBinding binding;
 
+    /**
+     *通知视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
@@ -95,28 +103,43 @@ public class NotificationsFragment extends Fragment {
 
     }
 
-
-
+    /**
+     *销毁试图
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
+    /**
+     *通知控制管理类
+     */
     private class NotificationAdapter extends FragmentStatePagerAdapter {
-
+        //页面标题列表
         ArrayList<String> list = new ArrayList<>();
+        //页面列表
         List<Fragment> fragments = new ArrayList<>();
 
         public NotificationAdapter(@NonNull @NotNull FragmentManager fm) {
             super(fm);
         }
 
+        /**
+         *添加界面和标题
+         * @param fragment
+         * @param title
+         */
         public void addFragment(Fragment fragment,String title){
             list.add(title);
             fragments.add(fragment);
         }
 
+        /**
+         *获取界面位置
+         * @param position
+         * @return 界面位置
+         */
         @NonNull
         @NotNull
         @Override
@@ -124,16 +147,31 @@ public class NotificationsFragment extends Fragment {
             return fragments.get(position);
         }
 
+        /**
+         *销毁界面项目
+         * @param container
+         * @param position
+         * @param object
+         */
         @Override
         public void destroyItem(@NonNull @NotNull ViewGroup container, int position, @NonNull @NotNull Object object) {
 
         }
 
+        /**
+         *获取界面数量
+         * @return 界面数
+         */
         @Override
         public int getCount() {
             return fragments.size();
         }
 
+        /**
+         *获取当前界面标题
+         * @param position
+         * @return
+         */
         @Nullable
         @org.jetbrains.annotations.Nullable
         @Override

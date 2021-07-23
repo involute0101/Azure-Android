@@ -12,7 +12,13 @@ import com.example.azureapp.R;
  * Email 1403235458@qq.com
  */
 public class VirtualMachineActivity extends AppCompatActivity {
+    //导航控件
     private NavController navController;
+
+    /**
+     * activity创建
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -42,10 +42,13 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class DataBaseFragment extends Fragment {
-
+    //视图控件
     RecyclerView recyclerView;
+    //视图控件数据管理
     DataBaseAdapter dbAdapter;
+    //数据库列表
     private List<DataBase> dbs;
+    //数据库添加按钮
     FloatingActionButton addDBButton;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -59,6 +62,9 @@ public class DataBaseFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    /**
+     * 数据库界面创建构造函数
+     */
     public DataBaseFragment() {
         // Required empty public constructor
     }
@@ -97,6 +103,13 @@ public class DataBaseFragment extends Fragment {
 
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -118,10 +131,11 @@ public class DataBaseFragment extends Fragment {
         //dbAdapter.dbs.add(new DataBase("test"));
         Log.d("db", "DataBase");
         getDataBase();
-
+        //设置视图
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(dbAdapter);
         addDBButton = requireActivity().findViewById(R.id.addDBButton);
+        //添加按钮点击界面跳转
         addDBButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +162,7 @@ public class DataBaseFragment extends Fragment {
                     if (statusCode == 200) {
                         String result = EntityUtils.toString(response.getEntity());
                         jsonArray = (JSONArray) JSONArray.parse(result);
+                        //json中取出数据添加
                         for(int i=0;i<jsonArray.size();i++)
                         {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -157,7 +172,6 @@ public class DataBaseFragment extends Fragment {
                                     jsonObject.getString("id"),jsonObject.getString("creationDate"),
                                     jsonObject.getString("status"),jsonObject.getString("maxSizeBytes"),jsonObject.getString("SqlServerId")));
                         }
-
                     }
                 } catch (ClientProtocolException e) {
                     e.printStackTrace();
@@ -166,7 +180,7 @@ public class DataBaseFragment extends Fragment {
                 }
             }
         });
-
+        //添加线程
         try {
             thread.start();
             thread.join();

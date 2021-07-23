@@ -25,11 +25,23 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class VirtualMachineLogAdapter extends RecyclerView.Adapter<VirtualMachineLogAdapter.VMLogViewHolder>{
+    //虚拟机日志列表
     List<Log> logs = new ArrayList<>();
 
+    /**
+     * 设置虚拟机日志
+     * @param logs
+     */
     public VirtualMachineLogAdapter(List<Log> logs){
         this.logs = logs;
     }
+
+    /**
+     * 日志视图创建
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @NotNull
     @Override
@@ -63,20 +75,36 @@ public class VirtualMachineLogAdapter extends RecyclerView.Adapter<VirtualMachin
 
     }
 
-
+    /**
+     * 获取日志数量
+     * @return
+     */
     @Override
     public int getItemCount() {
         return logs.size()+1;
     }
 
+    /**
+     * 获取当前item位置
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
     }
 
+    /**
+     * 虚拟机日志视图控制
+     */
     static class VMLogViewHolder extends  RecyclerView.ViewHolder{
         TextView logContentTextView,logTimeTextView;
         ImageView logImage;
+
+        /**
+         * 实例化控件
+         * @param itemView
+         */
         public VMLogViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             logContentTextView = itemView.findViewById(R.id.log_content_textView);

@@ -18,25 +18,47 @@ import java.util.GregorianCalendar;
  * 日志类
  */
 public class Log implements Serializable {
+    //日志内容
     public String content;
+    //日志时间
     public String time;
+    //日志类型
     public String type;
 
+    /**
+     * 日志内容构造函数
+     * @param content
+     */
     public Log(String content) {
         this.content = content;
     }
 
+    /**
+     * 日志内容时间的构造函数
+     * @param content
+     * @param time
+     */
     public Log(String content, String time) {
         this.content = content;
         this.time = time;
     }
 
+    /**
+     * 日志全部参数构造函数
+     * @param content
+     * @param time
+     * @param type
+     */
     public Log(String content, String time, String type) {
         this.content = content;
         this.time = time;
         this.type = type;
     }
 
+    /**
+     * 日志时间字符串转换，时间增加8小时至北京时间
+     * @throws ParseException
+     */
     public void changeTime() throws ParseException {
         String[] times = time.substring(0,16).split("T");
         time = times[0] +" "+times[1];

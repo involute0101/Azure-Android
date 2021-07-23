@@ -32,14 +32,23 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/9.
+ * Email 1403235458@qq.com
+ */
 public class MainActivity extends AppCompatActivity {
-
+    //绑定参数
     private ActivityMainBinding binding;
-
+    //通知管理
     NotificationManager manager;
+    //通知通道
     NotificationChannel channel;
 
+    /**
+     * 主界面创建函数
+     * @param savedInstanceState
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
         manager.createNotificationChannel(channel);
         sendAlerts();
 
-
-
-
     }
 
+    /**
+     * 发送警报
+     */
     private void sendAlerts() {
 
         new Thread(new Runnable() {
@@ -96,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }).start();
     }

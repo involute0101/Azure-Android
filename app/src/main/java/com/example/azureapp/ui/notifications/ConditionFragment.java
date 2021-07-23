@@ -39,10 +39,13 @@ import java.io.IOException;
  * Email 1403235458@qq.com
  */
 public class ConditionFragment extends Fragment {
-
+    //服务运行状况视图控件
     RecyclerView recyclerView;
+    //服务运行状况
     ConditionAdapter conditionAdapter;
+    //服务运行状况数据绑定
     FragmentConditionBinding biding;
+    //无服务运行状况图片控件
     ImageView imageView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,6 +78,10 @@ public class ConditionFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * 界面创建
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +91,13 @@ public class ConditionFragment extends Fragment {
         }
     }
 
+    /**
+     * 视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -154,7 +168,7 @@ public class ConditionFragment extends Fragment {
                 }
             }
         });
-
+        //添加线程
         try {
             thread.start();
             thread.join();

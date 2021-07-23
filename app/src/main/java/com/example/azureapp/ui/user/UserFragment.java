@@ -30,25 +30,48 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/8.
+ * Email 1403235458@qq.com
+ */
 public class UserFragment extends Fragment {
-
+    //用户界面视图模型
     private UserViewModel mViewModel;
+    //退出按钮控件
     Button quitButton;
+    //用户邮箱、类型控件
     TextView userEmailTV, userTypeTV;
+    //用户邮箱
     public String userEmail;
+    //用户类型
     public String userType;
 
+    /**
+     * 界面实例
+     * @return 用户界面实例
+     */
     public static UserFragment newInstance() {
         return new UserFragment();
     }
 
+    /**
+     * 视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.user_fragment, container, false);
     }
 
+    /**
+     * activity创建同步
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -60,10 +83,7 @@ public class UserFragment extends Fragment {
         getUserInfo();
         userEmailTV.setText(userEmail);
         if (userType.equals("user")){userTypeTV.setText("用户");}
-
-
-
-
+        //
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,10 +112,8 @@ public class UserFragment extends Fragment {
                         JSONObject user = object.getJSONObject("user");
                         userEmail = user.getString("name");
                         userType = user.getString("type");
-
-
-                            Log.d("user",userEmail);
-                            //获取到数据库的描述信息
+                        Log.d("user",userEmail);
+                        //获取到数据库的描述信息
 
                         //System.out.println("結果："+result);
                         //vmAdapter.notifyDataSetChanged();
@@ -108,7 +126,7 @@ public class UserFragment extends Fragment {
                 }
             }
         });
-
+        //添加线程
         try {
             thread.start();
             thread.join();

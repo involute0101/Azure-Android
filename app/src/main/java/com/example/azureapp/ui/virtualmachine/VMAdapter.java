@@ -34,7 +34,7 @@ import java.util.List;
  * Email 1403235458@qq.com
  */
 public class VMAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    //虚拟机列表
     List<VirtualMachine> vms = new ArrayList<>();
 
     //传入后端得到的虚拟机列表
@@ -42,6 +42,12 @@ public class VMAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.vms = vms;
     }
 
+    /**
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @NotNull
     @Override
@@ -126,6 +132,7 @@ public class VMAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             }
         });
+        //添线程
         try {
             thread.start();
             thread.join();
@@ -138,16 +145,28 @@ public class VMAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return detailVM;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return vms.size()+1;
     }
 
+    /**
+     *
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
     }
 
+    /**
+     *
+     */
     static class VMViewHolder extends  RecyclerView.ViewHolder{
         TextView vmNameTextView;
          public VMViewHolder(@NonNull @NotNull View itemView) {
@@ -156,6 +175,9 @@ public class VMAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
          }
      }
 
+    /**
+     *
+     */
      class VMViewHolder_Head extends  RecyclerView.ViewHolder{
          private TextView mTvName;
          public VMViewHolder_Head(@NonNull @NotNull View itemView) {

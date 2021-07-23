@@ -33,12 +33,21 @@ import java.util.List;
  * Use the {@link VirtualMachineLogFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+/**
+ * fileDesc
+ * Created by wzk on 2021/7/14.
+ * Email 1403235458@qq.com
+ */
 public class VirtualMachineLogFragment extends Fragment {
-
+    //视图列表控件
     RecyclerView recyclerView;
+    //数据绑定
     FragmentVirtualMachineLogBinding binding;
+    //虚拟机日志控制
     VirtualMachineLogAdapter logAdapter;
+    //日志列表
     List<Log> logList = new ArrayList<>();
+    //当前虚拟机资源组
     public String resourceGroup;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -72,6 +81,10 @@ public class VirtualMachineLogFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * 创建界面
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +141,7 @@ public class VirtualMachineLogFragment extends Fragment {
                 }
             }
         });
+        //添加线程
         try{
             thread.start();
             thread.join();
@@ -136,6 +150,13 @@ public class VirtualMachineLogFragment extends Fragment {
         }
     }
 
+    /**
+     * 视图创建
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
